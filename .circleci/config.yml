@@ -4,6 +4,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:12.14.1
+    environment:
+      SONARQUBE_SCANNER_PARAMS: '{"sonar.host.url":"https://sonarcloud.io","sonar.projectKey":"revaturelabs_Curricula-UI","sonar.organization":"revaturelabs-screenforce"}'
     steps:
       - checkout
       - run:
