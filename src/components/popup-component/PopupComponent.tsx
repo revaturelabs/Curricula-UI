@@ -1,6 +1,7 @@
 import React from "react"
 import { Skill } from "../../models/skill"
 import { Category } from "../../models/category"
+import { Container, Row, Card } from "reactstrap"
 
 interface IPopupComponentProps{
     newSkill: Skill,
@@ -22,6 +23,25 @@ export class PopupComponent extends React.Component<IPopupComponentProps,IPopupC
 
             
         }
+    }
+
+    render(){
+        return(
+            <div>
+                <Card>
+                <Container>
+                    {/* create skill */}
+                    <Row>   
+                        
+                    </Row>
+                    {/* create category */}
+                    <Row>
+
+                    </Row>
+                </Container>
+                </Card>
+            </div>
+        )
     }
 
 }
