@@ -1,18 +1,16 @@
 import { combineReducers } from "redux";
-import { Visualization } from "../models/visualization";
-import { vizReducer } from "./viz-reducer";
+import { Skill } from '../models/skill'
+import { skillsReducer } from './CurriculaSkillsReducer'
 
-export interface IVizState {
-    visualizations: Visualization[],
-    newVisualization: Visualization
+export interface ISkillState {
+    allSkills: Skill[],
+    message: string
 }
 
-export interface IState{
-    visualizationSet: IVizState
-    newVisualization: IVizState
+export interface IState {
+    allSkills: ISkillState
 }
 
 export const state = combineReducers<IState>({
-    visualizationSet: vizReducer,
-    newVisualization: vizReducer
+    allSkills: skillsReducer
 })
