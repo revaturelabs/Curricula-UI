@@ -1,4 +1,5 @@
 import React from 'react'
+import { Skill } from '../../models/skill';
 
 export class SkillPillComponent extends React.Component<any, any> {
     constructor(props: any) {

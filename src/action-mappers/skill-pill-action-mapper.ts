@@ -1,4 +1,4 @@
-
+import { apiGetAllSkills } from '../remote/CurriculaSkillsApi' 
 
 export const skillPillTypes = {
     SUCCESSFUL_GET_ALL: 'GET_ALL_SKILLS_SUCCESSFUL',
