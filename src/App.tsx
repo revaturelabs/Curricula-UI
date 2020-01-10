@@ -3,7 +3,11 @@ import './App.css';
 import { store } from './Store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import {CreateCategory} from '../src/components/create-category-component/CreateCategory';
+import PopupComponent from './components/popup-component/PopupButtonComponent';
+import CreateCategory from './components/create-category-component/CreateCategory';
+
+
+
 
 const App: React.FC = () => {
   return (
@@ -11,7 +15,8 @@ const App: React.FC = () => {
       <Provider store={store}>
         <Router>
           <Switch>
-          <Route path = '/category' component = {CreateCategory}/>
+            <Route path='/testpopupbutton' component={PopupComponent}></Route>
+            <Route path= '/create_category' component ={CreateCategory}></Route>
             <Route path='/' />
             
           </Switch>
