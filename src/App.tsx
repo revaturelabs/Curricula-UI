@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { SearchCurriculumComponent } from './components/search-curriculum-component/SearchCurriculumComponent';
 import PopupComponent from './components/popup-component/PopupButtonComponent';
 import CreateCategory from './components/create-category-component/CreateCategory';
+import ViewAllVizComponent from './components/view-all-viz-component/ViewAllVizContainer';
 
 
 const App: React.FC = () => {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
             <Route path='/search' component={SearchCurriculumComponent} />
             <Route path='/testpopupbutton' component={PopupComponent}></Route>
             <Route path= '/create_category' component ={CreateCategory}></Route>
+            <Route path= '/visualizations' component ={ViewAllVizComponent}></Route>
             <Route path='/' />
           </Switch>
         </Router>
