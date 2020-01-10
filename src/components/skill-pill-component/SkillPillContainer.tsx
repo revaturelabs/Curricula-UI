@@ -1,15 +1,17 @@
 import { SkillPillComponent } from "./SkillPillComponent"
-import { state } from "../../reducers"
+import { IState } from "../../reducers"
 import { connect } from "react-redux"
 
 const mapStateToProps = (state: IState) => {
     return {
-        allSkill: state.skill.allSkill
+        allSkills: state.skillSet.skills
+        
     }
 }
 
 const mapDispatchToProps ={
     getAllSkills
+    submitCurriculum
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SkillPillComponent)

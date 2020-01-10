@@ -1,7 +1,11 @@
 import React from 'react'
 import { Skill } from '../../models/skill';
 
-export class SkillPillComponent extends React.Component<any, any> {
+interface ISkillPillProps {
+    submitCurriciulum: (newCurriculum) => void
+}
+
+export class SkillPillComponent extends React.Component<ISkillPillProps, any> {
     constructor(props: any) {
         super(props);
         this.state = {

@@ -22,7 +22,7 @@ export async function apiGetAllSkills() {
     }
 }
 
-export async function apiSubmitCurriculum() {
+export async function apiSubmitCurriculum(newCurriculum) {
     const response = await client.get('/curriculums')
     try {
         if (response.status === 200) {
