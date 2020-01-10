@@ -1,11 +1,13 @@
+import { Skill } from "./skill";
+
 export class Curriculum {
     curriculumId: number;
     curriculumName: string;
-    curriculumSkills: [];
+    curriculumSkills: Skill[];
 
-    constructor(curriculumId: number, curriculumName: string, curriculumSkills: []) {
-        this.curriculumId = curriculumId
-        this.curriculumName = curriculumName
+    constructor(curriculumId: number, curriculumName: string, curriculumSkills: Skill[]) {
+        this.curriculumId = curriculumId,
+        this.curriculumName = curriculumName,
         this.curriculumSkills = curriculumSkills
     }
 }
