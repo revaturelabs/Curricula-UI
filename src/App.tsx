@@ -6,6 +6,10 @@ import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
 import { SearchCurriculumComponent } from './components/search-curriculum-component/SearchCurriculumComponent';
 import PopupComponent from './components/popup-component/PopupButtonComponent';
+import CreateCategory from './components/create-category-component/CreateCategoryComponent';
+import { CreateCurriculumPageComponent } from './components/create-curriculum-page-component/CreateCurriculumPageComponent';
+
+
 
 const App: React.FC = () => {
   return (
