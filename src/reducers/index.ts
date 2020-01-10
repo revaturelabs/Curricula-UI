@@ -1,15 +1,19 @@
 import { combineReducers } from "redux";
 import { Skill } from '../models/skill'
 import { skillsReducer } from './CurriculaSkillsReducer'
+import { Curriculum } from "../models/curriculum";
 
 export interface ISkillState {
-    skills: Skill[]
+    skills: Skill[],
+    newCurriculum: Curriculum
 }
 
 export interface IState{
-    skills: ISkillState
+    skillSet: ISkillState
+    newCurriculum: ISkillState
 }
 
 export const state = combineReducers<IState>({
-    skills: skillsReducer
+    skillSet: skillsReducer,
+    newCurriculum: skillsReducer
 })
