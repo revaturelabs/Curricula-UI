@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import PopupComponent from './components/popup-component/PopupButtonComponent';
 
 
+
+
 const App: React.FC = () => {
   return (
     <div className="App">
