@@ -1,6 +1,7 @@
 import React from 'react'
 import { SkillPillComponent } from '../skill-pill-component/SkillPillComponent';
 import { Input, Form } from 'reactstrap';
+import { SyntheticEvent } from 'react';
 
 export class CreateCurriculumComponent extends React.Component<any, any> {
     constructor(props: any) {
@@ -10,6 +11,13 @@ export class CreateCurriculumComponent extends React.Component<any, any> {
             filter: ''
         }
     }
+
+  updateFilter(value) {
+      this.setState({
+          filter: value
+      });
+  }
+  
 
     render() {
         return (
