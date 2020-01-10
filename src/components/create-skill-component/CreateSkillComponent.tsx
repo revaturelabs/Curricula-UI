@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function SkillComponent() {
+export default function CreateSkillComponent() {
 
     const [skill, setSkill] = React.useState('');
     const [category, setCategory] = React.useState('');
