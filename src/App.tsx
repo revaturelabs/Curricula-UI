@@ -4,6 +4,7 @@ import { store } from './Store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import PopupComponent from './components/popup-component/PopupButtonComponent';
+import CreateCategory from './components/create-category-component/CreateCategory';
 
 
 
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Router>
           <Switch>
             <Route path='/testpopupbutton' component={PopupComponent}></Route>
+            <Route path= '/create_category' component ={CreateCategory}></Route>
             <Route path='/' />
             
           </Switch>
