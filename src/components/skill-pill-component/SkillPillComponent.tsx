@@ -2,7 +2,7 @@ import React from 'react'
 import { Skill } from '../../models/skill';
 
 interface ISkillPillProps {
-    submitCurriciulum: (newCurriculum) => void
+    
 }
 
 export class SkillPillComponent extends React.Component<ISkillPillProps, any> {

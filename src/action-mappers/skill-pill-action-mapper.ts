@@ -33,7 +33,7 @@ export const getAllSkills = () => async (dispatch: any) => {
 export const submitCurriculum = (newCurriculum: Curriculum) => async (dispatch: any) => {
     try {
         let res = await apiSubmitCurriculum(newCurriculum)
-        if (res.status === 200) {
+        if (res.status === 201) {
             dispatch({
                 type: skillPillTypes.SUBMIT_SUCCESSFUL,
                 payload: {

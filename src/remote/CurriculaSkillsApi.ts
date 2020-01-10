@@ -1,4 +1,5 @@
 import { client } from './CurriculaClient'
+import { Curriculum } from '../models/curriculum'
 
 export async function apiGetAllSkills() {
     const response = await client.get('/skills')
@@ -22,10 +23,10 @@ export async function apiGetAllSkills() {
     }
 }
 
-export async function apiSubmitCurriculum(newCurriculum) {
-    const response = await client.get('/curriculums')
+export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
+    const response = await client.post('/curricula', newCurriculum)
     try {
-        if (response.status === 200) {
+        if (response.status === 201) {
             return {
                 status: response.status,
                 body: response.data
@@ -33,13 +34,13 @@ export async function apiSubmitCurriculum(newCurriculum) {
         } else {
             return {
                 status: response.status,
-                body: 'Curriculum was not created'
+                body: 'some school officials declined your curriculum submission'
             }
         }
     } catch (e) {
         return {
             status: response.status,
-            body: 'Something went wrong'
+            body: 'there was something exceptionally wrong with your teaching method'
         }
     }
 }
