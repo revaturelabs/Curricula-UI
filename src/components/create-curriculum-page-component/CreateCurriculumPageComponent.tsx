@@ -1,5 +1,6 @@
 import React from 'react';
 import { Curriculum } from '../../models/curriculum';
+import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 
 interface ICreateCurriculumPageProps{
     newCurriculm: Curriculum
@@ -20,6 +21,11 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     render() {
         return(
             <div>
+                
+                <PopupButtonComponent/>
+
+
+
 
             </div>
         )
