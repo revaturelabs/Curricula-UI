@@ -2,9 +2,10 @@ import { Skill } from '../models/skill'
 import { skillPillTypes } from '../action-mappers/skill-pill-action-mapper'
 import { ISkillState } from './index'
 import { Curriculum } from '../models/curriculum'
+import { Category } from '../models/category'
 
 const initialState : ISkillState = {
-    skills: [new Skill(0,'',[])],
+    skills: [new Skill(0,'',new Category(0,''))],
     newCurriculum: new Curriculum(0,'',[])
 }
 

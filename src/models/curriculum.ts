@@ -6,8 +6,8 @@ export class Curriculum {
     curriculumSkills: Skill[];
 
     constructor(curriculumId: number, curriculumName: string, curriculumSkills: Skill[]) {
-        this.curriculumId = curriculumId,
-        this.curriculumName = curriculumName,
+        this.curriculumId = curriculumId
+        this.curriculumName = curriculumName
         this.curriculumSkills = curriculumSkills
     }
 }

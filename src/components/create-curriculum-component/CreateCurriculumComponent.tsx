@@ -1,6 +1,5 @@
 import React from 'react'
-import { Theme, makeStyles, createStyles, Grid, Paper, Checkbox, TextField } from '@material-ui/core';
-import { render } from 'react-dom';
+import { Grid, Paper, Checkbox, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
