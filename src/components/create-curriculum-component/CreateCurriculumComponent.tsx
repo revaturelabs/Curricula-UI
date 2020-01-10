@@ -1,34 +1,68 @@
 import React from 'react'
-import { SkillPillComponent } from '../skill-pill-component/SkillPillComponent';
-import { Input, Form } from 'reactstrap';
-import { SyntheticEvent } from 'react';
+import { Theme, makeStyles, createStyles, Grid, Paper, Checkbox, TextField } from '@material-ui/core';
+import { render } from 'react-dom';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import SearchIcon from '@material-ui/icons/Search';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
-export class CreateCurriculumComponent extends React.Component<any, any> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            curriculumName: '',
-            filter: ''
-        }
-    }
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-  updateFilter(value) {
-      this.setState({
-          filter: value
-      });
-  }
-  
-
-    render() {
-        return (
-            <>
-                <Form onSubmit={this.callSubmitCurriculum}>
-                <Input value={this.state.curriculumName} onChange={this.updateCurriculumName} type="text" id="curriculumName" placeholder="Enter a name for the curriculum" required />
-                <Input value={this.state.filter} onChange={this.updateFilter} type="text" id="filter" placeholder="Type to filter..." />
-                <SkillPillComponent />
-                </Form>
-            </>
-        )
-    }
+interface IData {
+    skill: string;
 }
+
+
+
+export function CreateCurriculumComponent() {
+
+    return (
+        <div>
+            <br />
+            <Grid container justify="center">
+                <Paper component="form" >
+
+                    <Autocomplete
+                        popupIcon={<SearchIcon />}
+                        placeholder="test"
+                        multiple
+                        id="checkboxes-tags-demo"
+                        options={skillList}
+                        disableCloseOnSelect
+                        getOptionLabel={(option: IData) => option.skill}
+                        renderOption={(option: IData, { selected }) => (
+                            <React.Fragment>
+                                <Checkbox
+                                    icon={icon}
+                                    checkedIcon={checkedIcon}
+                                    style={{ marginRight: 8 }}
+                                    checked={selected}
+                                />
+                                {option.skill}
+                            </React.Fragment>
+                        )}
+                        style={{ width: 500 }}
+                        renderInput={params => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                label="Search Skill"
+                                placeholder="Skill"
+                                fullWidth
+                            />
+                        )}
+                    />
+                </Paper>
+            </Grid>
+        </div>
+    )
+}
+
+    const skillList = [
+        { skill: 'Angular' },
+        { skill: 'React' },
+        { skill: 'Jenkin' },
+        { skill: 'SQL' }
+    ];
 

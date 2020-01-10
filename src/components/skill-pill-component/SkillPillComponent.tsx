@@ -14,7 +14,7 @@ export class SkillPillComponent extends React.Component<any, any> {
             <ul>
                 {this.state.allSkills.map((s: Skill) => {
                     return <div>
-                        <p>{s.skillName}</p>
+                        <p>{s.name}</p>
                     </div>
                 })}
             </ul>

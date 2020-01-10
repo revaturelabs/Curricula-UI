@@ -1,5 +1,5 @@
 import { SkillPillComponent } from "./SkillPillComponent"
-import { state } from "../../reducers"
+import { IState } from "../../reducers"
 import { connect } from "react-redux"
 
 const mapStateToProps = (state: IState) => {
