@@ -5,8 +5,8 @@ import { Curriculum } from '../models/curriculum'
 import { Category } from '../models/category'
 
 const initialState : ISkillState = {
-    skills: [new Skill(0,'',new Category(0,''))],
-    newCurriculum: new Curriculum(0,'',[])
+    allSkills: [new Skill(0,'',new Category(0,''))],
+    message: ''
 }
 
 export const skillsReducer = (state = initialState, action : any) => {
@@ -21,19 +21,19 @@ export const skillsReducer = (state = initialState, action : any) => {
         case skillPillTypes.UNSUCCESSFUL_GET_ALL: {
             return {
                 ...state,
-                message: 'Skills reduced to nill, amigo'
+                message: 'Failed to retrieve skills'
             }
         }
         case skillPillTypes.SUBMIT_SUCCESSFUL: {
             return {
                 ...state,
-                curriculum: action.payload.curriculum
+                message: 'Curriculum created successfully'
             }
         }
         case skillPillTypes.SUBMIT_UNSUCCESSFUL: {
             return {
                 ...state,
-                message:  'New skills Reductively Declined'
+                message:  'Failed to create curriculum'
             }
         }
         default :

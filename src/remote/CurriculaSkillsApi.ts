@@ -1,8 +1,8 @@
-import { client } from './CurriculaClient'
+import { curriculaClient } from './curricula-client'
 import { Curriculum } from '../models/curriculum'
 
 export async function apiGetAllSkills() {
-    const response = await client.get('/skills')
+    const response = await curriculaClient.get('/skills')
     try {
         if (response.status === 200) {
             return {
@@ -12,19 +12,19 @@ export async function apiGetAllSkills() {
         } else {
             return {
                 status: response.status,
-                body: 'might want to brush up on those skills!'
+                body: 'Failed to get all skills'
             }
         }
     } catch (e) {
         return {
             status: response.status,
-            body: 'still needs some polishing...'
+            body: 'Failed to get all skills'
         }
     }
 }
 
 export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
-    const response = await client.post('/curricula', newCurriculum)
+    const response = await curriculaClient.post('/curricula', newCurriculum)
     try {
         if (response.status === 201) {
             return {
@@ -34,13 +34,13 @@ export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
         } else {
             return {
                 status: response.status,
-                body: 'some school officials declined your curriculum submission'
+                body: 'Failed to create curriculum'
             }
         }
     } catch (e) {
         return {
             status: response.status,
-            body: 'there was something exceptionally wrong with your teaching method'
+            body: 'Failed to create curriculum'
         }
     }
 }
