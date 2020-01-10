@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
 import { SearchCurriculumComponent } from './components/search-curriculum-component/SearchCurriculumComponent';
 import PopupComponent from './components/popup-component/PopupButtonComponent';
-import  { CreateCategoryComponent } from './components/create-category-component/CreateCategoryComponent';
+import { CreateCategoryComponent } from './components/create-category-component/CreateCategoryComponent';
 
 
 
