@@ -14,6 +14,7 @@ const App: React.FC = () => {
       <Provider store={store}>
         <Router>
           <Switch>
+          <Route path='/testskill' component={SkillComponent} />
             <Route path='/search' component={SearchCurriculumComponent} />
             <Route path='/testpopupbutton' component={PopupComponent}></Route>
             <Route path='/skill' component={SkillComponent}/>
