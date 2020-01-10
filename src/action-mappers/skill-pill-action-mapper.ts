@@ -25,4 +25,11 @@ export const getAllSkills = () => async (dispatch: any) => {
             type: skillPillTypes.UNSUCCESSFUL_GET_ALL
         })
     }
-}
+// }
+
+// export const submitCurriculum = {
+//     try {
+//         let res = await apiSubmitCurriculum()
+
+//     }
+// }
