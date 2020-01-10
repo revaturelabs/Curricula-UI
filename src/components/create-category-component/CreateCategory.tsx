@@ -1,28 +1,10 @@
 import React from 'react'
 import { TextField, Button} from '@material-ui/core'
 import { string } from 'prop-types'
-// import { Redirect } from 'react-router-dom'
+import { Category } from '../../models/category'
 
 
-
-// function checkCategory(input: { value: string; }) {
-
-//     // Check if input contains a digit
-//     if (/\d/.test(input.value)) {
-//         alert('Name contains a number');
-
-//     }
-
-//     // Check if input is empty
-//     if (input.value === '') {
-//         alert('Name is empty');
-//     }
-
-//     return true;
-// }
-
-interface Category {
-     
+interface ICreateCategoryProps{
     newCategoryName: Category
 }
 
@@ -36,11 +18,9 @@ export class CreateCategory extends React.Component <any, any>{
     }
 
 
-    postCategoryName = (e: any) => {
-        this.setState({
-            ...this.state,
-            categoryName: e.target.value
-        })
+    submitCategoryName = async (e: any) => {
+        e.preventDefault();
+
     }
             // left in here to fix later, would want to use for typecheck
 //     checkCategory = (e: { value: string; }) => {
@@ -64,23 +44,16 @@ export class CreateCategory extends React.Component <any, any>{
 //      return alert('Name contains a number');
 
 
-//     //  this.setState({
-//     //     ...this.state,
-//     //     checkCategory: input.target.value
-//     // });
-//  }
-
 
 
         render () {
             return (
                 <div id = "createCategory-div">                    
-                    <form id = "createCategory"  className = 'createCategory'>
+                    <form id = "createCategory" className = 'createCategory'>
                         <h1> Create a Category</h1>
                             {/* <FormControl error> */}
                                 <TextField id="filled-basic"  variant="outlined" 
-                                    value = {this.state.newCategoryName}
-                                    onChange= {this.state.checkCategory} 
+                                    value = {this.state.newCategoryName} 
                                     margin= "dense"
                                     name="Category"
                                     placeholder = "e.g. 'Devops'"
