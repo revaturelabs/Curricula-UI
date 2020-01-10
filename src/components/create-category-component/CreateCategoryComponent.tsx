@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, Button } from '@material-ui/core'
+import { TextField, Button, FormControl } from '@material-ui/core'
 import { string } from 'prop-types'
 
 
@@ -16,6 +16,7 @@ export class CreateCategory extends React.Component<any, any>{
 
 
 
+
     render() {
         return (
             <div id="createCategory-div">
@@ -26,7 +27,6 @@ export class CreateCategory extends React.Component<any, any>{
                         name="Category"
                         placeholder="e.g. 'Devops'"
                         label="Category"
-
                         type="category"
                     />
                     <br/>
