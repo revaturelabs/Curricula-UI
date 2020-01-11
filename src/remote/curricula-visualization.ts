@@ -24,24 +24,24 @@ export async function apiGetAllVisualizations() {
 
 //The following function will be useful for Creating a Visualization
 
-export async function apiSubmitVisualization() {
-    const response = await curriculaClient.get('/visualizations')
-    try {
-        if (response.status === 200) {
-            return {
-                status: response.status,
-                body: response.data
-            }
-        } else {
-            return {
-                status: response.status,
-                body: 'Visualization was not created'
-            }
-        }
-    } catch (e) {
-        return {
-            status: response.status,
-            body: 'Something went wrong on our end'
-        }
-    }
-}
+// export async function apiSubmitVisualization() {
+//     const response = await curriculaClient.get('/visualizations')
+//     try {
+//         if (response.status === 200) {
+//             return {
+//                 status: response.status,
+//                 body: response.data
+//             }
+//         } else {
+//             return {
+//                 status: response.status,
+//                 body: 'Visualization was not created'
+//             }
+//         }
+//     } catch (e) {
+//         return {
+//             status: response.status,
+//             body: 'Something went wrong on our end'
+//         }
+//     }
+// }
