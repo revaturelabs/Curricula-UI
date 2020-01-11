@@ -1,11 +1,11 @@
 import { apiGetAllVisualizations } from "../remote/CurriculaVisualization"
 
 
-export const vizTypes = {
-    SUCCESSFUL_GET_ALL: 'GET_ALL_VIZ_SUCCESSFUL',
-    UNSUCCESSFUL_GET_ALL: 'GET_ALL_VIZ_UNSUCCESSFUL',
-    SUBMIT_SUCCESSFUL: 'SUBMIT_VIZ_SUCCESSFUL',
-    SUBMIT_UNSUCCESSFUL: 'SUBMIT_VIZ_UNSUCCESSFUL'
+export const visualizationTypes = {
+    SUCCESSFUL_GOT_ALL: 'GOT_ALL_VISUALIZATIONS_SUCCESSFUL',
+    UNSUCCESSFUL_GOT_ALL: 'GOT_ALL_VISUALIZATIONS_UNSUCCESSFUL',
+    SUBMIT_SUCCESSFUL: 'SUBMIT_VISUALIZATIONS_SUCCESSFUL',
+    SUBMIT_UNSUCCESSFUL: 'SUBMIT_VISUALIZATIONS_UNSUCCESSFUL'
 }
 
 export const getAllVisualizations = () => async (dispatch: any) => {
@@ -13,19 +13,19 @@ export const getAllVisualizations = () => async (dispatch: any) => {
         let res = await apiGetAllVisualizations()
         if (res.status === 200) {
             dispatch({
-                type: vizTypes.SUCCESSFUL_GET_ALL,
+                type: visualizationTypes.SUCCESSFUL_GOT_ALL,
                 payload: {
                     allViz: res.body
                 }
             })
         } else {
             dispatch({
-                type: vizTypes.UNSUCCESSFUL_GET_ALL
+                type: visualizationTypes.UNSUCCESSFUL_GOT_ALL
             })
         }
     } catch (e) {
         dispatch({
-            type: vizTypes.UNSUCCESSFUL_GET_ALL
+            type: visualizationTypes.UNSUCCESSFUL_GOT_ALL
         })
     }
 }

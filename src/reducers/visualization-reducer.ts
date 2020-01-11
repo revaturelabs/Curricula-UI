@@ -1,6 +1,6 @@
 import { IVisualizationState } from '.';
 import { Visualization } from '../models/visualization';
-import { vizTypes } from '../action-mappers/ViewAllVizAction';
+import { visualizationTypes } from '../action-mappers/view-all-visualization-action-mapper';
 import { Curriculum } from '../models/curriculum';
 import { Skill } from '../models/skill';
 import { Category } from '../models/category';
@@ -13,25 +13,25 @@ const initialVisualizationState: IVisualizationState = {
 export const visualizationReducer = (state = initialVisualizationState, action: any) => {
 
     switch (action.type) {
-        case vizTypes.SUCCESSFUL_GET_ALL: {
+        case visualizationTypes.SUCCESSFUL_GOT_ALL: {
             return {
                 ...state,
                 visualizationSet: action.payload.allVisualizations
             }
         }
-        case vizTypes.UNSUCCESSFUL_GET_ALL: {
+        case visualizationTypes.UNSUCCESSFUL_GOT_ALL: {
             return {
                 ...state,
                 message: 'No visualizations returned'
             }
         }
-        case vizTypes.SUBMIT_SUCCESSFUL: {
+        case visualizationTypes.SUBMIT_SUCCESSFUL: {
             return {
                 ...state,
                 visualization: action.payload.visualization
             }
         }
-        case vizTypes.SUBMIT_UNSUCCESSFUL: {
+        case visualizationTypes.SUBMIT_UNSUCCESSFUL: {
             return {
                 ...state,
                 message: 'New visualization not created'
