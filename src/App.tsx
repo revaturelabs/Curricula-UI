@@ -7,6 +7,7 @@ import SkillComponent from './components/create-skill-component/CreateSkillCompo
 import { SearchCurriculumComponent } from './components/search-curriculum-component/SearchCurriculumComponent';
 import { CreateCurriculumComponent } from './components/create-curriculum-component/CreateCurriculumComponent';
 import { CreateCurriculumPageComponent } from './components/create-curriculum-page-component/CreateCurriculumPageComponent';
+import ViewAllVisualizationsContainer from './components/view-all-viz-component/ViewAllVisualizationsContainer';
 
 
 
@@ -20,7 +21,7 @@ const App: React.FC = () => {
             <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent}></Route>
             <Route path='/search' component={SearchCurriculumComponent} />
             <Route path='/skill' component={SkillComponent} />
-            <Route path='/' />
+            <Route path='/' component={ViewAllVisualizationsContainer} />
           </Switch>
         </Router>
       </Provider>
