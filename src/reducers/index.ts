@@ -10,7 +10,7 @@ export interface ISkillState {
 }
 
 export interface IVisualizationState {
-    allVisualizations: Visualization[]
+    visualizations: Visualization[]
 }
 
 export interface IState {

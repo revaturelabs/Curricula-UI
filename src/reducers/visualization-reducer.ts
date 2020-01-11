@@ -7,7 +7,7 @@ import { Category } from '../models/category';
 
 
 const initialState: IVisualizationState = {
-    allVisualizations: [new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])]
+    visualizations: [new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])]
 }
 
 export const visualizationReducer = (state = initialState, action: any) => {
@@ -16,13 +16,7 @@ export const visualizationReducer = (state = initialState, action: any) => {
         case visualizationTypes.SUCCESSFUL_GET_ALL: {
             return {
                 ...state,
-                visualizationSet: action.payload.allVisualizations
-            }
-        }
-        case visualizationTypes.UNSUCCESSFUL_GET_ALL: {
-            return {
-                ...state,
-                message: 'No visualizations returned'
+                visualizations: action.payload.allVisualizations
             }
         }
         default:
