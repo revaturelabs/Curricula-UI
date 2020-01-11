@@ -5,7 +5,7 @@ import { Curriculum } from '../models/curriculum'
 import { Category } from '../models/category'
 
 const initialState : ISkillState = {
-    allSkills: [new Skill(0,'',new Category(0,''))],
+    skillSet: [new Skill(0,'',new Category(0,''))],
     message: ''
 }
 
