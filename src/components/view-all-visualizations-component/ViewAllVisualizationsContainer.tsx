@@ -8,7 +8,7 @@ import { ViewAllVisualizationsComponent } from "./ViewAllVisualizationsComponent
 const mapStateToProps = (state: IState) => {
     return {
         allVisualizations: state.allVisualizations.visualizations,
-        allSkills: state.allSkills.allSkills
+        allSkills: state.allSkills.skills
     }
 }
 
