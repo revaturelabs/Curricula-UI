@@ -5,7 +5,7 @@ import { Curriculum } from '../models/curriculum'
 import { Category } from '../models/category'
 
 const initialState : ISkillState = {
-    skillSet: [new Skill(0,'',new Category(0,''))],
+    skills: [new Skill(0,'',new Category(0,''))],
     message: ''
 }
 
@@ -15,7 +15,7 @@ export const skillsReducer = (state = initialState, action : any) => {
         case skillPillTypes.SUCCESSFUL_GET_ALL: {
             return { 
                 ...state,
-                skillSet : action.payload.allSkills
+                skills : action.payload.allSkills
             }
         }
         case skillPillTypes.UNSUCCESSFUL_GET_ALL: {

@@ -1,10 +1,9 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, ButtonGroup } from '@material-ui/core';
-import { store } from '../../Store';
+import { Button } from '@material-ui/core';
 
 
 interface ICreateCurriculumPageProps{
@@ -17,27 +16,23 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     constructor(props:any){
         super(props)
         this.state = {
-           // newCurriculum: new Curriculum(0, '', this.state.skillsToCurriculumArray),
-           
+            //newCurriculum: new Curriculum(0, '', this.state.skillsToCurriculumArray),
             skillsToCurriculumArray: [new Skill(0,'',new Category(0,''))],
             allSkillsMap: [new Skill(0,'',new Category(0,''))]
         }
     }
 
-    upSkillsToCurriculumArray = (e: SyntheticEvent) => {
+    upSkillsToCurriculumArray = (e: any) => {
+        this.state.skillsToCurriculumArray.push(this.props.allSkillsMap[e - 1])
         this.setState({
             ...this.state,
-          //  skillsToCurriculumArray: this.state.skillsToCurriculumArray += e.target.value
         })
     }
     
 
-    componentWillMount(){
-        const { getAllSkills } = this.props;
-        getAllSkills();
+    componentDidMount(){
         this.setState({
-            ...this.state,
-            allSkillsMap: store.getState().allSkills.skillSet
+            ...this.state
         })
     }
 
@@ -45,14 +40,22 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         
         return(
             <>
-                <ButtonGroup>
-                    {this.state.allSkillsMap.map((e:Skill) => {
-                        return (<div>
-                            <Button value={e.id} className="skillPill" onClick={this.upSkillsToCurriculumArray}>
-                                {e.name}</Button></div>
+                
+                <ul className="skillToCurriculumList">
+                    {this.state.skillsToCurriculumArray.map((e:any) => {
+                        return (<li>{e.skillName}</li>)
+                    })}
+                    
+                </ul>
+                <div>
+                    {/* <p>{this.props.allSkillsMap(skillId(4)}</p> */}
+                    {this.props.allSkillsMap.map((e:any) => {
+                        return (
+                            <Button value={e.skillId} className="skillPillCurriculum" onClick={()=>{this.upSkillsToCurriculumArray(e.skillId)}}>{e.skillName}</Button>
                         )
                     })}
-                </ButtonGroup>
+                    
+                </div>
 
                 <PopupButtonComponent/>
             </>

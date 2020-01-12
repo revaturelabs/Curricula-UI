@@ -5,7 +5,7 @@ import { CreateCurriculumPageComponent } from './CreateCurriculumPageComponent'
 
 const mapStateToProps = (state: IState) => {
     return {
-        allSkillsMap: state.allSkills.skillSet
+        allSkillsMap: state.allSkills.skills
     }
 }
 

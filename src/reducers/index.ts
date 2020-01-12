@@ -5,7 +5,7 @@ import { Visualization } from "../models/visualization";
 import { visualizationReducer } from "./visualization-reducer";
 
 export interface ISkillState {
-    skillSet: Skill[],
+    skills: Skill[],
     message: string
 }
 

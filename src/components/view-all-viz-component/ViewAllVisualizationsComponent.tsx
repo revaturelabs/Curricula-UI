@@ -1,5 +1,6 @@
 import React from 'react'
 import { Visualization } from '../../models/visualization';
+import { Link } from 'react-router-dom';
 
 interface IVisualizationsProps {
     visualizations: Visualization[]
@@ -23,7 +24,7 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     render() {
         return (
             <div>
-                <p>Visualization Page :D</p>
+               <Link to="/createcurriculumpage"> <p>Visualization Page :D</p> </Link>
             </div>
         )
 
