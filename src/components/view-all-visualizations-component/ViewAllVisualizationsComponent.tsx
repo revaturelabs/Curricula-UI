@@ -6,6 +6,7 @@ interface IVisualizationsProps {
     getAllVisualizations: () => void
     getAllSkills: () => void
     getAllCurricula: () => void
+    getAllCategories: () => void
 }
 
 export class ViewAllVisualizationsComponent extends React.Component<IVisualizationsProps, any>{
@@ -20,6 +21,7 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
         this.props.getAllVisualizations()
         this.props.getAllSkills()
         this.props.getAllCurricula()
+        this.props.getAllCategories()
     }
 
     render() {
