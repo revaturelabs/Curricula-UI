@@ -7,7 +7,7 @@ import { Curriculum } from "../models/curriculum";
 import { curriculumReducer } from "./curriculum-reducer";
 
 export interface ISkillState {
-    allSkills: Skill[],
+    skills: Skill[],
     message: string
 }
 
