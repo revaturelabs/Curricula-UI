@@ -1,7 +1,6 @@
 import { Skill } from '../models/skill'
 import { skillPillTypes } from '../action-mappers/skill-pill-action-mapper'
 import { ISkillState } from './index'
-import { Curriculum } from '../models/curriculum'
 import { Category } from '../models/category'
 
 const initialState: ISkillState = {
@@ -15,7 +14,7 @@ export const skillsReducer = (state = initialState, action: any) => {
         case skillPillTypes.SUCCESSFUL_GET_ALL: {
             return {
                 ...state,
-                skillSet: action.payload.allSkills
+                skills: action.payload.allSkills
             }
         }
         case skillPillTypes.UNSUCCESSFUL_GET_ALL: {
