@@ -71,6 +71,11 @@ export default function CreateSkillComponent() {
                     <MenuItem value="database">Database</MenuItem>
                     <MenuItem value="sourcecode">Sourcecode</MenuItem>
                     <MenuItem value="ide">IDE</MenuItem>
+                    <MenuItem value="language">Language</MenuItem>
+                    <MenuItem value="server">Server</MenuItem>
+                    <MenuItem value="library">Library</MenuItem>
+                    <MenuItem value="testing">Testing</MenuItem>
+                    <MenuItem value="microservices">Microservices</MenuItem>
                 </Select>
             </FormControl>
 

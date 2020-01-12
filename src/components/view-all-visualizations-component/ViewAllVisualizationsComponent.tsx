@@ -1,10 +1,13 @@
 import React from 'react'
 import { Visualization } from '../../models/visualization';
+import { Link } from 'react-router-dom';
 
 interface IVisualizationsProps {
     visualizations: Visualization[]
     getAllVisualizations: () => void
     getAllSkills: () => void
+    getAllCurricula: () => void
+    getAllCategories: () => void
 }
 
 export class ViewAllVisualizationsComponent extends React.Component<IVisualizationsProps, any>{
@@ -18,12 +21,14 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     async componentDidMount() {
         this.props.getAllVisualizations()
         this.props.getAllSkills()
+        this.props.getAllCurricula()
+        this.props.getAllCategories()
     }
 
     render() {
         return (
             <div>
-                <p>Visualization Page :D</p>
+               <Link to="/createcurriculumpage"> <p>Visualization Page :D</p> </Link>
             </div>
         )
 

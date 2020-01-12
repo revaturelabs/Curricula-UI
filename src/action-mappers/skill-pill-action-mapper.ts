@@ -30,7 +30,7 @@ export const getAllSkills = () => async (dispatch: any) => {
     }
 }
 
-export const submitCurriculum = (newCurriculum: Curriculum) => async (dispatch: any) => {
+export const postSubmitCurriculum = (newCurriculum: Curriculum) => async (dispatch: any) => {
     try {
         let res = await apiSubmitCurriculum(newCurriculum)
         if (res.status === 201) {

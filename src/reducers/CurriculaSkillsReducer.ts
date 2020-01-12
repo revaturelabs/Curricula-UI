@@ -1,21 +1,20 @@
 import { Skill } from '../models/skill'
 import { skillPillTypes } from '../action-mappers/skill-pill-action-mapper'
 import { ISkillState } from './index'
-import { Curriculum } from '../models/curriculum'
 import { Category } from '../models/category'
 
-const initialState : ISkillState = {
-    allSkills: [new Skill(0,'',new Category(0,''))],
+const initialState: ISkillState = {
+    skills: [new Skill(0, '', new Category(0, ''))],
     message: ''
 }
 
-export const skillsReducer = (state = initialState, action : any) => {
+export const skillsReducer = (state = initialState, action: any) => {
 
-    switch(action.type){
+    switch (action.type) {
         case skillPillTypes.SUCCESSFUL_GET_ALL: {
-            return { 
+            return {
                 ...state,
-                skillSet : action.payload.allSkills
+                skills: action.payload.allSkills
             }
         }
         case skillPillTypes.UNSUCCESSFUL_GET_ALL: {
@@ -33,10 +32,10 @@ export const skillsReducer = (state = initialState, action : any) => {
         case skillPillTypes.SUBMIT_UNSUCCESSFUL: {
             return {
                 ...state,
-                message:  'Failed to create curriculum'
+                message: 'Failed to create curriculum'
             }
         }
-        default :
+        default:
             return state
     }
 }

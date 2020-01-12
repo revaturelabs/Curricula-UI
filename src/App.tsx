@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
 import { SearchCurriculumComponent } from './components/search-curriculum-component/SearchCurriculumComponent';
 import { CreateCurriculumComponent } from './components/create-curriculum-component/CreateCurriculumComponent';
-import { CreateCurriculumPageComponent } from './components/create-curriculum-page-component/CreateCurriculumPageComponent';
-import ViewAllVisualizationsContainer from './components/view-all-viz-component/ViewAllVisualizationsContainer';
+import  CreateCurriculumPageComponent  from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
+import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
 
 
 
@@ -17,9 +17,7 @@ const App: React.FC = () => {
       <Provider store={store}>
         <Router>
           <Switch>
-            <Route path='/createcurriculum' component={CreateCurriculumComponent} />
             <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent}></Route>
-            <Route path='/search' component={SearchCurriculumComponent} />
             <Route path='/skill' component={SkillComponent} />
             <Route path='/' component={ViewAllVisualizationsContainer} />
           </Switch>
