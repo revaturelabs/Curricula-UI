@@ -89,5 +89,12 @@ const curriculumList = [
     { curriculum: 'Java React' },
     { curriculum: 'Cyber Security' },
     { curriculum: 'Java Angular' },
-    { curriculum: 'Java' }
+    { curriculum: 'Java' },
+    { curriculum: 'Java React Extended' },
+    { curriculum: 'Java Angular Extended' },
+    { curriculum: 'Microservices' },
+    { curriculum: 'Salesforce' },
+    { curriculum: 'Java Testing' },
+    { curriculum: 'Business Analysis' },
+    { curriculum: 'GCP' },
 ];
