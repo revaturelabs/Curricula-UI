@@ -97,6 +97,9 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 filterSkillsORSkillsMap: false
             })
         }
+        if (this.state.filterSkillsORSkillsMap) {
+            
+        }
         let searchInputValue = e.target.value
         console.log(e.target.value)
         for (let i = 0; i < this.props.allSkillsMap.length; i++) {
@@ -111,7 +114,6 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     }
 
     render() {
-
         return (
             <>
                 <div>
