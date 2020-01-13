@@ -60,6 +60,8 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         this.setState({
             ...this.state,
         })
+        console.log(this.state.skillsToCurriculumArray);
+        
     }
 
     submitCurriculum = (e: SyntheticEvent) => {
@@ -78,39 +80,23 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 ...this.state,
             })
             this.props.postSubmitCurriculum(this.state.newCurriculum)
-            console.log(this.state.newCurriculum)
             //message of successful creation should go here once sql error is handled
         }
     }
 
     filterSkills = (e : any) => {
-        if (e !== undefined || e !== null) {
-            this.setState({
-                ...this.state,
-                filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
-                filterSkillsORSkillsMap: true
-            })
-        } else {
-            this.setState({
-                ...this.state,
-                filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
-                filterSkillsORSkillsMap: false
-            })
-        }
-        if (this.state.filterSkillsORSkillsMap) {
-            
-        }
         let searchInputValue = e.target.value
-        console.log(e.target.value)
+        let tempSkillsMap = [new Skill(0, '', new Category(0, ''))]
         for (let i = 0; i < this.props.allSkillsMap.length; i++) {
             let searchString = this.props.allSkillsMap[i].skillName 
             if (searchString.toLowerCase().includes(searchInputValue)){
-                this.state.filterSkillsMap.push(this.props.allSkillsMap[i])
-                // console.log(searchString)
-                // console.log(searchInputValue)
+                tempSkillsMap.push(this.props.allSkillsMap[i])
             }
-            console.log(this.state.filterSkillsMap)
         }
+        this.setState({
+            ...this.state,
+            filterSkillsMap: tempSkillsMap
+        })        
     }
 
     render() {
@@ -132,24 +118,26 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
                 <ul className="skillToCurriculumList">
                     {this.state.skillsToCurriculumArray.map((e: any) => {
-                        return (<li>{e.skillName}</li>)
+                        return (<li key = {e.skillId}>{e.skillName}</li>)
                     })}
 
                 </ul>
-                <div id="allSkillsMap">
+                {this.state.filterSkillsMap.length === 1 ?
+                <div>
                     {this.props.allSkillsMap.map((f: any) => {
                         return (
-                            <Button value={f.skillId} className="skillPillCurriculum" onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }}>{f.skillName}</Button>
+                            <Button value={f.skillId} className="skillPillCurriculum" key = {f.skillId} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }}>{f.skillName}</Button>
                         )
                     })}
-                </div>
-                <div id="filterSkillsMap">
+                </div> :
+                <div>
                     {this.state.filterSkillsMap.map((e: any) => {
                         return (
-                            <Button value={e.skillId} className="skillPillCurriculum" onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }}>{e.skillName}</Button>
+                            <Button value={e.skillId} className="skillPillCurriculum" key = {e.skillId} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }}>{e.skillName}</Button>
                         )
                     })}   
                 </div>
+                }
 
                 <PopupButtonComponent />
             </>
