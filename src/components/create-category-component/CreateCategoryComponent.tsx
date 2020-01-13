@@ -1,21 +1,28 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { TextField, Button, FormControl } from '@material-ui/core'
 import { string } from 'prop-types'
+import { curriculaSubmitCategory } from '../../remote/curricula-category'
 
 
 
-export class CreateCategory extends React.Component<any, any>{
+export class CreateCategoryComponent extends React.Component<any, any>{
+
     constructor(props: any) {
         super(props)
         this.state = {
-            categoryName: string,
-
+            id: 0,
+           name: ''
         }
     }
 
-
-
-
+submitCategory = async (e: SyntheticEvent) => {
+    e.preventDefault()
+    try{
+        let c = await curriculaSubmitCategory(this.state.id,this.state.name)
+        } catch (e){
+            console.log(e);
+        }
+}
 
     render() {
         return (
@@ -40,4 +47,4 @@ export class CreateCategory extends React.Component<any, any>{
         )
     }
 }
-export default CreateCategory
+export default CreateCategoryComponent

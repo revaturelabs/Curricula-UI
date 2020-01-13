@@ -4,6 +4,8 @@ import { Button, makeStyles, Theme, createStyles, MenuItem } from '@material-ui/
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { Category } from '../../models/category';
+
 
 
 
@@ -18,6 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
+
+
+interface ICreateSkillComponentProps{
+    category: Category
+}
 
 
 export default function CreateSkillComponent() {
@@ -46,6 +53,9 @@ export default function CreateSkillComponent() {
         e.preventDefault( )
     }
 
+    // const rows = this.props.category.map((e) => {
+    //     return 
+    // })
 
     return (
         <div>
@@ -63,19 +73,9 @@ export default function CreateSkillComponent() {
                     labelWidth={labelWidth}
                 >
                     <MenuItem value="">
-                        <em>None</em>
+                        {/* {rows} */}
                     </MenuItem>
-                    <MenuItem value="framework">Framework</MenuItem>
-                    <MenuItem value="devops">DevOps</MenuItem>
-                    <MenuItem value="architecture">Architecture</MenuItem>
-                    <MenuItem value="database">Database</MenuItem>
-                    <MenuItem value="sourcecode">Sourcecode</MenuItem>
-                    <MenuItem value="ide">IDE</MenuItem>
-                    <MenuItem value="language">Language</MenuItem>
-                    <MenuItem value="server">Server</MenuItem>
-                    <MenuItem value="library">Library</MenuItem>
-                    <MenuItem value="testing">Testing</MenuItem>
-                    <MenuItem value="microservices">Microservices</MenuItem>
+                   
                 </Select>
             </FormControl>
 
