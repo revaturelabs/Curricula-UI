@@ -32,7 +32,7 @@ export const skillsReducer = (state = initialState, action: any) => {
         case skillPillTypes.SUBMIT_UNSUCCESSFUL: {
             return {
                 ...state,
-                message: 'Failed to create curriculum'
+                message: 'Reducer failed to create curriculum'
             }
         }
         default:
