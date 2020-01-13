@@ -7,6 +7,7 @@ import { Button, Input, Grid, Paper } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
 import DoneIcon from '@material-ui/icons/Done';
+import '../../App.css'
 
 
 interface ICreateCurriculumPageProps {
@@ -127,9 +128,9 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 </Paper>
             </Grid>
         </div>
-        
+
                 {this.state.filterSkillsMap.length === 1 ?
-                <div>
+                <div className = "skillPillContainer" >
                     {this.props.allSkillsMap.map((f: any) => {
                         return (
                             this.state.checkRender.includes(f.skillId) ?
@@ -138,7 +139,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                         )
                     })}
                 </div> :
-                <div>
+                <div className = "skillPillContainer" >
                     {this.state.filterSkillsMap.map((e: any) => {
                         return (
                             this.state.checkRender.includes(e.skillId) ?
