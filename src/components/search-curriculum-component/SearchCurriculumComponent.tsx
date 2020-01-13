@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -6,7 +6,6 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { Grid } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import { useStore, useSelector } from 'react-redux';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -16,14 +15,6 @@ interface ITestData {
 }
 
 export function SearchCurriculumComponent(props: any) {
-
-    const [curriculum, setCurriculum] = React.useState(props.allCurricula)
-
-    console.log(props.allCurricula[0]);
-
-    // const curriculumList = [
-    //     { curriculum: curriculum[0].curriculumName },
-    // ];
 
     const curriculumList = props.allCurricula.map((e: any) => {
         console.log(e.curriculumName);
