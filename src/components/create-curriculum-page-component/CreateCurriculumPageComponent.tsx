@@ -3,7 +3,7 @@ import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, Input, InputLabel } from '@material-ui/core';
+import { Button, Input } from '@material-ui/core';
 
 
 interface ICreateCurriculumPageProps{
@@ -63,7 +63,6 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         return(
             <>
                 <div>
-                    {/* <InputLabel className="newCurriculumForm" >Curriculum To Create:</InputLabel> */}
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.upCurriculumName}/>
                     <Button className="newCurriculumForm">Create Curriculum {this.state.newCurriculumName}</Button>
                 </div>
@@ -75,7 +74,6 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                     
                 </ul>
                 <div>
-                    {/* <p>{this.props.allSkillsMap(skillId(4)}</p> */}
                     {this.props.allSkillsMap.map((e:any) => {
                         return (
                             <Button value={e.skillId} className="skillPillCurriculum" onClick={()=>{this.upSkillsToCurriculumArray(e.skillId)}}>{e.skillName}</Button>
