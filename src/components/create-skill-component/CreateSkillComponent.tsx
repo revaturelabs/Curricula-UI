@@ -20,7 +20,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function CreateSkillComponent() {
+export default function CreateSkillComponent(categories: any) {
+
+    console.log(categories);
+    const fillDropdown = categories.categories.categories.map((e:any) => {
+        return <MenuItem value={e.categoryName} key={"key" + e.categoryId}>{e.categoryName}</MenuItem>
+    })
 
     const [skill, setSkill] = React.useState('');
     const [category, setCategory] = React.useState('');
@@ -65,8 +70,7 @@ export default function CreateSkillComponent() {
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
-                    <MenuItem value="framework">Framework</MenuItem>
-                    <MenuItem value="devops">DevOps</MenuItem>
+                    {fillDropdown}
                 </Select>
             </FormControl>
 

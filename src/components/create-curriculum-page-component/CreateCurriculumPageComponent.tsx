@@ -12,6 +12,7 @@ interface ICreateCurriculumPageProps {
     getAllSkills: () => void
     allSkillsMap: Skill[]
     curriculaIdNum: Curriculum[]
+    allCategories: Category[]
 }
 
 export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, any>{
@@ -111,7 +112,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
                 </div>
 
-                <PopupButtonComponent />
+                <PopupButtonComponent categories={this.props.allCategories}/>
             </>
         )
     }
