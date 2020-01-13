@@ -66,10 +66,10 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
     submitCurriculum = (e: SyntheticEvent) => {
         e.preventDefault()
-        if (this.state.newCurriculumName.length < 2) {
-            alert('Please enter a valid Curriculum Name, greater than two characters')
-        } else if (this.state.skillsToCurriculumArray.length < 6) {
-            alert('Please make sure to include at least five skills in your New curriculum')
+        if (this.state.newCurriculumName.length <= 2) {
+            alert('Please enter a valid Curriculum Name, at least two characters long')
+        } else if (this.state.skillsToCurriculumArray.length < 1) {
+            alert('Please make sure to include at least one skill in your New curriculum')
         } else {
             console.log(this.state.newCurriculum)
             this.state.skillsToCurriculumArray.shift()
