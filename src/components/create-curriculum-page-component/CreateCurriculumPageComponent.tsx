@@ -3,7 +3,7 @@ import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, Input } from '@material-ui/core';
+import { Button, Input, Grid, Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 
 
@@ -11,6 +11,7 @@ interface ICreateCurriculumPageProps {
     postSubmitCurriculum: (newCurriculum: Curriculum) => void
     getAllSkills: () => void
     allSkillsMap: Skill[]
+    skill: string
     curriculaIdNum: Curriculum[]
     allCategories: Category[]
 }
@@ -22,6 +23,8 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             skillsToCurriculumArray: [new Skill(0, '', new Category(0, ''))],
             newCurriculumName: '',
             newCurriculum: new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))]),
+            filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
+            filterSkillsORSkillsMap: Boolean
         }
     }
 
@@ -58,14 +61,16 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         this.setState({
             ...this.state,
         })
+        console.log(this.state.skillsToCurriculumArray);
+        
     }
 
     submitCurriculum = (e: SyntheticEvent) => {
         e.preventDefault()
-        if (this.state.newCurriculumName.length < 2) {
-            alert('Please enter a valid Curriculum Name, greater than two characters')
-        } else if (this.state.skillsToCurriculumArray.length < 6) {
-            alert('Please make sure to include at least five skills in your New curriculum')
+        if (this.state.newCurriculumName.length <= 2) {
+            alert('Please enter a valid Curriculum Name, at least two characters long')
+        } else if (this.state.skillsToCurriculumArray.length < 1) {
+            alert('Please make sure to include at least one skill in your New curriculum')
         } else {
             console.log(this.state.newCurriculum)
             this.state.skillsToCurriculumArray.shift()
@@ -76,20 +81,26 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 ...this.state,
             })
             this.props.postSubmitCurriculum(this.state.newCurriculum)
-            console.log(this.state.newCurriculum)
             //message of successful creation should go here once sql error is handled
         }
     }
 
-
-    componentDidMount() {
+    filterSkills = (e : any) => {
+        let searchInputValue = e.target.value
+        let tempSkillsMap = [new Skill(0, '', new Category(0, ''))]
+        for (let i = 0; i < this.props.allSkillsMap.length; i++) {
+            let searchString = this.props.allSkillsMap[i].skillName 
+            if (searchString.toLowerCase().includes(searchInputValue)){
+                tempSkillsMap.push(this.props.allSkillsMap[i])
+            }
+        }
         this.setState({
-            ...this.state
-        })
+            ...this.state,
+            filterSkillsMap: tempSkillsMap
+        })        
     }
 
     render() {
-
         return (
             <>
                 <div>
@@ -97,20 +108,37 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                     <Link to="/"><Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button></Link>
                 </div>
 
+                <div>
+            <br />
+            <Grid container justify="center">
+                <Paper component="form" >
+                    <Input placeholder="Type to filter..." onChange={this.filterSkills}></Input>
+                </Paper>
+            </Grid>
+        </div>
+
                 <ul className="skillToCurriculumList">
                     {this.state.skillsToCurriculumArray.map((e: any) => {
-                        return (<li>{e.skillName}</li>)
+                        return (<li key = {e.skillId}>{e.skillName}</li>)
                     })}
 
                 </ul>
+                {this.state.filterSkillsMap.length === 1 ?
                 <div>
-                    {this.props.allSkillsMap.map((e: any) => {
+                    {this.props.allSkillsMap.map((f: any) => {
                         return (
-                            <Button value={e.skillId} className="skillPillCurriculum" onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }}>{e.skillName}</Button>
+                            <Button value={f.skillId} className="skillPillCurriculum" key = {f.skillId} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }}>{f.skillName}</Button>
                         )
                     })}
-
+                </div> :
+                <div>
+                    {this.state.filterSkillsMap.map((e: any) => {
+                        return (
+                            <Button value={e.skillId} className="skillPillCurriculum" key = {e.skillId} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }}>{e.skillName}</Button>
+                        )
+                    })}   
                 </div>
+                }
 
                 <PopupButtonComponent categories={this.props.allCategories}/>
             </>
