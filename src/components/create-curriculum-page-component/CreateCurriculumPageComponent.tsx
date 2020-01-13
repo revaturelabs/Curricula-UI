@@ -3,7 +3,7 @@ import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, Input, Grid, Paper, TextField } from '@material-ui/core';
+import { Button, Input, Grid, Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 
 
@@ -22,6 +22,8 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             skillsToCurriculumArray: [new Skill(0, '', new Category(0, ''))],
             newCurriculumName: '',
             newCurriculum: new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))]),
+            filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
+            filterSkillsORSkillsMap: Boolean
         }
     }
 
@@ -81,6 +83,33 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         }
     }
 
+    filterSkills = (e : any) => {
+        if (e !== undefined || e !== null) {
+            this.setState({
+                ...this.state,
+                filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
+                filterSkillsORSkillsMap: true
+            })
+        } else {
+            this.setState({
+                ...this.state,
+                filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
+                filterSkillsORSkillsMap: false
+            })
+        }
+        let searchInputValue = e.target.value
+        console.log(e.target.value)
+        for (let i = 0; i < this.props.allSkillsMap.length; i++) {
+            let searchString = this.props.allSkillsMap[i].skillName 
+            if (searchString.toLowerCase().includes(searchInputValue)){
+                this.state.filterSkillsMap.push(this.props.allSkillsMap[i])
+                // console.log(searchString)
+                // console.log(searchInputValue)
+            }
+            console.log(this.state.filterSkillsMap)
+        }
+    }
+
     render() {
 
         return (
@@ -94,12 +123,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             <br />
             <Grid container justify="center">
                 <Paper component="form" >
-
-                    <TextField
-                        placeholder="Type to filter..."
-                        id="checkboxes-tags-demo"
-                        style={{ width: 500 }}
-                    />
+                    <Input placeholder="Type to filter..." onChange={this.filterSkills}></Input>
                 </Paper>
             </Grid>
         </div>
@@ -110,13 +134,19 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                     })}
 
                 </ul>
-                <div>
-                    {this.props.allSkillsMap.map((e: any) => {
+                <div id="allSkillsMap">
+                    {this.props.allSkillsMap.map((f: any) => {
+                        return (
+                            <Button value={f.skillId} className="skillPillCurriculum" onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }}>{f.skillName}</Button>
+                        )
+                    })}
+                </div>
+                <div id="filterSkillsMap">
+                    {this.state.filterSkillsMap.map((e: any) => {
                         return (
                             <Button value={e.skillId} className="skillPillCurriculum" onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }}>{e.skillName}</Button>
                         )
-                    })}
-
+                    })}   
                 </div>
 
                 <PopupButtonComponent />
