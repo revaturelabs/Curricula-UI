@@ -3,7 +3,7 @@ import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, Input } from '@material-ui/core';
+import { Button, Input, Grid, Paper, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { store } from '../../Store';
 
@@ -12,6 +12,7 @@ interface ICreateCurriculumPageProps {
     postSubmitCurriculum: (newCurriculum: Curriculum) => void
     getAllSkills: () => void
     allSkillsMap: Skill[]
+    skill: string
 }
 
 export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, any>{
@@ -81,13 +82,6 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         }
     }
 
-
-    componentDidMount() {
-        this.setState({
-            ...this.state
-        })
-    }
-
     render() {
 
         return (
@@ -96,6 +90,20 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.upCurriculumName} />
                     <Link to="/"><Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button></Link>
                 </div>
+
+                <div>
+            <br />
+            <Grid container justify="center">
+                <Paper component="form" >
+
+                    <TextField
+                        placeholder="Type to filter..."
+                        id="checkboxes-tags-demo"
+                        style={{ width: 500 }}
+                    />
+                </Paper>
+            </Grid>
+        </div>
 
                 <ul className="skillToCurriculumList">
                     {this.state.skillsToCurriculumArray.map((e: any) => {
