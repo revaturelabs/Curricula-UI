@@ -5,7 +5,6 @@ import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
 import { Button, Input, Grid, Paper, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom'
-import { store } from '../../Store';
 
 
 interface ICreateCurriculumPageProps {
@@ -13,6 +12,7 @@ interface ICreateCurriculumPageProps {
     getAllSkills: () => void
     allSkillsMap: Skill[]
     skill: string
+    curriculaIdNum: Curriculum[]
 }
 
 export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, any>{
@@ -21,15 +21,14 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         this.state = {
             skillsToCurriculumArray: [new Skill(0, '', new Category(0, ''))],
             newCurriculumName: '',
-            allSkillsMap: [new Skill(0, '', new Category(0, ''))],
             newCurriculum: new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))]),
         }
     }
 
     upCurriculumName = (e: any) => {
-        let existingCurricula = store.getState().allCurricula.curricula
+        let existingCurricula = this.props.curriculaIdNum
         for (let i = 0; i < existingCurricula.length; i++) {
-            if (existingCurricula.curriculumName === e.target.value) {
+            if (existingCurricula[i].curriculumName === e.target.value) {
                 return alert('A Currriculum of this name already exists. Please get more creative...')
             } else if (i === existingCurricula.length - 1) {
                 this.setState({
@@ -70,7 +69,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         } else {
             console.log(this.state.newCurriculum)
             this.state.skillsToCurriculumArray.shift()
-            this.state.newCurriculum.curriculumId = store.getState().allCurricula.curricula.length + 1
+            this.state.newCurriculum.curriculumId = this.props.curriculaIdNum.length + 1
             this.state.newCurriculum.curriculumName = this.state.newCurriculumName
             this.state.newCurriculum.skills = this.state.skillsToCurriculumArray
             this.setState({
