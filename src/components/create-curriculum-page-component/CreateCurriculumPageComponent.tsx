@@ -11,7 +11,7 @@ interface ICreateCurriculumPageProps {
     postSubmitCurriculum: (newCurriculum: Curriculum) => void
     getAllSkills: () => void
     allSkillsMap: Skill[]
-    curriculaIdNum: any
+    curriculaIdNum: Curriculum[]
 }
 
 export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, any>{
@@ -27,7 +27,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     upCurriculumName = (e: any) => {
         let existingCurricula = this.props.curriculaIdNum
         for (let i = 0; i < existingCurricula.length; i++) {
-            if (existingCurricula.curriculumName === e.target.value) {
+            if (existingCurricula[i].curriculumName === e.target.value) {
                 return alert('A Currriculum of this name already exists. Please get more creative...')
             } else if (i === existingCurricula.length - 1) {
                 this.setState({
