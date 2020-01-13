@@ -1,3 +1,77 @@
+# Curricula Service
+
+![alt text](https://github.com/revaturelabs/boilerplate-project/blob/master/logo/logo.png "Logo")
+
+This project established the frontend User Interface (UI) for the Curricula project.
+
+## Introduction
+
+## Directory Structure
+
+```bash
+├── src
+│   ├── components
+│   │   ├── create-category-component
+│   │   ├── create-curriculum-component
+│   │   ├── create-curriculum-page-component
+│   │   ├── create-skill-component
+│   │   ├── popup-component
+│   │   ├── search-curriculum-component
+│   ├── models
+│   ├── reducers
+│   ├── remote
+│   ├── App.css
+│   ├── App.test.tsx
+│   ├── index.css
+│   ├── index.tsx
+│   ├── logo.svg
+│   ├── react-app-env.d.ts
+│   ├── serviceWorker.ts
+│   ├── setupTest.ts
+│   └── Store.ts
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo.png
+│   ├── manifest.json
+│   ├── robots.txt
+├── .gitignore
+├── package.json
+├── README.md
+├── sonar-project.properties
+├── tsconfig.json
+
+```
+
+## Code of Conduct
+
+## Community
+
+### Team
+
++ Alec Batson
++ Kenneth Bradley Davis
++ Mahmud Karim
++ Sam Mosca "Gao-Shan"
++ Justin  Massey
++ Saritha Karunanithi
++ Dane Vosmeier
++ Wes Oler
++ Naziia Travels
++ Joshua Roy
++ Harvey Mousad
++ Nikhil Singh
++ Jose Indriago
++ Jeffrey Chang
+
+## Contribute
+
+## Support
+
+
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
