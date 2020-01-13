@@ -28,7 +28,8 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     render() {
         return (
             <div>
-               <Link to="/createcurriculumpage"> <p>Visualization Page :D</p> </Link>
+                <Link to="/createcurriculumpage"> <p>Visualization Page :D</p> </Link>
+                <Link to="/search"> <p>Search Curriculum</p> </Link>
             </div>
         )
 

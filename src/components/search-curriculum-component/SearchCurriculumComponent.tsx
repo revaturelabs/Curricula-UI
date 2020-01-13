@@ -36,9 +36,28 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export function SearchCurriculumComponent() {
+export function SearchCurriculumComponent(props: any) {
 
     const classes = useStyles();
+
+    const [curriculum, setCurriculum] = React.useState(props)
+
+    console.log("this is the props " + curriculum);
+
+
+    const curriculumList = [
+        { curriculum: 'Java React' },
+        { curriculum: 'Cyber Security' },
+        { curriculum: 'Java Angular' },
+        { curriculum: 'Java' },
+        { curriculum: 'Java React Extended' },
+        { curriculum: 'Java Angular Extended' },
+        { curriculum: 'Microservices' },
+        { curriculum: 'Salesforce' },
+        { curriculum: 'Java Testing' },
+        { curriculum: 'Business Analysis' },
+        { curriculum: 'GCP' },
+    ];
 
     return (
         <div>
@@ -84,17 +103,3 @@ export function SearchCurriculumComponent() {
 
 
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const curriculumList = [
-    { curriculum: 'Java React' },
-    { curriculum: 'Cyber Security' },
-    { curriculum: 'Java Angular' },
-    { curriculum: 'Java' },
-    { curriculum: 'Java React Extended' },
-    { curriculum: 'Java Angular Extended' },
-    { curriculum: 'Microservices' },
-    { curriculum: 'Salesforce' },
-    { curriculum: 'Java Testing' },
-    { curriculum: 'Business Analysis' },
-    { curriculum: 'GCP' },
-];

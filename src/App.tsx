@@ -4,10 +4,9 @@ import { store } from './Store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
-import { SearchCurriculumComponent } from './components/search-curriculum-component/SearchCurriculumComponent';
-import { CreateCurriculumComponent } from './components/create-curriculum-component/CreateCurriculumComponent';
-import  CreateCurriculumPageComponent  from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
+import CreateCurriculumPageComponent from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
 import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
+import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
 
 
 
@@ -19,6 +18,7 @@ const App: React.FC = () => {
           <Switch>
             <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent}></Route>
             <Route path='/skill' component={SkillComponent} />
+            <Route path='/search' component={SearchCurriculumContainer} />
             <Route path='/' component={ViewAllVisualizationsContainer} />
           </Switch>
         </Router>
