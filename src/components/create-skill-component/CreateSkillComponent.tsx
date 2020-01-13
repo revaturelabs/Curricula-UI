@@ -54,7 +54,7 @@ export default function CreateSkillComponent(categories: any) {
 
     return (
         <div>
-            <h2>Create New Skill</h2>
+            <h3>Create New Skill</h3>
             <h5> Select Your Category :</h5>
             <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
@@ -75,8 +75,8 @@ export default function CreateSkillComponent(categories: any) {
             </FormControl>
 
             <h5>Type Your Skill Name :</h5>
-            <form noValidate autoComplete="off">
-                <TextField onChange={updateSkill} id="outlined-basic" label="SkillName" variant="outlined" />
+            <form>
+                <TextField onChange={updateSkill} id="outlined-basic" label="SkillName" variant="outlined" size="small"/>
                 <br /><br />
                 <Button onClick={submitSkill} variant="contained" color="primary">Submit</Button>
             </form>
