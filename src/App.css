@@ -40,3 +40,7 @@
 .skillToCurriculumList{
   list-style:none;
 }
+
+.newCurriculumForm{
+  display: inline; 
+}

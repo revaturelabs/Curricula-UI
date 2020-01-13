@@ -3,11 +3,11 @@ import { Skill } from "./skill";
 export class Curriculum {
     curriculumId: number;
     curriculumName: string;
-    curriculumSkills: Skill[];
+    skills: Skill[];
 
-    constructor(curriculumId: number, curriculumName: string, curriculumSkills: Skill[]) {
+    constructor(curriculumId: number, curriculumName: string, skills: Skill[]) {
         this.curriculumId = curriculumId
         this.curriculumName = curriculumName
-        this.curriculumSkills = curriculumSkills
+        this.skills = skills
     }
 }
