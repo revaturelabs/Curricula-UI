@@ -7,6 +7,7 @@ import { Curriculum } from "../models/curriculum";
 import { curriculumReducer } from "./curriculum-reducer";
 import { Category } from "../models/category";
 import { categoryReducer } from "./category-reducer";
+import { visualizationDisplayReducer } from "./visualization-display-reducer";
 
 export interface ISkillState {
     skills: Skill[],
@@ -21,6 +22,11 @@ export interface ICurriculumState {
     curricula: Curriculum[]
 }
 
+export interface IVistualizationDisplayState {
+viscurricula : Curriculum[]
+
+}
+
 export interface ICategoryState {
     categories: Category[]
 }
@@ -30,11 +36,13 @@ export interface IState {
     allVisualizations: IVisualizationState
     allCurricula: ICurriculumState
     allCategories: ICategoryState
+    viscurricula:IVistualizationDisplayState
 }
 
 export const state = combineReducers<IState>({
     allSkills: skillsReducer,
     allVisualizations: visualizationReducer,
     allCurricula: curriculumReducer,
-    allCategories: categoryReducer
+    allCategories: categoryReducer,
+    viscurricula: visualizationDisplayReducer,
 })
