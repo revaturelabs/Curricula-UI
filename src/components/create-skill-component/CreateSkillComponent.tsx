@@ -67,19 +67,8 @@ export default function CreateSkillComponent() {
                     </MenuItem>
                     <MenuItem value="framework">Framework</MenuItem>
                     <MenuItem value="devops">DevOps</MenuItem>
-                    <MenuItem value="architecture">Architecture</MenuItem>
-                    <MenuItem value="database">Database</MenuItem>
-                    <MenuItem value="sourcecode">Sourcecode</MenuItem>
-                    <MenuItem value="ide">IDE</MenuItem>
-                    <MenuItem value="language">Language</MenuItem>
-                    <MenuItem value="server">Server</MenuItem>
-                    <MenuItem value="library">Library</MenuItem>
-                    <MenuItem value="testing">Testing</MenuItem>
-                    <MenuItem value="microservices">Microservices</MenuItem>
                 </Select>
             </FormControl>
-
-            <br /><br />
 
             <h5>Type Your Skill Name :</h5>
             <form noValidate autoComplete="off">

@@ -56,10 +56,11 @@ export default function PopupButtonComponent() {
         <Fade in={open}>
           <div className={classes.paper}>
               <Container>
-                  
+               
             <h2 id="head2">Add Skill/Category</h2>
             <p id="transition-modal-description">Created:</p>
             <CreateSkillComponent/>
+          
             <CreateCategory/>
             
 
