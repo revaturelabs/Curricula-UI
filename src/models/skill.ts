@@ -2,12 +2,12 @@ import { Category } from "./category"
 
 export class Skill{
     skillId: number
-    name: string
+    skillName: string
     category: Category
 
     constructor(skillId:number, skillName: string, category: Category){
         this.skillId = skillId
-        this.name = skillName
+        this.skillName = skillName
         this.category = category
     }
 }

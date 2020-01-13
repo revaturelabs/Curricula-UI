@@ -12,8 +12,6 @@ interface IData {
     skill: string;
 }
 
-
-
 export function CreateCurriculumComponent() {
 
     return (
@@ -29,18 +27,18 @@ export function CreateCurriculumComponent() {
                         id="checkboxes-tags-demo"
                         options={skillList}
                         disableCloseOnSelect
-                        getOptionLabel={(option: IData) => option.skill}
-                        renderOption={(option: IData, { selected }) => (
-                            <React.Fragment>
-                                <Checkbox
-                                    icon={icon}
-                                    checkedIcon={checkedIcon}
-                                    style={{ marginRight: 8 }}
-                                    checked={selected}
-                                />
-                                {option.skill}
-                            </React.Fragment>
-                        )}
+                        //getOptionLabel={(option: IData) => option.skill}
+                        // renderOption={(option: IData, { selected }) => (
+                        //     <React.Fragment>
+                        //         <Checkbox
+                        //             icon={icon}
+                        //             checkedIcon={checkedIcon}
+                        //             style={{ marginRight: 8 }}
+                        //             checked={selected}
+                        //         />
+                        //         {option.skill}
+                        //     </React.Fragment>
+                        // )}
                         style={{ width: 500 }}
                         renderInput={params => (
                             <TextField
