@@ -10,9 +10,6 @@ import { ViewAllVisualizationsComponent } from "./ViewAllVisualizationsComponent
 const mapStateToProps = (state: IState) => {
     return {
         allVisualizations: state.allVisualizations.visualizations,
-        allSkills: state.allSkills.skills,
-        allCurricula: state.allCurricula.curricula,
-        allCategories: state.allCategories.categories
     }
 }
 
