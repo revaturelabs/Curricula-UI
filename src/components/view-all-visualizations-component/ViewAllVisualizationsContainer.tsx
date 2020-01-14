@@ -1,5 +1,5 @@
 import { IState } from "../../reducers"
-import { getAllVisualizations } from "../../action-mappers/view-all-visualization-action-mapper"
+import { getAllVisualizations } from "../../action-mappers/visualization-action-mapper"
 import { getAllSkills } from "../../action-mappers/skill-pill-action-mapper"
 import { getAllCurricula } from "../../action-mappers/curriculum-action-mapper"
 import { getAllCategories } from "../../action-mappers/category-action-mapper"

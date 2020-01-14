@@ -47,7 +47,7 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
                 return false
             }
         }).map((visualization) => {
-            return <VisualizationLinkComponent visualization={visualization} />
+            return <VisualizationLinkComponent visualization={visualization} key = {visualization.visualizationId}/>
         })
 
         return (
@@ -63,7 +63,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
                     />
                 </Paper>
                 {visualizationsToRender}
-                <Link to="/createcurriculumpage"> <p>Visualization Page :D</p> </Link>
             </div>
         )
     }

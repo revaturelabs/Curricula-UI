@@ -4,7 +4,8 @@ import { categoryTypes } from '../action-mappers/category-action-mapper';
 
 
 const initialState: ICategoryState = {
-    categories: [new Category(0, '')]
+    categories: [new Category(0, '')],
+    category: new Category(0,'')
 }
 
 export const categoryReducer = (state = initialState, action: any) => {
@@ -14,6 +15,17 @@ export const categoryReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 categories: action.payload.allCategories
+            }
+        }
+        case categoryTypes.UNSUCCESSFUL_POST_NEW_CATEGORY: {
+            return {
+                ...state,
+            }
+        }
+        case categoryTypes.SUCCESSFUL_POST_NEW_CATEGORY: {
+            return {
+                ...state,
+                category: action.payload.newCategory
             }
         }
         default:
