@@ -1,9 +1,12 @@
 import React from "react";
-import { Curriculum } from "../../models/curriculum";
 import { apiGetVisualizationByName } from "../../remote/curricula-visualization-display";
+import { Visualization } from "../../models/visualization";
+import { Curriculum } from "../../models/curriculum";
+import { CurriculaSelectionComponent } from "./curricula-selection-component/CurriculaSelectionComponent";
 
 interface IVisualizationComponentstate {
-    curricula: Curriculum[]
+    visualization: Visualization
+    activeCurriculum: Curriculum
 }
 
 
@@ -12,27 +15,41 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
     constructor(props: any) {
         super(props)
         this.state = {
-            curricula: []
+            visualization: new Visualization(0,'',[]),
+            activeCurriculum: new Curriculum(0,'',[])
         }
 
     }
 
     async componentDidMount() {
+        let visualizationName = this.props.match.params.visualization
+        
         try {
-            let c = await apiGetVisualizationByName()
-            if (c.status === 200) {
+            let res = await apiGetVisualizationByName(visualizationName)
+            if (res.status === 200 && res.body) {
                 this.setState({
                     ...this.state,
-                    curricula: c.body
+                    visualization: res.body
                 })
             }
         } catch (e) {
             console.log(e);
-        
+        }
     }
-    render(){
-        let rows = this.state.curricula.map((e) => {
-            return <
+
+    updateActiveCurriculum = (curriculum: Curriculum) => {
+        this.setState({
+            ...this.state,
+            activeCurriculum: curriculum
         })
+    }
+
+    render(){
+
+        return(
+            <div>
+                <CurriculaSelectionComponent updateActiveCurriculum={this.updateActiveCurriculum} curricula={this.state.visualization.curricula} />
+            </div>
+        )
     }
 }
