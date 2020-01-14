@@ -1,0 +1,12 @@
+code App.tsx
+cd remote
+code *.ts
+cd ..
+cd action-mappers
+code *.ts
+cd ..
+cd models
+code *.ts
+cd ..
+cd reducers
+code *.ts
