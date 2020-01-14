@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -17,13 +17,18 @@ interface ITestData {
 export function SearchCurriculumComponent(props: any) {
 
     const curriculumList = props.allCurricula.map((e: any) => {
-        console.log(e.curriculumName);
-
         return { curriculum: e.curriculumName }
     })
 
+    const temp = (e: any) => {
+        console.log();
+
+    }
+
     return (
         <div>
+            <br />
+            <TextField id="VisualizationName" label="Visualization Name" variant="outlined" />
             <br />
             <Grid container justify="center" >
                 <Autocomplete
@@ -57,6 +62,9 @@ export function SearchCurriculumComponent(props: any) {
                     )}
                 />
             </Grid>
+            <Button variant="contained" color="primary">
+                Make
+            </Button>
         </div>
     );
 }
