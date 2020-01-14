@@ -20,9 +20,9 @@ interface ISearchCurriculumProps {
     allCurricula: Curriculum[]
 }
 
-export function SearchCurriculumComponent(ISearchCurriculumProps: any) {
+export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
 
-    const curriculumList = ISearchCurriculumProps.allCurricula.map((e: any) => {
+    const curriculumList = props.allCurricula.map((e: any) => {
         console.log(e.curriculumName);
 
         return { curriculum: e.curriculumName }
