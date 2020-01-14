@@ -22,11 +22,12 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     constructor(props: any) {
         super(props)
         this.state = {
-            skillsToCurriculumArray: [[new Skill(0, '', new Category(0, ''))]],
+            skillsToCurriculumArray: [],
             newCurriculumName: '',
-            checkRender: [],
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
-            filterSkillsORSkillsMap: Boolean
+            filterSkillsORSkillsMap: Boolean,
+            search: false,
+            colors: ['white', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
         }
     }
 
@@ -44,36 +45,25 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         }
     }
 
-    upSkillsToCurriculumArray = (e: any) => {
-        let skillToAdd = this.props.allSkillsMap[e - 1]
+    upSkillsToCurriculumArray = (e: number) => {
         let currArray = this.state.skillsToCurriculumArray
         let added
-        if (currArray.length === 1) {
-            currArray.push(skillToAdd)
-            added = true
-        } else if (currArray.length > 1) {
+        if (currArray.length === 0) {
+            currArray.push(e)
+        } else {
             for (let i = 0; i < currArray.length; i++) {
-                if ((currArray[i].skillId === skillToAdd.skillId)) {
+                if ((currArray[i] === e)) {
                     currArray.splice(i, 1)
                     added = false
                     break
-                } else if ((i === currArray.length - 1)) {
-                    currArray.push(skillToAdd)
-                    added = true
-                    break
                 }
+            } if (added !== false) {
+                currArray.push(e)
             }
         }
         this.setState({
-            ...this.state,
+            ...this.state
         })
-        if(added){
-            this.state.checkRender.push(skillToAdd.skillId)
-        } else {
-            this.state.checkRender.splice(this.state.checkRender.indexOf(skillToAdd.skillId), 1)
-        }
-        console.log(this.state.skillsToCurriculumArray);     
-        
     }
 
     submitCurriculum = (e: SyntheticEvent) => {
@@ -83,7 +73,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         } else if (this.state.skillsToCurriculumArray.length < 1) {
             alert('Please make sure to include at least one skill in your New curriculum')
         } else {
-            console.log(this.state.newCurriculum)
+            //console.log(this.state.newCurriculum)
             this.state.skillsToCurriculumArray.shift()
             let submitCurriculum = new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])
             submitCurriculum.curriculumId = this.props.curriculaIdNum.length + 1
@@ -97,19 +87,40 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         }
     }
 
-    filterSkills = (e : any) => {
+    filterSkills = (e: any) => {
         let searchInputValue = e.target.value
+        let search
+        if(e.target.value) {
+            search = true
+        } else {
+            search = false
+        }
         let tempSkillsMap = [new Skill(0, '', new Category(0, ''))]
         for (let i = 0; i < this.props.allSkillsMap.length; i++) {
-            let searchString = this.props.allSkillsMap[i].skillName 
-            if (searchString.toLowerCase().includes(searchInputValue)){
-                tempSkillsMap.push(this.props.allSkillsMap[i])
+            let searchString = this.props.allSkillsMap[i].skillName
+            if (searchString.toLowerCase().includes(searchInputValue)) {
+                if(tempSkillsMap[0].skillId === 0){
+                    tempSkillsMap[0] = this.props.allSkillsMap[i]
+                } else {
+                    tempSkillsMap.push(this.props.allSkillsMap[i])
+                }
             }
         }
         this.setState({
             ...this.state,
-            filterSkillsMap: tempSkillsMap
-        })        
+            filterSkillsMap: tempSkillsMap,
+            search
+        })
+    }
+
+    compare(a: any, b: any) {
+        if (a.category.categoryId > b.category.categoryId) {
+            return 1;
+        }
+        if (a.category.categoryId < b.category.categoryId) {
+            return -1;
+        }
+        return 0;
     }
 
     render() {
@@ -121,33 +132,33 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 </div>
 
                 <div>
-            <br />
-            <Grid container justify="center">
-                <Paper component="form" >
-                    <Input placeholder="Type to filter..." onChange={this.filterSkills}></Input>
-                </Paper>
-            </Grid>
-        </div>
-
-                {this.state.filterSkillsMap.length === 1 ?
-                <div className = "skillPillContainer" >
-                    {this.props.allSkillsMap.map((f: any) => {
-                        return (
-                            this.state.checkRender.includes(f.skillId) ?
-                            <Chip icon = {<DoneIcon />} label = {f.skillName} className="skillPillCurriculum" key = {f.skillId} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }} /> :
-                            <Chip label = {f.skillName} className="skillPillCurriculum" key = {f.skillId} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }} />
-                        )
-                    })}
-                </div> :
-                <div className = "skillPillContainer" >
-                    {this.state.filterSkillsMap.map((e: any) => {
-                        return (
-                            this.state.checkRender.includes(e.skillId) ?
-                            <Chip icon = {<DoneIcon />} label = {e.skillName} className="skillPillCurriculum" key = {e.skillId} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }} /> :
-                            <Chip label = {e.skillName} className="skillPillCurriculum" key = {e.skillId} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }} />
-                        )
-                    })}   
+                    <br />
+                    <Grid container justify="center">
+                        <Paper component="form" >
+                            <Input placeholder="Type to filter..." onChange={this.filterSkills}></Input>
+                        </Paper>
+                    </Grid>
                 </div>
+
+                {this.state.filterSkillsMap[0].skillId === 0 && !this.state.search ?
+                    <div className="skillPillContainer" >
+                        {this.props.allSkillsMap.sort(this.compare).map((f: any) => {
+                            return (
+                                this.state.skillsToCurriculumArray.includes(f.skillId) ?
+                                    <Chip icon={<DoneIcon />} label={f.skillName} className="skillPillCurriculum" key={f.skillId} style={{ backgroundColor: this.state.colors[f.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }} /> :
+                                    <Chip label={f.skillName} className="skillPillCurriculum" key={f.skillId} style={{ backgroundColor: this.state.colors[f.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }} />
+                            )
+                        })}
+                    </div> :
+                    <div className="skillPillContainer" >
+                        {this.state.filterSkillsMap.sort(this.compare).map((e: any) => {
+                            return (
+                                this.state.skillsToCurriculumArray.includes(e.skillId) ?
+                                    <Chip icon={<DoneIcon />} label={e.skillName} className="skillPillCurriculum" key={e.skillId} style={{ backgroundColor: this.state.colors[e.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }} /> :
+                                    <Chip label={e.skillName} className="skillPillCurriculum" key={e.skillId} style={{ backgroundColor: this.state.colors[e.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }} />
+                            )
+                        })}
+                    </div>
                 }
 
                 <PopupButtonComponent />
@@ -155,3 +166,9 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         )
     }
 }
+
+// const StyleChip = withStyles({
+//     root: {
+//       backgroundColor:
+//     }
+//   })(Chip);
