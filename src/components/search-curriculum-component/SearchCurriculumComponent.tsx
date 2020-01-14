@@ -20,7 +20,7 @@ export function SearchCurriculumComponent(props: any) {
         return { curriculum: e.curriculumName }
     })
 
-    const temp = (e: any) => {
+    const temp = (e: any) => (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value);
     }
 
