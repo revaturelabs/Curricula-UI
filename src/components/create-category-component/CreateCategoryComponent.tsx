@@ -1,37 +1,50 @@
-import React from 'react'
-import { TextField, Button } from '@material-ui/core'
-import { string } from 'prop-types'
+import React, { SyntheticEvent } from 'react'
+import { Button, Input } from '@material-ui/core'
+import { Category } from '../../models/category'
 
 
+interface ICreateCategoryComponentProps {
+    postNewCategory: (categoryToCreate: Category) => void
+    returnedNewCategory: Category
+}
 
-export class CreateCategory extends React.Component<any, any>{
+export class CreateCategoryComponent extends React.Component<ICreateCategoryComponentProps, any>{
     constructor(props: any) {
         super(props)
         this.state = {
-            categoryName: string,
-
+            categoryName: '',
+            categoryToCreate: new Category(0, '')
         }
     }
 
+    updateCategoryName = (e: any) => {
+        this.setState({
+            ...this.state,
+            categoryName: e.target.value
+        })
+        console.log(this.state.categoryName)
+    }
 
-
-
+    submitPostNewCategory = (e: SyntheticEvent) => {
+        e.preventDefault()
+        this.state.categoryToCreate.categoryName = this.state.categoryName
+        this.setState({
+            ...this.state,
+        })
+        this.props.postNewCategory(this.state.categoryToCreate)
+    }
 
     render() {
         return (
             <div id="createCategory-div">
                 <form id="createCategory" className='createCategory'>
-                    <p> Create a Category</p>
-                    <TextField id="filled-basic" variant="outlined"
-                        margin="dense"
-                        name="Category"
-                        placeholder="e.g. 'Devops'"
-                        label="Category"
-                        type="category"
-                    />
-                    <br></br>
-                   
-                            <Button size="medium" variant="contained" type='submit' color="primary" className='{classes.submit}'>
+                    <h1> Create a Category</h1>
+                    <Input onChange={this.updateCategoryName}></Input>
+        <p>{this.state.categoryName}</p>
+                    <br/>
+                    &nbsp;
+                    &nbsp;
+                            <Button onClick={this.submitPostNewCategory} variant="contained" type='submit' color="primary" className='{classes.submit}'>
                         Submit
                             </Button>
                 </form>
@@ -39,4 +52,4 @@ export class CreateCategory extends React.Component<any, any>{
         )
     }
 }
-export default CreateCategory
+export default CreateCategoryComponent
