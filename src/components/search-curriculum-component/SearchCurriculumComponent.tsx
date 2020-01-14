@@ -33,7 +33,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
     })
 
     const updateCurricula = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-
+        props.allCurricula.push
         console.log(name);
     }
 
