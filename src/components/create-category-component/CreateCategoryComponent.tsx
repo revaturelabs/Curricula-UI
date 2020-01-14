@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, Button, FormControl } from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 import { string } from 'prop-types'
 
 
@@ -21,7 +21,7 @@ export class CreateCategory extends React.Component<any, any>{
         return (
             <div id="createCategory-div">
                 <form id="createCategory" className='createCategory'>
-                    <h1> Create a Category</h1>
+                    <p> Create a Category</p>
                     <TextField id="filled-basic" variant="outlined"
                         margin="dense"
                         name="Category"
@@ -29,10 +29,9 @@ export class CreateCategory extends React.Component<any, any>{
                         label="Category"
                         type="category"
                     />
-                    <br/>
-                    &nbsp;
-                    &nbsp;
-                            <Button variant="contained" type='submit' color="primary" className='{classes.submit}'>
+                    <br></br>
+                   
+                            <Button size="medium" variant="contained" type='submit' color="primary" className='{classes.submit}'>
                         Submit
                             </Button>
                 </form>
