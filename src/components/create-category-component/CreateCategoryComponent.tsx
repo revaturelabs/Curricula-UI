@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from 'react'
 import { Button, Input } from '@material-ui/core'
 import { Category } from '../../models/category'
 
+
 interface ICreateCategoryComponentProps {
     postNewCategory: (categoryToCreate: Category) => void 
     returnedNewCategory: Category
