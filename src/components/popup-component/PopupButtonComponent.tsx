@@ -61,9 +61,8 @@ export default function PopupButtonComponent(categories: any) {
             <h2 id="head2">Add Skill/Category</h2>
             <p id="transition-modal-description">Created:</p>
             <CreateSkillComponent categories={categories}/>
-          
             <CreateCategoryComponent/>
-            
+
 
             </Container>
           </div>

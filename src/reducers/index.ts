@@ -37,11 +37,10 @@ export interface IState {
     allVisualizations: IVisualizationState
     allCurricula: ICurriculumState
     allCategories: ICategoryState
-<<<<<<< HEAD
-    newCategory: ICategoryState
-=======
+
+
     viscurricula:IVistualizationDisplayState
->>>>>>> 81c689804e22e9a62c947736f891668a244a21c3
+
 }
 
 export const state = combineReducers<IState>({
@@ -49,9 +48,5 @@ export const state = combineReducers<IState>({
     allVisualizations: visualizationReducer,
     allCurricula: curriculumReducer,
     allCategories: categoryReducer,
-<<<<<<< HEAD
-    newCategory: categoryReducer
-=======
-    viscurricula: visualizationDisplayReducer,
->>>>>>> 81c689804e22e9a62c947736f891668a244a21c3
+    viscurricula: visualizationDisplayReducer
 })

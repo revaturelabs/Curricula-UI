@@ -38,10 +38,13 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
         return (
             <div id="createCategory-div">
                 <form id="createCategory" className='createCategory'>
-                    <p> Create a Category</p>
+                    <h1> Create a Category</h1>
                     <Input onChange={this.updateCategoryName}></Input>
-
-                    <Button onClick={this.submitPostNewCategory} size="medium" variant="contained" type='submit' color="primary" className='{classes.submit}'>
+        <p>{this.state.categoryName}</p>
+                    <br/>
+                    &nbsp;
+                    &nbsp;
+                            <Button onClick={this.submitPostNewCategory} variant="contained" type='submit' color="primary" className='{classes.submit}'>
                         Submit
                             </Button>
                 </form>
