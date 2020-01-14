@@ -6,6 +6,10 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { Grid, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { Visualization } from '../../models/visualization';
+import { Curriculum } from '../../models/curriculum';
+import { Skill } from '../../models/skill';
+import { Category } from '../../models/category';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -13,20 +17,43 @@ interface ITestData {
     curriculum: string;
 }
 
-export function SearchCurriculumComponent(props: any) {
+interface ISearchCurriculumProps {
+    postSubmitVisualization: (newVisualization: Visualization) => void
+    allCurricula: Curriculum[]
+}
+
+export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
+
+    const [visualizationName, setvisualizationName] = React.useState('');
+
+    const [newCurricula, setnewCurricula] = React.useState([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
 
     const curriculumList = props.allCurricula.map((e: any) => {
         return { curriculum: e.curriculumName }
     })
 
-    const temp = (e: any) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
+    const updateCurricula = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        console.log(name);
+    }
+
+    const updateVisualization = (e: any) => {
+        setvisualizationName(e.target.value)
+        console.log(visualizationName);
+    }
+
+    const sumbitVisualization = (e: any) => {
+        e.preventDefault()
+        let tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
+        tempVisualization.visualizationName = visualizationName
+        tempVisualization.curricula = newCurricula
+        props.postSubmitVisualization(tempVisualization)
     }
 
     return (
         <div>
             <br />
-            <TextField id="VisualizationName" label="Visualization Name" variant="outlined" />
+            <TextField onChange={updateVisualization} value={visualizationName} id="VisualizationName" label="Visualization Name" variant="outlined" />
             <br />
             <Grid container justify="center" >
                 <Autocomplete
@@ -44,8 +71,7 @@ export function SearchCurriculumComponent(props: any) {
                                 checkedIcon={checkedIcon}
                                 style={{ marginRight: 8 }}
                                 checked={selected}
-                                onChange={temp}
-                                value={'test'}
+                                onChange={updateCurricula(option.curriculum)}
                             />
                             {option.curriculum}
                         </React.Fragment>
@@ -62,7 +88,7 @@ export function SearchCurriculumComponent(props: any) {
                     )}
                 />
             </Grid>
-            <Button variant="contained" color="primary">
+            <Button onClick={sumbitVisualization} variant="contained" color="primary">
                 Make
             </Button>
         </div>
