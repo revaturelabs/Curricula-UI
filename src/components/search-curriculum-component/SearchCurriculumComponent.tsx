@@ -21,8 +21,7 @@ export function SearchCurriculumComponent(props: any) {
     })
 
     const temp = (e: any) => {
-        console.log();
-
+        console.log(e.target.value);
     }
 
     return (
@@ -46,6 +45,8 @@ export function SearchCurriculumComponent(props: any) {
                                 checkedIcon={checkedIcon}
                                 style={{ marginRight: 8 }}
                                 checked={selected}
+                                onChange={temp}
+                                value={'test'}
                             />
                             {option.curriculum}
                         </React.Fragment>
