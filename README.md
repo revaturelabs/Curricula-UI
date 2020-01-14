@@ -74,6 +74,10 @@ This project established the frontend User Interface (UI) for the Curricula proj
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Environment Variables
+
+BASE_URL: This is the base url used to generate links. It should be the url the front end server will have.
+
 ## Available Scripts
 
 In the project directory, you can run:

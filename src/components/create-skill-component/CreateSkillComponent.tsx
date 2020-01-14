@@ -20,7 +20,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export default function SkillComponent() {
+export default function CreateSkillComponent(categories: any) {
+
+    console.log(categories);
+    const fillDropdown = categories.categories.categories.map((e:any) => {
+        return <MenuItem value={e.categoryName} key={"key" + e.categoryId}>{e.categoryName}</MenuItem>
+    })
 
     const [skill, setSkill] = React.useState('');
     const [category, setCategory] = React.useState('');
@@ -49,7 +54,7 @@ export default function SkillComponent() {
 
     return (
         <div>
-            <h2>Create New Skill</h2>
+            <h3>Create New Skill</h3>
             <h5> Select Your Category :</h5>
             <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
@@ -65,20 +70,13 @@ export default function SkillComponent() {
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
-                    <MenuItem value="framework">Framework</MenuItem>
-                    <MenuItem value="devops">DevOps</MenuItem>
-                    <MenuItem value="architecture">Architecture</MenuItem>
-                    <MenuItem value="database">Database</MenuItem>
-                    <MenuItem value="sourcecode">Sourcecode</MenuItem>
-                    <MenuItem value="ide">IDE</MenuItem>
+                    {fillDropdown}
                 </Select>
             </FormControl>
 
-            <br /><br />
-
             <h5>Type Your Skill Name :</h5>
-            <form noValidate autoComplete="off">
-                <TextField onChange={updateSkill} id="outlined-basic" label="SkillName" variant="outlined" />
+            <form>
+                <TextField onChange={updateSkill} id="outlined-basic" label="SkillName" variant="outlined" size="small"/>
                 <br /><br />
                 <Button onClick={submitSkill} variant="contained" color="primary">Submit</Button>
             </form>

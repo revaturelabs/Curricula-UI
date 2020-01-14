@@ -4,10 +4,10 @@ import { store } from './Store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
-import { SearchCurriculumComponent } from './components/search-curriculum-component/SearchCurriculumComponent';
-import PopupComponent from './components/popup-component/PopupButtonComponent';
-import CreateCategory from './components/create-category-component/CreateCategoryComponent';
-import { CreateCurriculumPageComponent } from './components/create-curriculum-page-component/CreateCurriculumPageComponent';
+import CreateCurriculumPageComponent from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
+import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
+import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
+import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
 
 
 
@@ -17,11 +17,11 @@ const App: React.FC = () => {
       <Provider store={store}>
         <Router>
           <Switch>
-            <Route path='/testskill' component={SkillComponent} />
-            <Route path='/search' component={SearchCurriculumComponent} />
-            <Route path='/testpopupbutton' component={PopupComponent}></Route>
-            <Route path='/skill' component={SkillComponent}/>
-            <Route path='/' />
+            <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent}></Route>
+            <Route path='/skill' component={SkillComponent} />
+            <Route path='/search' component={SearchCurriculumContainer} />
+            <Route path='/createcategory' component={CreateCategoryComponent} />
+            <Route path='/' component={ViewAllVisualizationsContainer} />
           </Switch>
         </Router>
       </Provider>
