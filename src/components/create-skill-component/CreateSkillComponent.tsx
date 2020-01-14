@@ -21,16 +21,21 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+interface ICreateSkillComponentProps {
+    categoriesToMap: Category[],
+    newSkill: Skill,
+    submitNewSkill: (skillToSubmit: Skill) => void
+}
 
-export default function CreateSkillComponent(categories: any) {
-
-    console.log(categories);
-    const fillDropdown = categories.categories.categories.map((e:any) => {
+export default function CreateSkillComponent(props: ICreateSkillComponentProps) {
+    
+    const fillDropdown = props.categoriesToMap.map((e:any) => {
         return <MenuItem value={e.categoryName} key={"key" + e.categoryId}>{e.categoryName}</MenuItem>
     })
 
     const [skillName, setSkillName] = React.useState('');
     const [categoryName, setCategoryName] = React.useState('');
+    
     //const [skillToSubmit, setSkillToSubmit] = React.useState('');
 
     const classes = useStyles();
@@ -40,10 +45,6 @@ export default function CreateSkillComponent(categories: any) {
     React.useEffect(() => {
         setLabelWidth(inputLabel.current!.offsetWidth);
     }, []);
-
-    // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    //     setCategoryName(event.target.value.categoryName);
-    // };
 
     const updateCategoryName = (e: any) => {
         setCategoryName(e.target.value)
@@ -65,9 +66,9 @@ export default function CreateSkillComponent(categories: any) {
                 categoryName: categoryName
             }
         }
+        props.submitNewSkill(skillToSubmit)
         console.log(skillToSubmit)
     }
-
 
     return (
         <div>
@@ -101,4 +102,3 @@ export default function CreateSkillComponent(categories: any) {
         </div>
     )
 }
-
