@@ -63,7 +63,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
                     />
                 </Paper>
                 {visualizationsToRender}
-                <Link to="/createcurriculumpage"> <p>Visualization Page :D</p> </Link>
             </div>
         )
     }
