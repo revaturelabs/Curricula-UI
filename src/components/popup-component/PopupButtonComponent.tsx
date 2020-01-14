@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PopupButtonComponent() {
+export default function PopupButtonComponent(categories: any) {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -56,10 +57,11 @@ export default function PopupButtonComponent() {
         <Fade in={open}>
           <div className={classes.paper}>
               <Container>
-                  
+               
             <h2 id="head2">Add Skill/Category</h2>
             <p id="transition-modal-description">Created:</p>
-            <CreateSkillComponent/>
+            <CreateSkillComponent categories={categories}/>
+          
             <CreateCategoryComponent/>
             
 

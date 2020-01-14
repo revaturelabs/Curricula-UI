@@ -2,8 +2,9 @@ import React, { SyntheticEvent } from 'react'
 import { Button, Input } from '@material-ui/core'
 import { Category } from '../../models/category'
 
+
 interface ICreateCategoryComponentProps {
-    postNewCategory: (categoryToCreate: Category) => void 
+    postNewCategory: (categoryToCreate: Category) => void
     returnedNewCategory: Category
 }
 
@@ -12,19 +13,19 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
         super(props)
         this.state = {
             categoryName: '',
-            categoryToCreate: new Category(0,'')
+            categoryToCreate: new Category(0, '')
         }
-    }       
+    }
 
-    updateCategoryName = (e : any) => {
+    updateCategoryName = (e: any) => {
         this.setState({
             ...this.state,
             categoryName: e.target.value
         })
         console.log(this.state.categoryName)
-    } 
+    }
 
-    submitPostNewCategory = (e : SyntheticEvent) => {
+    submitPostNewCategory = (e: SyntheticEvent) => {
         e.preventDefault()
         this.state.categoryToCreate.categoryName = this.state.categoryName
         this.setState({
@@ -37,13 +38,10 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
         return (
             <div id="createCategory-div">
                 <form id="createCategory" className='createCategory'>
-                    <h1> Create a Category</h1>
+                    <p> Create a Category</p>
                     <Input onChange={this.updateCategoryName}></Input>
-        <p>{this.state.categoryName}</p>
-                    <br/>
-                    &nbsp;
-                    &nbsp;
-                            <Button onClick={this.submitPostNewCategory} variant="contained" type='submit' color="primary" className='{classes.submit}'>
+
+                    <Button onClick={this.submitPostNewCategory} size="medium" variant="contained" type='submit' color="primary" className='{classes.submit}'>
                         Submit
                             </Button>
                 </form>

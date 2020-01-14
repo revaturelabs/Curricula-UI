@@ -5,7 +5,7 @@ import { postNewCategory } from '../../action-mappers/category-action-mapper'
 
 const mapStateToProps = (state : IState) => {
     return {
-        returnedNewCategory: state.newCategory.category
+        returnedNewCategory: state.allCategories.category
     }
 }
 
