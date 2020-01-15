@@ -21,25 +21,6 @@ export async function apiGetAllCategories() {
     }
 }
 
-<<<<<<< HEAD
-// Submit Category
-export async function curriculaSubmitCategory(categoryId: number, categoryName: string){
-    const fields = {
-        categoryId: 0,
-         categoryName: ''
-    }
-    try{
-        let response = await curriculaClient.post('/categories', fields)
-        if(response.status === 200) {
-            return{
-                status: response.status,
-                body: response.data
-            }
-        }
-    } catch(e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')    
-=======
 export async function apiSaveOneCategory(categoryToCreate: Category) {
     const response = await curriculaClient.post('/categories', categoryToCreate)
     try {
@@ -57,6 +38,5 @@ export async function apiSaveOneCategory(categoryToCreate: Category) {
         return {
             status: response.status
         }
->>>>>>> dev
     }
 }
