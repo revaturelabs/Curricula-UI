@@ -33,20 +33,35 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
     })
 
     const updateCurricula = (name: string, selected: boolean) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        let currName: Curriculum = new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])
+        for (let i = 0; i < props.allCurricula.length; i++) {
+            if (props.allCurricula[i].curriculumName === name) {
+                currName = props.allCurricula[i]
+                break
+            }
+            else if (i === props.allCurricula.length - 1) {
+                return console.log('Curriculum don\'t match')
+            } else {
+                continue
+            }
+        }
         if (selected) {
-            newCurricula.push(props.allCurricula[0])
+            newCurricula.push(currName)
+        } else if (newCurricula.includes(currName)) {
+            const index = newCurricula.indexOf(currName)
+            newCurricula.splice(index, 1);
         }
         setNewCurricula(newCurricula)
+        console.log("this is the currname:");
+
+        console.log(currName);
+
         console.log(name);
         console.log(newCurricula);
     }
 
     const updateVisualization = (e: any) => {
         setVisualizationName(e.target.value)
-    }
-    const testing = () => {
-        console.log('this was clicked');
-
     }
 
     const sumbitVisualization = (e: any) => {
@@ -83,7 +98,6 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                                 style={{ marginRight: 8 }}
                                 checked={selected}
                                 onChange={updateCurricula(option.curriculum, !selected)}
-                                onClick={testing}
                             />
                             {option.curriculum}
                         </React.Fragment>
