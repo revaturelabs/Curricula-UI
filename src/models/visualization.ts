@@ -1,4 +1,4 @@
-import { Curriculum } from "./curriculum";
+ import { Curriculum } from "./curriculum";
 
 export class Visualization {
     visualizationId: number;
