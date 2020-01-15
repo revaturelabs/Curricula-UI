@@ -73,9 +73,10 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
             }
         }
 
+        allSkills.sort(this.compare)
         let categoryId = 0
         let colorIncrementor= 0
-        let skillsToDisplay = allSkills.sort(this.compare).map((skill) => {
+        let skillsToDisplay = allSkills.map((skill) => {
             if(categoryId !== skill.category.categoryId){
                 categoryId = skill.category.categoryId
                 colorIncrementor++
@@ -86,7 +87,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
             } else {
                 return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor], opacity: 0.6 }} />
             }
-        })        
+        })
 
         let legend = categoriesInLegend.map((category) => {
             return <div><p>{category.categoryName}: </p><Chip className="skillPillCurriculum" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
