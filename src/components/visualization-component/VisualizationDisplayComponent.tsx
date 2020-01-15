@@ -65,9 +65,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         let categoriesInLegend: Category[] = []
         for (let curriculum of this.state.visualization.curricula) {
             for (let skill of curriculum.skills) {
-                if(allSkills.includes(skill)){
-
-                } else {
+                if(!allSkills.includes(skill)){
                     allSkills.push(skill)
                 }
             }
