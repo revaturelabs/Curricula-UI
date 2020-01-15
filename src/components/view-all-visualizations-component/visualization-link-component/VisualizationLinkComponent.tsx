@@ -13,7 +13,7 @@ export class VisualizationLinkComponent extends React.PureComponent<IVisualizati
     render() {
         return (
             <div>
-                <Link to={`${process.env.BASE_URL}/visualizations/${this.props.visualization.visualizationName}`}>
+                <Link to={`/visualizations/${this.props.visualization.visualizationName}`}>
                     {process.env.BASE_URL}/visualizations/{this.props.visualization.visualizationName}
                 </Link>
                 <CopyToClipboard text={`${process.env.BASE_URL}/visualizations/${this.props.visualization.visualizationName}`}>
