@@ -87,7 +87,7 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
             <h3>Create New Skill</h3>
             <h5> Select Your Category :</h5>
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
+                <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label" required>
                     Category
                 </InputLabel>
                 <Select
@@ -98,7 +98,7 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
                     labelWidth={labelWidth}
                     onClick={updateCategoryName}
                 >
-                    <MenuItem >
+                    <MenuItem>
                         <em>None</em>
                     </MenuItem>
                     {fillDropdown}
@@ -107,7 +107,7 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
 
             <h5>Type Your Skill Name :</h5>
             <form>
-                <TextField onChange={updateSkillName} id="outlined-basic" label="SkillName" variant="outlined" size="small" />
+                <TextField onChange={updateSkillName} id="outlined-basic" label="SkillName" variant="outlined" size="small" required/>
                 <br /><br />
                 <Button onClick={submitSkill} variant="contained" color="primary">Submit</Button>
             </form>

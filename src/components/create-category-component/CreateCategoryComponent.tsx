@@ -22,15 +22,11 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
             ...this.state,
             categoryName: e.target.value
         })
-        console.log(this.state.categoryName)
     }
 
     submitPostNewCategory = (e: SyntheticEvent) => {
         e.preventDefault()
         this.state.categoryToCreate.categoryName = this.state.categoryName
-        this.setState({
-            ...this.state,
-        })
         this.props.postNewCategory(this.state.categoryToCreate)
         this.forceUpdate()
     }
