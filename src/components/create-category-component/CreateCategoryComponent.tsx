@@ -32,6 +32,7 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
             ...this.state,
         })
         this.props.postNewCategory(this.state.categoryToCreate)
+        this.forceUpdate()
     }
 
     render() {

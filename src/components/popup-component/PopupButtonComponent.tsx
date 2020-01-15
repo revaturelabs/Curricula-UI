@@ -5,7 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Container } from '@material-ui/core';
 import  CreateCategoryComponent from '../create-category-component/CreateCategoryContainer';
-import CreateSkillComponent from '../create-skill-component/CreateSkillComponent';
+import CreateSkillComponent from '../create-skill-component/CreateSkillContainer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,7 +60,7 @@ export default function PopupButtonComponent(categories: any) {
                
             <h2 id="head2">Add Skill/Category</h2>
             <p id="transition-modal-description">Created:</p>
-            <CreateSkillComponent categories={categories}/>
+            <CreateSkillComponent></CreateSkillComponent>
             <CreateCategoryComponent/>
 
 
