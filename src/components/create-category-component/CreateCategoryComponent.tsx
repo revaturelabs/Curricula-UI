@@ -1,6 +1,5 @@
 import React, { SyntheticEvent } from 'react'
 import { TextField, Button, FormControl } from '@material-ui/core'
-import { string } from 'prop-types'
 import { curriculaSubmitCategory } from '../../remote/curricula-category'
 
 
@@ -11,18 +10,18 @@ export class CreateCategoryComponent extends React.Component<any, any>{
         super(props)
         this.state = {
             id: 0,
-           name: ''
+            name: ''
         }
     }
 
-submitCategory = async (e: SyntheticEvent) => {
-    e.preventDefault()
-    try{
-        let c = await curriculaSubmitCategory(this.state.id,this.state.name)
-        } catch (e){
+    submitCategory = async (e: SyntheticEvent) => {
+        e.preventDefault()
+        try {
+            let c = await curriculaSubmitCategory(this.state.id, this.state.name)
+        } catch (e) {
             console.log(e);
         }
-}
+    }
 
     render() {
         return (
@@ -36,7 +35,7 @@ submitCategory = async (e: SyntheticEvent) => {
                         label="Category"
                         type="category"
                     />
-                    <br/>
+                    <br />
                     &nbsp;
                     &nbsp;
                             <Button variant="contained" type='submit' color="primary" className='{classes.submit}'>
