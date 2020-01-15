@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import TextField from '@material-ui/core/TextField';
 import { Button, makeStyles, Theme, createStyles, MenuItem } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { Skill } from '../../models/skill';
+import { Category } from '../../models/category';
 
 
 
@@ -19,16 +21,22 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+interface ICreateSkillComponentProps {
+    categoriesToMap: Category[],
+    newSkill: Skill,
+    submitNewSkill: (skillToSubmit: Skill) => void
+}
 
-export default function CreateSkillComponent(categories: any) {
-
-    console.log(categories);
-    const fillDropdown = categories.categories.categories.map((e:any) => {
+export default function CreateSkillComponent(props: ICreateSkillComponentProps) {
+    
+    const fillDropdown = props.categoriesToMap.map((e:any) => {
         return <MenuItem value={e.categoryName} key={"key" + e.categoryId}>{e.categoryName}</MenuItem>
     })
 
-    const [skill, setSkill] = React.useState('');
-    const [category, setCategory] = React.useState('');
+    const [skillName, setSkillName] = React.useState('');
+    const [categoryName, setCategoryName] = React.useState('');
+    
+    //const [skillToSubmit, setSkillToSubmit] = React.useState('');
 
     const classes = useStyles();
     const inputLabel = React.useRef<HTMLLabelElement>(null);
@@ -38,19 +46,29 @@ export default function CreateSkillComponent(categories: any) {
         setLabelWidth(inputLabel.current!.offsetWidth);
     }, []);
 
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setCategory(event.target.value as string);
-    };
-
-    const updateSkill = (e: any) => {
-        setSkill(e.target.value)
-        console.log(skill);
+    const updateCategoryName = (e: any) => {
+        setCategoryName(e.target.value)
+        console.log(categoryName)
     }
 
-    const submitSkill = async (e: any) => {
+    const updateSkillName = (e: any) => {
+        setSkillName(e.target.value)
+        console.log(skillName);
+    }
+
+    const submitSkill = async (e: SyntheticEvent) => {
         e.preventDefault( )
+        let skillToSubmit: Skill  = {
+            skillName: skillName,
+            skillId: 0,
+            category: {
+                categoryId: 0,
+                categoryName: categoryName
+            }
+        }
+        props.submitNewSkill(skillToSubmit)
+        console.log(skillToSubmit)
     }
-
 
     return (
         <div>
@@ -63,11 +81,12 @@ export default function CreateSkillComponent(categories: any) {
                 <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
-                    value={category}
-                    onChange={handleChange}
+                    value={categoryName}
+                    // onChange={handleChange}
                     labelWidth={labelWidth}
+                    onClick={updateCategoryName}
                 >
-                    <MenuItem value="">
+                    <MenuItem >
                         <em>None</em>
                     </MenuItem>
                     {fillDropdown}
@@ -76,11 +95,10 @@ export default function CreateSkillComponent(categories: any) {
 
             <h5>Type Your Skill Name :</h5>
             <form>
-                <TextField onChange={updateSkill} id="outlined-basic" label="SkillName" variant="outlined" size="small"/>
+                <TextField onChange={updateSkillName} id="outlined-basic" label="SkillName" variant="outlined" size="small"/>
                 <br /><br />
                 <Button onClick={submitSkill} variant="contained" color="primary">Submit</Button>
             </form>
         </div>
     )
 }
-
