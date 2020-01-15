@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function ButtonAppBar() {
+export default function NavBarComponent() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);

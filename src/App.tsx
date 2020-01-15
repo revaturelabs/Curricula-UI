@@ -7,8 +7,9 @@ import SkillComponent from './components/create-skill-component/CreateSkillCompo
 import CreateCurriculumPageComponent from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
 import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
 import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
-import NavBarComponent from './components/navbar-component/NavBarComponent';
-
+import { VisualizationComponent } from './components/visualization-component/VisualizationDisplayComponent';
+import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
+import NavBarComponent from './components/navbar-component/NavBarComponent'
 
 
 const App: React.FC = () => {
@@ -18,10 +19,11 @@ const App: React.FC = () => {
         <Router>
         <NavBarComponent/>
           <Switch>
-            <Route path='/navbar' component={NavBarComponent} />
-            <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent}></Route>
+            <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
             <Route path='/skill' component={SkillComponent} />
             <Route path='/search' component={SearchCurriculumContainer} />
+            <Route path='/visualizations/:visualization' component={VisualizationComponent} />
+            <Route path='/createcategory' component={CreateCategoryComponent} />
             <Route path='/' component={ViewAllVisualizationsContainer} />
           </Switch>
         </Router>
