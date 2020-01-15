@@ -16,6 +16,7 @@ const App: React.FC = () => {
     <div className="App">
       <Provider store={store}>
         <Router>
+        <NavBarComponent/>
           <Switch>
             <Route path='/navbar' component={NavBarComponent} />
             <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent}></Route>

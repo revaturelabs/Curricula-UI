@@ -9,10 +9,9 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
-//import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import { NavLink } from 'react-router-dom';
-//import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { NavLink, Link } from 'react-router-dom';
+import { Button, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -67,10 +66,8 @@ export default function ButtonAppBar() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-
-                    <Typography variant="h6" className={classes.title}>
-                        Curricula
-          </Typography>
+                    <Grid container justify="space-evenly">
+                    <Button color="inherit" component={Link} to="/"  >Curricula</Button>
                     <Typography
                          ref={anchorRef}
                          aria-controls={open ? 'menu-list-grow' : undefined}
@@ -88,10 +85,7 @@ export default function ButtonAppBar() {
                                 <Paper>
                                     <ClickAwayListener onClickAway={handleClose}>
                                         <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                              {/* <MenuItem onClick={handleClose}>New</MenuItem>
-                                              <MenuItem onClick={handleClose}>View</MenuItem> */}
-                                              
-                                              <NavLink to='/createcurriculumpage'>New</NavLink>
+                                              <NavLink to='/search'>New</NavLink>
                                               <br/>
                                               <NavLink to='/createcurriculumpage'>View</NavLink>
                                               
@@ -102,13 +96,11 @@ export default function ButtonAppBar() {
                         )}
                     </Popper>
 
-                    <Typography variant="h6" className={classes.title}>
-                        New Curriculum
-                    </Typography>
-                    {/* <Button color="inherit">Login</Button> */}
+                    <Button color="inherit" component={Link} to="/createcurriculumpage" >New Curriculum</Button>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
+                    </Grid>
                 </Toolbar>
             </AppBar>
         </div>
