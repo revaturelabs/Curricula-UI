@@ -5,9 +5,9 @@ export const visualizationNameTypes = {
     UNSUCCESSFUL_VISUALIZATION_DISPLAY: 'VISUALIZATION_NAME_UNSUCCESSFUL'
 }
 
-export const getVisualizationByName = () => async (dispatch: any) => {
+export const getVisualizationByName = (name: string) => async (dispatch: any) => {
     try {
-        let res = await apiGetVisualizationByName()
+        let res = await apiGetVisualizationByName(name)
         if (res.status === 200) {
             dispatch({
                 type: visualizationNameTypes.SUCCESSFUL_VISUALIZATION_DISPLAY,
