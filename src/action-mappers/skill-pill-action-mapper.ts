@@ -1,7 +1,6 @@
-import { apiGetAllSkills, apiSubmitCurriculum, apiSubmitSkill } from '../remote/CurriculaSkillsApi' 
+import { apiGetAllSkills, apiSubmitCurriculum, apiSubmitSkill } from '../remote/CurriculaSkillsApi'
 import { Curriculum } from '../models/curriculum'
 import { Skill } from '../models/skill'
-import { BottomNavigationAction } from '@material-ui/core'
 
 export const skillPillTypes = {
     SUCCESSFUL_GET_ALL: 'GET_ALL_SKILLS_SUCCESSFUL',
@@ -49,7 +48,7 @@ export const submitNewSkill = (skillToSubmit: Skill) => async (dispatch: any) =>
                 type: skillPillTypes.POST_NEW_SKILL_FAIL
             })
         }
-    } catch(e) {
+    } catch (e) {
         dispatch({
             type: skillPillTypes.POST_NEW_SKILL_FAIL
         })
