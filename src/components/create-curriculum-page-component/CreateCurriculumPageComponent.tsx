@@ -16,7 +16,6 @@ interface ICreateCurriculumPageProps {
     allSkillsMap: Skill[]
     skill: string
     curriculaIdNum: Curriculum[]
-    allCategories: Category[]
 }
 
 export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, any>{
@@ -28,22 +27,15 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
             filterSkillsORSkillsMap: Boolean,
             search: false,
-            colors: ['white', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+            colors: ['white', 'red', 'orangered', 'orange', 'gold', 'yellow', 'yellowgreen', 'green', 'teal', 'blue', 'blueviolet', 'indigo', 'darkviolet', 'violet']
         }
     }
 
     upCurriculumName = (e: any) => {
-        let existingCurricula = this.props.curriculaIdNum
-        for (let i = 0; i < existingCurricula.length; i++) {
-            if (existingCurricula[i].curriculumName === e.target.value) {
-                return alert('A Currriculum of this name already exists. Please get more creative...')
-            } else if (i === existingCurricula.length - 1) {
-                this.setState({
-                    ...this.state,
-                    newCurriculumName: e.target.value
-                })
-            }
-        }
+        this.setState({
+            ...this.state,
+            newCurriculumName: e.target.value
+        })
     }
 
     upSkillsToCurriculumArray = (e: number) => {
@@ -69,12 +61,17 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
     submitCurriculum = (e: SyntheticEvent) => {
         e.preventDefault()
+        let existingCurricula = this.props.curriculaIdNum
+        for (let i = 0; i < existingCurricula.length; i++) {
+            if (existingCurricula[i].curriculumName === this.state.newCurriculumName) {
+                return alert('A Currriculum of this name already exists. Please get more creative...')
+            }
+        }
         if (this.state.newCurriculumName.length <= 2) {
             alert('Please enter a valid Curriculum Name, at least two characters long')
         } else if (this.state.skillsToCurriculumArray.length < 1) {
             alert('Please make sure to include at least one skill in your New curriculum')
         } else {
-            //console.log(this.state.newCurriculum)
             this.state.skillsToCurriculumArray.shift()
             let submitCurriculum = new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])
             submitCurriculum.curriculumId = this.props.curriculaIdNum.length + 1
@@ -91,7 +88,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     filterSkills = (e: any) => {
         let searchInputValue = e.target.value
         let search
-        if(e.target.value) {
+        if (e.target.value) {
             search = true
         } else {
             search = false
@@ -100,7 +97,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         for (let i = 0; i < this.props.allSkillsMap.length; i++) {
             let searchString = this.props.allSkillsMap[i].skillName
             if (searchString.toLowerCase().includes(searchInputValue)) {
-                if(tempSkillsMap[0].skillId === 0){
+                if (tempSkillsMap[0].skillId === 0) {
                     tempSkillsMap[0] = this.props.allSkillsMap[i]
                 } else {
                     tempSkillsMap.push(this.props.allSkillsMap[i])
@@ -140,33 +137,42 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                         </Paper>
                     </Grid>
                 </div>
-
-                {this.state.filterSkillsMap[0].skillId === 0 && !this.state.search ?
-                    <div className="skillPillContainer" >
-                        {this.props.allSkillsMap.sort(this.compare).map((f: any) => {
-                            return (
-                                this.state.skillsToCurriculumArray.includes(f.skillId) ?
-                                    <Chip icon={<DoneIcon />} label={f.skillName} className="skillPillCurriculum" key={f.skillId} style={{ backgroundColor: this.state.colors[f.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }} /> :
-                                    <Chip label={f.skillName} className="skillPillCurriculum" key={f.skillId} style={{ backgroundColor: this.state.colors[f.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(f.skillId) }} />
-                            )
-                        })}
-                    </div> :
-                    <div className="skillPillContainer" >
-                        {this.state.filterSkillsMap.sort(this.compare).map((e: any) => {
-                            return (
-                                this.state.skillsToCurriculumArray.includes(e.skillId) ?
-                                    <Chip icon={<DoneIcon />} label={e.skillName} className="skillPillCurriculum" key={e.skillId} style={{ backgroundColor: this.state.colors[e.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }} /> :
-                                    <Chip label={e.skillName} className="skillPillCurriculum" key={e.skillId} style={{ backgroundColor: this.state.colors[e.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(e.skillId) }} />
-                            )
-                        })}
-                    </div>
-                }
-
-                <PopupButtonComponent categories={this.props.allCategories}/>
+                <div>
+                    {this.state.filterSkillsMap[0].skillId === 0 && !this.state.search ?
+                        <div>
+                            {this.props.allSkillsMap.sort(this.compare).map((allSkill: any) => {
+                                return (
+                                    this.state.skillsToCurriculumArray.includes(allSkill.skillId) ?
+                                        <Chip icon={<DoneIcon />} label={allSkill.skillName} className="skillPillCurriculum" key={allSkill.skillId} style={{ backgroundColor: this.state.colors[allSkill.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(allSkill.skillId) }} />
+                                        :
+                                        <Chip label={allSkill.skillName} className="skillPillCurriculum" key={allSkill.skillId} style={{ backgroundColor: this.state.colors[allSkill.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(allSkill.skillId) }} />
+                                )
+                            })}
+                        </div>
+                        :
+                        <div>
+                            {this.state.filterSkillsMap.sort(this.compare).map((filterSkill: any) => {
+                                return (
+                                    this.state.skillsToCurriculumArray.includes(filterSkill.skillId) ?
+                                        <Chip icon={<DoneIcon />} label={filterSkill.skillName} className="skillPillCurriculum" key={filterSkill.skillId} style={{ backgroundColor: this.state.colors[filterSkill.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(filterSkill.skillId) }} />
+                                        :
+                                        <Chip label={filterSkill.skillName} className="skillPillCurriculum" key={filterSkill.skillId} style={{ backgroundColor: this.state.colors[filterSkill.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(filterSkill.skillId) }} />
+                                )
+                            })}
+                        </div>
+                    }
+                </div>
+                <PopupButtonComponent />
             </>
         )
     }
 }
+
+// const skillPillStyle = {
+//     position: 'relative',
+//     height: '200px',
+//     overflow: 'scroll'
+// }
 
 // const StyleChip = withStyles({
 //     root: {
