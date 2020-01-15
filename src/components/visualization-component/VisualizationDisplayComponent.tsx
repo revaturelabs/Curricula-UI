@@ -3,8 +3,9 @@ import { apiGetVisualizationByName } from "../../remote/curricula-visualization-
 import { Visualization } from "../../models/visualization";
 import { Curriculum } from "../../models/curriculum";
 import { CurriculaSelectionComponent } from "./curricula-selection-component/CurriculaSelectionComponent";
-import { Chip } from "@material-ui/core";
+import { Chip, Paper } from "@material-ui/core";
 import { Skill } from "../../models/skill";
+import { Category } from "../../models/category";
 
 interface IVisualizationComponentstate {
     visualization: Visualization
@@ -20,7 +21,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         this.state = {
             visualization: new Visualization(0,'',[]),
             activeCurriculum: new Curriculum(0,'',[]),
-            colors: ['white', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+            colors: ['black', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
         }
 
     }
@@ -61,6 +62,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
     render(){
 
         let allSkills: Skill[] = []
+        let categoriesInLegend: Category[] = []
         for (let curriculum of this.state.visualization.curricula) {
             for (let skill of curriculum.skills) {
                 if(allSkills.includes(skill)){
@@ -71,12 +73,23 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
             }
         }
 
+        let categoryId = 0
+        let colorIncrementor= 0
         let skillsToDisplay = allSkills.sort(this.compare).map((skill) => {
-            if(this.state.activeCurriculum.skills.includes(skill)){
-                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} />
-            } else {
-                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.6 }} />
+            if(categoryId !== skill.category.categoryId){
+                categoryId = skill.category.categoryId
+                colorIncrementor++
+                categoriesInLegend.push(skill.category)
             }
+            if(this.state.activeCurriculum.skills.includes(skill)){
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor] }} />
+            } else {
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor], opacity: 0.6 }} />
+            }
+        })        
+
+        let legend = categoriesInLegend.map((category) => {
+            return <div><p>{category.categoryName}: </p><Chip className="skillPillCurriculum" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
         })
 
         return(
@@ -85,6 +98,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
                 <div>
                     {skillsToDisplay}
                 </div>
+                <Paper elevation={1}>{legend}</Paper>
             </div>
         )
     }
