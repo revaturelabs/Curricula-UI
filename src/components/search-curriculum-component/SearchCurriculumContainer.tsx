@@ -1,7 +1,7 @@
 import { IState } from "../../reducers"
 import { connect } from "react-redux"
 import { SearchCurriculumComponent } from "./SearchCurriculumComponent"
-
+import { postSubmitVisualization } from "../../action-mappers/visualization-action-mapper"
 
 const mapStateToProps = (state: IState) => {
     return {
@@ -9,4 +9,8 @@ const mapStateToProps = (state: IState) => {
     }
 }
 
-export default connect(mapStateToProps)(SearchCurriculumComponent);
+const mapDispatchToProps = {
+    postSubmitVisualization
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchCurriculumComponent);

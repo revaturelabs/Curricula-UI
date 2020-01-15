@@ -1,6 +1,6 @@
 import { IVisualizationState } from '.';
 import { Visualization } from '../models/visualization';
-import { visualizationTypes } from '../action-mappers/view-all-visualization-action-mapper';
+import { visualizationTypes } from '../action-mappers/visualization-action-mapper';
 import { Curriculum } from '../models/curriculum';
 import { Skill } from '../models/skill';
 import { Category } from '../models/category';
@@ -17,6 +17,16 @@ export const visualizationReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 visualizations: action.payload.allVisualizations
+            }
+        }
+        case visualizationTypes.SUBMIT_SUCCESSFUL: {
+            return {
+                ...state
+            }
+        }
+        case visualizationTypes.SUBMIT_UNSUCCESSFUL: {
+            return {
+                ...state,
             }
         }
         default:
