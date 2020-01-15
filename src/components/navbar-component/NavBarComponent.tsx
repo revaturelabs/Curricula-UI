@@ -91,7 +91,7 @@ export default function ButtonAppBar() {
                                               {/* <MenuItem onClick={handleClose}>New</MenuItem>
                                               <MenuItem onClick={handleClose}>View</MenuItem> */}
                                               
-                                              <NavLink to='/createcurriculum'>New</NavLink>
+                                              <NavLink to='/createcurriculumpage'>New</NavLink>
                                               <br/>
                                               <NavLink to='/createcurriculumpage'>View</NavLink>
                                               
