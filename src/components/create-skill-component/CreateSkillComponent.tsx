@@ -28,14 +28,14 @@ interface ICreateSkillComponentProps {
 }
 
 export default function CreateSkillComponent(props: ICreateSkillComponentProps) {
-    
-    const fillDropdown = props.categoriesToMap.map((e:any) => {
+
+    const fillDropdown = props.categoriesToMap.map((e: any) => {
         return <MenuItem value={e.categoryName} key={"key" + e.categoryId}>{e.categoryName}</MenuItem>
     })
 
     const [skillName, setSkillName] = React.useState('');
     const [categoryName, setCategoryName] = React.useState('');
-    
+
     //const [skillToSubmit, setSkillToSubmit] = React.useState('');
 
     const classes = useStyles();
@@ -57,12 +57,24 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
     }
 
     const submitSkill = async (e: SyntheticEvent) => {
-        e.preventDefault( )
-        let skillToSubmit: Skill  = {
+        e.preventDefault()
+        let newCategoryId: number = 0
+        for (let i = 0; i < props.categoriesToMap.length; i++) {
+            if (props.categoriesToMap[i].categoryName === categoryName) {
+                newCategoryId = props.categoriesToMap[i].categoryId
+                break
+            }
+            else if (i === props.categoriesToMap.length - 1) {
+                return console.log('Categories don\'t match')
+            } else {
+                continue
+            }
+        }
+        let skillToSubmit: Skill = {
             skillName: skillName,
             skillId: 0,
             category: {
-                categoryId: 0,
+                categoryId: newCategoryId,
                 categoryName: categoryName
             }
         }
@@ -95,7 +107,7 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
 
             <h5>Type Your Skill Name :</h5>
             <form>
-                <TextField onChange={updateSkillName} id="outlined-basic" label="SkillName" variant="outlined" size="small"/>
+                <TextField onChange={updateSkillName} id="outlined-basic" label="SkillName" variant="outlined" size="small" />
                 <br /><br />
                 <Button onClick={submitSkill} variant="contained" color="primary">Submit</Button>
             </form>
