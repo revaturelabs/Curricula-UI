@@ -6,17 +6,21 @@ This project established the frontend User Interface (UI) for the Curricula proj
 
 ## Introduction
 
+Curricula is a project designed for business level users to be able to quickly visualize what high level skills are taught in which curricula we offer at Revature. Curricula allows for building new curricula and attaching high level skills to them. It puts high level skills in related categories for easy management. Curricula can also build compare contrast visualizations between multiple different curricula.
+
 ## Directory Structure
 
 ```bash
 ├── src
 │   ├── components
 │   │   ├── create-category-component
-│   │   ├── create-curriculum-component
 │   │   ├── create-curriculum-page-component
 │   │   ├── create-skill-component
+│   │   ├── navbar-component
 │   │   ├── popup-component
 │   │   ├── search-curriculum-component
+│   │   ├── view-all-visualizations-component
+│   │   ├── visualization-component
 │   ├── models
 │   ├── reducers
 │   ├── remote
