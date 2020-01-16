@@ -84,7 +84,7 @@ export default function NavBarComponent() {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" color="secondary" onKeyDown={handleListKeyDown}>
                     <MenuItem component={Link} to="/search" onClick={handleClose}>New</MenuItem>
                     <MenuItem component={Link} to="/createcurriculumpage" onClick={handleClose}>View</MenuItem>
                   </MenuList>
@@ -93,26 +93,6 @@ export default function NavBarComponent() {
             </Grow>
           )}
         </Popper>
-                    {/* <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                        {({ TransitionProps, placement }) => (
-                            <Grow
-                                {...TransitionProps}
-                                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                            >
-                                <Paper>
-                                    <ClickAwayListener onClickAway={handleClose}>
-                                        <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                              <NavLink to='/search'>New</NavLink>
-                                              <br/>
-                                              <NavLink to='/createcurriculumpage'>View</NavLink>
-                                              
-                                        </MenuList>
-                                    </ClickAwayListener>
-                                </Paper>
-                            </Grow>
-                        )}
-                    </Popper> */}
-
                     <Button color="inherit" component={Link} to="/createcurriculumpage" >New Curriculum</Button>
                     </Grid>
                 </Toolbar>
