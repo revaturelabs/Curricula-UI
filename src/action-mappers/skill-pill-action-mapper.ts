@@ -40,7 +40,7 @@ export const submitNewSkill = (skillToSubmit: Skill) => async (dispatch: any) =>
             dispatch({
                 type: skillPillTypes.POST_NEW_SKILL_SUCCESS,
                 payload: {
-                    newSkill: res.body
+                    skill: res.body
                 }
             })
         } else {

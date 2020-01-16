@@ -1,6 +1,5 @@
 import React, { SyntheticEvent } from 'react'
-import TextField from '@material-ui/core/TextField';
-import { Button, makeStyles, Theme, createStyles, MenuItem } from '@material-ui/core';
+import { Button, makeStyles, Theme, createStyles, MenuItem, TextField } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -24,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ICreateSkillComponentProps {
     categoriesToMap: Category[],
     newSkill: Skill,
-    submitNewSkill: (skillToSubmit: Skill) => void
+    submitNewSkill: (skillToSubmit: Skill) => void,
+    allSkills: Skill[]
 }
 
 export default function CreateSkillComponent(props: ICreateSkillComponentProps) {
@@ -36,8 +36,6 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
     const [skillName, setSkillName] = React.useState('');
     const [categoryName, setCategoryName] = React.useState('');
 
-    //const [skillToSubmit, setSkillToSubmit] = React.useState('');
-
     const classes = useStyles();
     const inputLabel = React.useRef<HTMLLabelElement>(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
@@ -48,16 +46,25 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
 
     const updateCategoryName = (e: any) => {
         setCategoryName(e.target.value)
-        console.log(categoryName)
     }
 
     const updateSkillName = (e: any) => {
         setSkillName(e.target.value)
-        console.log(skillName);
     }
 
     const submitSkill = async (e: SyntheticEvent) => {
         e.preventDefault()
+        if(!categoryName) {
+            return alert('Please select a category')
+        }
+        if(!skillName) {
+            return alert('Please enter a skill name')
+        }
+        for (let i = 0; i < props.allSkills.length; i++) {
+            if (props.allSkills[i].skillName === skillName) {
+                return alert('This skill already exists')
+            }
+        }
         let newCategoryId: number = 0
         for (let i = 0; i < props.categoriesToMap.length; i++) {
             if (props.categoriesToMap[i].categoryName === categoryName) {
@@ -84,9 +91,9 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
 
     return (
         <div>
-            <h3>Create New Skill</h3>
-            <h5> Select Your Category :</h5>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <h2>Create New Skill</h2>
+            <h3> Select Your Category :</h3>
+            <FormControl variant="outlined" className={classes.formControl} style = {{marginLeft: -2}}>
                 <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
                     Category
                 </InputLabel>
@@ -94,22 +101,20 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
                     value={categoryName}
-                    // onChange={handleChange}
                     labelWidth={labelWidth}
                     onClick={updateCategoryName}
                 >
-                    <MenuItem >
+                    <MenuItem>
                         <em>None</em>
                     </MenuItem>
                     {fillDropdown}
                 </Select>
             </FormControl>
 
-            <h5>Type Your Skill Name :</h5>
             <form>
-                <TextField onChange={updateSkillName} id="outlined-basic" label="SkillName" variant="outlined" size="small" />
-                <br /><br />
-                <Button onClick={submitSkill} variant="contained" color="primary">Submit</Button>
+                <TextField onChange={updateSkillName} className="negativeMargBot" id="outlined-basic" placeholder = "Type Your Skill Name"/>
+                <p></p>
+                <Button onClick={submitSkill} className="negativeMargBot" variant="contained" color="primary">Submit</Button>
             </form>
         </div>
     )
