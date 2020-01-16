@@ -1,8 +1,10 @@
 # Curricula Service
 
-![alt text](https://github.com/revaturelabs/boilerplate-project/blob/master/logo/logo.png "Logo")
+![revature-logo](../assets/revature-logo-600x219.png "Logo")
 
-This project established the frontend User Interface (UI) for the Curricula project.
+![banner](../assets/curricula-banner.png "Banner")
+
+This project established the frontend User Interface (UI) for the Curricula application.
 
 ## Introduction
 
@@ -70,9 +72,25 @@ Curricula is a project designed for business level users to be able to quickly v
 
 ## Contribute
 
+Contributions are welcome and gladly accepted.
+
+## Documentation
+
+*The Curricula UI styleguides may be found in the wiki documents in the Github repository.*
+
+### Front End Development Standards
+
+Any contributions should meet specific Front End Development requirements.
+
+The guidelines and principles are available in:
+
++ [Front End Styleguide](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Front-End)
++ [Accessibility](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Accessibility)
++ [Curricula API Styleguide](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Curricula-API)
+
 ## Support
 
-
+Please send all inquiries to the Project Manager for Curricula.
 
 ---
 
