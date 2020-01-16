@@ -1,4 +1,4 @@
-import { apiGetAllSkills, apiSubmitCurriculum, apiSubmitSkill } from '../remote/CurriculaSkillsApi'
+import { apiGetAllSkills, apiSubmitCurriculum, apiSubmitSkill } from '../remote/curricula-skills-api'
 import { Curriculum } from '../models/curriculum'
 import { Skill } from '../models/skill'
 
