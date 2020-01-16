@@ -1,3 +1,99 @@
+# Curricula Service
+
+![revature-logo](../assets/revature-logo-600x219.png "Logo")
+
+![banner](../assets/curricula-banner.png "Banner")
+
+This project established the frontend User Interface (UI) for the Curricula application.
+
+## Introduction
+
+Curricula is a project designed for business level users to be able to quickly visualize what high level skills are taught in which curricula we offer at Revature. Curricula allows for building new curricula and attaching high level skills to them. It puts high level skills in related categories for easy management. Curricula can also build compare contrast visualizations between multiple different curricula.
+
+## Directory Structure
+
+```bash
+├── src
+│   ├── components
+│   │   ├── create-category-component
+│   │   ├── create-curriculum-page-component
+│   │   ├── create-skill-component
+│   │   ├── navbar-component
+│   │   ├── popup-component
+│   │   ├── search-curriculum-component
+│   │   ├── view-all-visualizations-component
+│   │   ├── visualization-component
+│   ├── models
+│   ├── reducers
+│   ├── remote
+│   ├── App.css
+│   ├── App.test.tsx
+│   ├── index.css
+│   ├── index.tsx
+│   ├── logo.svg
+│   ├── react-app-env.d.ts
+│   ├── serviceWorker.ts
+│   ├── setupTest.ts
+│   └── Store.ts
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo.png
+│   ├── manifest.json
+│   ├── robots.txt
+├── .gitignore
+├── package.json
+├── README.md
+├── sonar-project.properties
+├── tsconfig.json
+
+```
+
+## Code of Conduct
+
+## Community
+
+### Team
+
++ Alec Batson
++ Kenneth Bradley Davis
++ Mahmud Karim
++ Sam Mosca "Gao-Shan"
++ Justin  Massey
++ Saritha Karunanithi
++ Dane Vosmeier
++ Wes Oler
++ Naziia Travels
++ Joshua Roy
++ Harvey Mousad
++ Nikhil Singh
++ Jose Indriago
++ Jeffrey Chang
+
+## Contribute
+
+Contributions are welcome and gladly accepted.
+
+## Documentation
+
+*The Curricula UI styleguides may be found in the wiki documents in the Github repository.*
+
+### Front End Development Standards
+
+Any contributions should meet specific Front End Development requirements.
+
+The guidelines and principles are available in:
+
++ [Front End Styleguide](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Front-End)
++ [Accessibility](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Accessibility)
++ [Curricula API Styleguide](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Curricula-API)
+
+## Support
+
+Please send all inquiries to the Project Manager for Curricula.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Environment Variables
