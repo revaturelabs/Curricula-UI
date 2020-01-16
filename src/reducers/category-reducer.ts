@@ -23,9 +23,12 @@ export const categoryReducer = (state = initialState, action: any) => {
             }
         }
         case categoryTypes.SUCCESSFUL_POST_NEW_CATEGORY: {
+            let categories = [...state.categories]
+            categories.push(action.payload.category)
             return {
                 ...state,
-                category: action.payload.newCategory
+                categories,
+                category: action.payload.category
             }
         }
         default:
