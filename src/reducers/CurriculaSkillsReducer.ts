@@ -37,9 +37,12 @@ export const skillsReducer = (state = initialState, action: any) => {
             }
         }
         case skillPillTypes.POST_NEW_SKILL_SUCCESS: {
+            let skills = [...state.skills]
+            skills.push(action.payload.skill)
             return {
                 ...state,
-                newSkill: action.payload.newSkill
+                skills,
+                newSkill: action.payload.skill
             }
         }
         case skillPillTypes.POST_NEW_SKILL_FAIL: {
