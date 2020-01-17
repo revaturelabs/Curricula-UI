@@ -148,12 +148,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         })
 
         return (
-            <>
-                {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
-                {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
-                {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
-                {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
-                
+            <>  
                 <div>
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
                     <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
@@ -173,6 +168,11 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 </div>
 
                 <PopupButtonComponent categories={this.props.allCategories} />
+
+                {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
+                {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
+                {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
+                {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
             </>
         )
     }
