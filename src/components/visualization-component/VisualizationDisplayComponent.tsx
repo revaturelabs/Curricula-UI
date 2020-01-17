@@ -88,7 +88,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         })
 
         let legend = categoriesInLegend.map((category) => {
-            return <div><p>{category.categoryName}: </p><Chip className="skillPillCurriculum" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
+            return <div><p>{category.categoryName}: <span><Chip className="skillPillCurriculum" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></span></p></div>
         })
 
         return(
