@@ -8,6 +8,7 @@ import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
+import { Redirect } from 'react-router';
 
 interface ICreateCurriculumPageProps {
     postSubmitCurriculum: (newCurriculum: Curriculum) => void
@@ -22,7 +23,7 @@ interface ICreateCurriculumPageState {
     allCurriculaState: Curriculum[]
     newCurriculumName: string
     filterSkillsMap: Skill[]
-    search: boolean
+    search: string
     colors: string[]
     shortName: boolean
     noSkills: boolean
@@ -38,7 +39,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             allCurriculaState: this.props.allCurricula,
             newCurriculumName: '',
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
-            search: false,
+            search: '',
             colors: ['white', 'red', 'orangered', 'orange', 'gold', 'yellow', 'yellowgreen', 'green', 'teal', 'blue', 'blueviolet', 'indigo', 'darkviolet', 'violet'],
             shortName: false,
             noSkills: false,
@@ -56,18 +57,18 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         }
     }
 
-    upCurriculumName = (e: any) => {
+    updateCurriculumName = (e: any) => {
         this.setState({
             ...this.state,
             newCurriculumName: e.target.value
         })
     }
 
-    upSkillsToCurriculumArray = (e: Skill) => {
-        let currArray = this.state.skillsToCurriculumArray
-        let added
-        if (currArray.length <= 1) {
-            currArray.push(e)
+    updateSkillsToCurriculumArray = (skill: Skill) => {
+        let skillsArray = [...this.state.skillsToCurriculumArray]
+
+        if (!skillsArray.includes(skill)) {
+            skillsArray.push(skill)
         } else {
             let index = skillsArray.findIndex((skillToCheck: Skill) => { return skillToCheck === skill })
             skillsArray.splice(index, 1)
@@ -81,141 +82,108 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
     submitCurriculum = (e: SyntheticEvent) => {
         e.preventDefault()
-        let existingCurricula = this.props.allCurricula
-        for (let i = 0; i < existingCurricula.length; i++) {
-            if (existingCurricula[i].curriculumName === this.state.newCurriculumName) {
-                return alert('A Currriculum of this name already exists. Please get more creative...')
-            }
-        }
         if (this.state.newCurriculumName.length <= 2) {
             this.setState({
                 ...this.state,
                 shortName: true,
                 noSkills: false,
-                existsAlready: false,
-                submitSuccess: false,
+                existsAlready: false
             })
         } else if (this.state.skillsToCurriculumArray.length < 1) {
             this.setState({
                 ...this.state,
                 shortName: false,
                 noSkills: true,
-                existsAlready: false,
-                submitSuccess: false,
+                existsAlready: false
             })
         } else {
-            this.state.skillsToCurriculumArray.shift()
-            let submitCurriculum = new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])
-            submitCurriculum.curriculumId = this.props.allCurricula.length + 1
-            submitCurriculum.curriculumName = this.state.newCurriculumName
-            submitCurriculum.skills = this.state.skillsToCurriculumArray
-            this.props.postSubmitCurriculum(submitCurriculum)
-        }
-    }
-
-    filterSkills = (e: any) => {
-        let searchInputValue = e.target.value
-        let search
-        if (e.target.value) {
-            search = true
-        } else {
-            search = false
-        }
-        let tempSkillsMap = [new Skill(0, '', new Category(0, ''))]
-        for (let i = 0; i < this.props.allSkills.length; i++) {
-            let searchString = this.props.allSkills[i].skillName
-            if (searchString.toLowerCase().includes(searchInputValue)) {
-                if (tempSkillsMap[0].skillId === 0) {
-                    tempSkillsMap[0] = this.props.allSkills[i]
-                } else {
-                    tempSkillsMap.push(this.props.allSkills[i])
-                    for (let curriculum of this.props.allCurricula) {
-                        if (curriculum.curriculumName === this.state.newCurriculumName) {
-                            this.setState({
-                                ...this.state,
-                                shortName: false,
-                                noSkills: false,
-                                existsAlready: true,
-                                submitSuccess: false,
-                            })
-                            return
-                        }
-                    }
-                    let newCurriculum = new Curriculum(0, this.state.newCurriculumName, this.state.skillsToCurriculumArray)
-                    this.props.postSubmitCurriculum(newCurriculum)
+            for (let curriculum of this.props.allCurricula) {
+                if (curriculum.curriculumName === this.state.newCurriculumName) {
                     this.setState({
                         ...this.state,
                         shortName: false,
                         noSkills: false,
-                        existsAlready: false,
-                        submitSuccess: true,
+                        existsAlready: true
                     })
+                    return
                 }
             }
-
-            updateSearch = (e: any) => {
-                this.setState({
-                    ...this.state,
-                    search: e.target.value
-                })
-            }
-
-            compare(skill1: Skill, skill2: Skill) {
-                if (skill1.category.categoryId > skill2.category.categoryId) {
-                    return 1;
-                }
-                if (skill1.category.categoryId < skill2.category.categoryId) {
-                    return -1;
-                }
-                return 0;
-            }
-
-            render() {
-
-                let allSkills = [...this.props.allSkills]
-                allSkills.sort(this.compare)
-                let skillsToDisplay = allSkills.filter((skill: Skill) => {
-                    if (skill.skillName.toLowerCase().includes(this.state.search.toLowerCase())) {
-                        return true
-                    } else {
-                        return false
-                    }
-                }).map((skill: Skill) => {
-                    if (this.state.skillsToCurriculumArray.includes(skill)) {
-                        return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
-                    } else {
-                        return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.6 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
-                    }
-                })
-
-                return (
-                    !this.state.submitSuccess ?
-                        <>
-                            <div>
-                                <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
-                                <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
-                            </div>
-
-                            <div>
-                                <br />
-                                <Grid container justify="center">
-                                    <Paper component="form" >
-                                        <Input placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch}></Input>
-                                    </Paper>
-                                </Grid>
-                            </div>
-
-                            <div className="skillPillContainer">
-                                {skillsToDisplay}
-                            </div>
-
-                            <PopupButtonComponent categories={this.props.allCategories} />
-
-                            {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
-                            {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
-                            {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
-                            {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
-                        </>
-        )
-            }
+            this.state.skillsToCurriculumArray.shift()
+            let newCurriculum = new Curriculum(0, this.state.newCurriculumName, this.state.skillsToCurriculumArray)
+            this.props.postSubmitCurriculum(newCurriculum)
+            this.setState({
+                ...this.state,
+                shortName: false,
+                noSkills: false,
+                existsAlready: false
+            })
         }
+    }
+
+    updateSearch = (e: any) => {
+        this.setState({
+            ...this.state,
+            search: e.target.value
+        })
+    }
+
+    compare(skill1: Skill, skill2: Skill) {
+        if (skill1.category.categoryId > skill2.category.categoryId) {
+            return 1;
+        }
+        if (skill1.category.categoryId < skill2.category.categoryId) {
+            return -1;
+        }
+        return 0;
+    }
+
+    render() {
+
+        let allSkills = [...this.props.allSkills]
+        allSkills.sort(this.compare)
+        let skillsToDisplay = allSkills.filter((skill: Skill) => {
+            if (skill.skillName.toLowerCase().includes(this.state.search.toLowerCase())) {
+                return true
+            } else {
+                return false
+            }
+        }).map((skill: Skill) => {
+            if (this.state.skillsToCurriculumArray.includes(skill)) {
+                return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
+            } else {
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.6 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
+            }
+        })
+
+        return (
+            !this.state.submitSuccess ?
+            <>
+                <div>
+                    <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
+                    <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
+                </div>
+
+                <div>
+                    <br />
+                    <Grid container justify="center">
+                        <Paper component="form" >
+                            <Input placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch}></Input>
+                        </Paper>
+                    </Grid>
+                </div>
+
+                <div className="skillPillContainer">
+                    {skillsToDisplay}
+                </div>
+
+                <PopupButtonComponent categories={this.props.allCategories} />
+
+                {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
+                {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
+                {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
+                {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
+            </> :
+            <Redirect to='/search' />
+        )
+    }
+}
