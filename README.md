@@ -86,7 +86,8 @@ The guidelines and principles are available in:
 
 + [Front End Styleguide](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Front-End)
 + [Accessibility](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Accessibility)
-+ [Curricula API Styleguide](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Curricula-API)
++ [UI Documentation](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-UI-Documentation)
++ [Work and Development](https://github.com/revaturelabs/Curricula-UI/wiki/Styleguide:-Work-and-Development)
 
 ## Support
 
