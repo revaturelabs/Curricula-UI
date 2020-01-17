@@ -21,6 +21,7 @@ export interface IVisualizationState {
 
 export interface ICurriculumState {
     curricula: Curriculum[]
+    submitSuccess: boolean
 }
 
 export interface IVistualizationDisplayState {
