@@ -6,6 +6,7 @@ import { CurriculaSelectionComponent } from "./curricula-selection-component/Cur
 import { Chip, Paper } from "@material-ui/core";
 import { Skill } from "../../models/skill";
 import { Category } from "../../models/category";
+import colors from "../../colors";
 
 interface IVisualizationComponentstate {
     visualization: Visualization
@@ -21,7 +22,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         this.state = {
             visualization: new Visualization(0,'',[]),
             activeCurriculum: new Curriculum(0,'',[]),
-            colors: ['black', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+            colors: colors
         }
 
     }
