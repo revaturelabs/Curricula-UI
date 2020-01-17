@@ -1,0 +1,26 @@
+/* .vizCurriculaSection{
+    display: flex; 
+    justify-content: flex-start;
+}
+.vizSkillsDisplay{
+    display: flex; 
+    justify-content: flex-end;
+}
+.vizCategoryLegend{
+    display: flex; 
+    justify-content: center;
+} */
+.categoryLegendCurriculum{
+    border-radius: 0% !important;
+    width: 100%;
+    font-weight: bolder;
+    text-shadow: white;
+    margin: .1em;
+}
+.skillPillCurriculum {
+    margin: .3em;
+}
+
+/* .inlineSpan{
+    display: inline-block;
+} */
