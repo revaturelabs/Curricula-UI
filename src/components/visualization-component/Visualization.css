@@ -1,26 +1,18 @@
-/* .vizCurriculaSection{
-    display: flex; 
-    justify-content: flex-start;
+.vizCurriculaSection{
+    margin: .1em;
 }
-.vizSkillsDisplay{
-    display: flex; 
-    justify-content: flex-end;
+.categoryLegendCurriculumHide{
+    display: none !important;
 }
-.vizCategoryLegend{
-    display: flex; 
-    justify-content: center;
-} */
-.categoryLegendCurriculum{
+.categoryLegendCurriculumShow{
     border-radius: 0% !important;
     width: 100%;
     font-weight: bolder;
     text-shadow: white;
-    margin: .1em;
+    margin: 0.3em;
+    padding-top: 0.8em;
+    display: block !important;
 }
 .skillPillCurriculum {
     margin: .3em;
 }
-
-/* .inlineSpan{
-    display: inline-block;
-} */

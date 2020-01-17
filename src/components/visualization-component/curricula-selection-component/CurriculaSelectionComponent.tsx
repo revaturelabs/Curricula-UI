@@ -10,19 +10,23 @@ interface ICurriculaSelectionComponentProps {
 
 export class CurriculaSelectionComponent extends React.PureComponent<ICurriculaSelectionComponentProps> {
 
-    render() {
 
-        let rows = this.props.curricula.map((curriuclum) => {
+    render() {
+        let blankCurriculum = new Curriculum(0, '', [])
+        let rows = this.props.curricula.map((curriculum) => {
             return (
-            <div>
-                <Button onMouseEnter={() => { this.props.updateActiveCurriculum(curriuclum) }}>{curriuclum.curriculumName}</Button>
-            </div>
+                <div>
+                    <Button className="vizCurriculaSection"
+                        onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}
+                        onMouseLeave={() => { this.props.updateActiveCurriculum(blankCurriculum) }}>
+                        {curriculum.curriculumName}</Button>
+                </div>
             )
         })
 
         return (
-            <div>
-                <Paper className="vizCurriculaSection" elevation={1}>
+            <div >
+                <Paper elevation={2}>
                     {rows}
                 </Paper>
             </div>

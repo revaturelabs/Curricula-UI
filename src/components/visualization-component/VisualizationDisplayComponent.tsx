@@ -89,24 +89,38 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         })
 
         let legend = categoriesInLegend.map((category) => {
-            return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculum" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
+            console.log(this.state.activeCurriculum.skills)
+            let activeSkillsArray = this.state.activeCurriculum.skills
+            for (let i = 0; i < activeSkillsArray.length; i++) {
+                if (activeSkillsArray[i].category.categoryId === category.categoryId) {
+                    return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumShow" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
+                } 
+            }
+            if(activeSkillsArray.length <= 1) {
+                return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumHide" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
+            }
+            return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumHide" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
         })
 
         return (
             <Container component="main" maxWidth="xl">
-                <Grid container spacing={3} justify="space-evenly">
-                            <Grid item lg={2}>
-                                <Paper elevation={1}>{legend}
-                                </Paper>
-                            </Grid>
-                            <Grid item lg={2}> <CurriculaSelectionComponent 
-                                updateActiveCurriculum={this.updateActiveCurriculum} 
-                                curricula={this.state.visualization.curricula} />
-                            </Grid>
-                            <Grid item lg={8}>
-                               {skillsToDisplay}
-                            </Grid>
-                        
+                <Grid container spacing={1} justify="space-evenly">
+
+                    <Grid item lg={2}> 
+                        <CurriculaSelectionComponent 
+                        updateActiveCurriculum={this.updateActiveCurriculum}
+                        curricula={this.state.visualization.curricula} />
+                    </Grid>
+
+                    <Grid item lg={2}>
+                        <Paper elevation={2}>{legend}
+                        </Paper>
+                    </Grid>
+
+                    <Grid item lg={8}>
+                        {skillsToDisplay}
+                    </Grid>
+
                 </Grid>
             </Container>
         )
