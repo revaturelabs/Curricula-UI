@@ -5,8 +5,7 @@ import { Category } from '../models/category'
 
 const initialState: ISkillState = {
     skills: [new Skill(0, '', new Category(0, ''))],
-    newSkill: new Skill(0, '', new Category(0,'')),
-    message: ''
+    newSkill: new Skill(0, '', new Category(0,''))
 }
 
 export const skillsReducer = (state = initialState, action: any) => {
@@ -22,18 +21,6 @@ export const skillsReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 message: 'Failed to retrieve skills'
-            }
-        }
-        case skillPillTypes.SUBMIT_SUCCESSFUL: {
-            return {
-                ...state,
-                message: 'Curriculum created successfully'
-            }
-        }
-        case skillPillTypes.SUBMIT_UNSUCCESSFUL: {
-            return {
-                ...state,
-                message: 'Reducer failed to create curriculum'
             }
         }
         case skillPillTypes.POST_NEW_SKILL_SUCCESS: {

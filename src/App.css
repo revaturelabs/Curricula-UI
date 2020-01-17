@@ -48,9 +48,3 @@
 .newCurriculumForm{
   display: inline; 
 }
-
-.skillPillContainer{
-  position: 'relative';
-  height: '200px';
-  overflow: 'scroll';
-}
