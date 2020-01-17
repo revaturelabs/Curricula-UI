@@ -1,0 +1,18 @@
+.vizCurriculaSection{
+    margin: .1em;
+}
+.categoryLegendCurriculumHide{
+    display: none !important;
+}
+.categoryLegendCurriculumShow{
+    border-radius: 0% !important;
+    width: 100%;
+    font-weight: bolder;
+    text-shadow: white;
+    margin: 0.3em;
+    padding-top: 0.8em;
+    display: block !important;
+}
+.skillPillCurriculum {
+    margin: .3em;
+}
