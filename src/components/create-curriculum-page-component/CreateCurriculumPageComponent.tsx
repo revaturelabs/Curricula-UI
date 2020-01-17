@@ -9,7 +9,6 @@ import { Link, Redirect } from 'react-router-dom';
 import DoneIcon from '@material-ui/icons/Done';
 import '../../App.css'
 
-
 interface ICreateCurriculumPageProps {
     postSubmitCurriculum: (newCurriculum: Curriculum) => void
     getAllSkills: () => void
@@ -17,7 +16,6 @@ interface ICreateCurriculumPageProps {
     skill: string
     curriculaIdNum: Curriculum[]
     allCategories: Category[]
-    submitSuccess: boolean
 }
 
 export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, any>{
@@ -25,11 +23,21 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         super(props)
         this.state = {
             skillsToCurriculumArray: [new Skill(0, '', new Category(0, ''))],
+            allCurricula: this.props.curriculaIdNum,
             newCurriculumName: '',
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
-            filterSkillsORSkillsMap: Boolean,
             search: false,
-            colors: ['white', 'red', 'orangered', 'orange', 'gold', 'yellow', 'yellowgreen', 'green', 'teal', 'blue', 'blueviolet', 'indigo', 'darkviolet', 'violet']
+            colors: ['white', 'red', 'orangered', 'orange', 'gold', 'yellow', 'yellowgreen', 'green', 'teal', 'blue', 'blueviolet', 'indigo', 'darkviolet', 'violet'],
+            submitSuccess: false
+        }
+    }
+
+    componentDidUpdate() {
+        if(this.state.allCurricula.length < this.props.curriculaIdNum.length && !this.state.submitSuccess) {
+            this.setState({
+                ...this.state,
+                submitSuccess: true
+            })
         }
     }
 
@@ -122,7 +130,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
     render() {
         return (
-            !this.props.submitSuccess ?
+            !this.state.submitSuccess ?
             <>
                 <div>
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.upCurriculumName} />
@@ -165,15 +173,3 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         )
     }
 }
-
-// const skillPillStyle = {
-//     position: 'relative',
-//     height: '200px',
-//     overflow: 'scroll'
-// }
-
-// const StyleChip = withStyles({
-//     root: {
-//       backgroundColor:
-//     }
-//   })(Chip);

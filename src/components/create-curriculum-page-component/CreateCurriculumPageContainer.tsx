@@ -1,6 +1,7 @@
 import { IState } from "../../reducers"
 import { connect } from "react-redux"
-import { postSubmitCurriculum, getAllSkills } from '../../action-mappers/skill-pill-action-mapper'
+import { getAllSkills } from '../../action-mappers/skill-pill-action-mapper'
+import { postSubmitCurriculum } from '../../action-mappers/curriculum-action-mapper'
 import { CreateCurriculumPageComponent } from './CreateCurriculumPageComponent'
 
 const mapStateToProps = (state: IState) => {

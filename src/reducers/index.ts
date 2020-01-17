@@ -11,8 +11,7 @@ import { visualizationDisplayReducer } from "./visualization-display-reducer";
 
 export interface ISkillState {
     skills: Skill[],
-    newSkill: Skill,
-    message: string
+    newSkill: Skill
 }
 
 export interface IVisualizationState {
@@ -21,7 +20,6 @@ export interface IVisualizationState {
 
 export interface ICurriculumState {
     curricula: Curriculum[]
-    submitSuccess: boolean
 }
 
 export interface IVistualizationDisplayState {
