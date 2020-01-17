@@ -6,7 +6,8 @@ import { curriculumTypes } from '../action-mappers/curriculum-action-mapper';
 
 
 const initialState: ICurriculumState = {
-    curricula: [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])]
+    curricula: [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])],
+    submitSuccess: false
 }
 
 export const curriculumReducer = (state = initialState, action: any) => {
@@ -15,7 +16,8 @@ export const curriculumReducer = (state = initialState, action: any) => {
         case curriculumTypes.SUCCESSFUL_GET_ALL: {
             return {
                 ...state,
-                curricula: action.payload.allCurricula
+                curricula: action.payload.allCurricula,
+                submitSuccess: true
             }
         }
         default:

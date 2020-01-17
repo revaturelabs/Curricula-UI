@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Container } from '@material-ui/core';
-import  CreateCategoryComponent from '../create-category-component/CreateCategoryContainer';
+import CreateCategoryComponent from '../create-category-component/CreateCategoryContainer';
 import CreateSkillComponent from '../create-skill-component/CreateSkillContainer';
 
 
@@ -33,13 +33,16 @@ export default function PopupButtonComponent(categories: any) {
     setOpen(true);
   };
 
+
+
+
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
-    <div>
-      <button type="button" onClick={handleOpen}>
+    <div >
+      <button type="button" className="negativeMargBot" onClick={handleOpen}>
         Add Skill/Category
       </button>
       <Modal
@@ -49,20 +52,19 @@ export default function PopupButtonComponent(categories: any) {
         open={open}
         onClose={handleClose}
         closeAfterTransition
+        style={{ overflow: 'scroll', paddingTop: '15em', paddingBottom: '15em' }}
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-              <Container>
-               
-            <h2 id="head2">Add Skill/Category</h2>
-            <p id="transition-modal-description">Created:</p>
-            <CreateSkillComponent></CreateSkillComponent>
-            <CreateCategoryComponent/>
+          <div className={classes.paper} >
+            <Container>
 
+              <h1 id="head2" className="negativeMargBot">Add Skill/Category</h1>
+                <CreateSkillComponent />
+                <CreateCategoryComponent />
 
             </Container>
           </div>

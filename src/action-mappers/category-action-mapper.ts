@@ -38,7 +38,7 @@ export const postNewCategory = (categoryToCreate: Category) => async (dispatch: 
             dispatch({
                 type: categoryTypes.SUCCESSFUL_POST_NEW_CATEGORY,
                 payload: {
-                    newCategory: res.body
+                    category: res.body
                 }
             })
         } else {

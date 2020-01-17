@@ -1,11 +1,12 @@
 import React, { SyntheticEvent } from 'react'
-import { Button, Input } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import { Category } from '../../models/category'
 
 
 interface ICreateCategoryComponentProps {
     postNewCategory: (categoryToCreate: Category) => void
     returnedNewCategory: Category
+    allCategories: Category[]
 }
 
 export class CreateCategoryComponent extends React.Component<ICreateCategoryComponentProps, any>{
@@ -22,15 +23,19 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
             ...this.state,
             categoryName: e.target.value
         })
-        console.log(this.state.categoryName)
     }
 
     submitPostNewCategory = (e: SyntheticEvent) => {
         e.preventDefault()
+        if (!this.state.categoryName) {
+            return alert('Please Enter a category name')
+        }
+        for (let i = 0; i < this.props.allCategories.length; i++) {
+            if (this.props.allCategories[i].categoryName === this.state.categoryName) {
+                return alert('This category already exists')
+            }
+        }
         this.state.categoryToCreate.categoryName = this.state.categoryName
-        this.setState({
-            ...this.state,
-        })
         this.props.postNewCategory(this.state.categoryToCreate)
         this.forceUpdate()
     }
@@ -39,13 +44,10 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
         return (
             <div id="createCategory-div">
                 <form id="createCategory" className='createCategory'>
-                    <h1> Create a Category</h1>
-                    <Input onChange={this.updateCategoryName}></Input>
-        <p>{this.state.categoryName}</p>
-                    <br/>
-                    &nbsp;
-                    &nbsp;
-                            <Button onClick={this.submitPostNewCategory} variant="contained" type='submit' color="primary" className='{classes.submit}'>
+                    <h2> Create a Category</h2>
+                    <TextField onChange={this.updateCategoryName} placeholder="Type Your Category Name"></TextField>
+                    <p></p>
+                    <Button onClick={this.submitPostNewCategory} variant="contained" type='submit' color="primary">
                         Submit
                             </Button>
                 </form>

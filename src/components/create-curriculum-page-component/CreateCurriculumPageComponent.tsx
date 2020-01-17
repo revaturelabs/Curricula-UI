@@ -5,7 +5,7 @@ import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
 import { Button, Input, Grid, Paper } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import DoneIcon from '@material-ui/icons/Done';
 import '../../App.css'
 
@@ -16,13 +16,15 @@ interface ICreateCurriculumPageProps {
     allSkillsMap: Skill[]
     skill: string
     curriculaIdNum: Curriculum[]
+    allCategories: Category[]
+    submitSuccess: boolean
 }
 
 export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, any>{
     constructor(props: any) {
         super(props)
         this.state = {
-            skillsToCurriculumArray: [],
+            skillsToCurriculumArray: [new Skill(0, '', new Category(0, ''))],
             newCurriculumName: '',
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
             filterSkillsORSkillsMap: Boolean,
@@ -38,10 +40,10 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         })
     }
 
-    upSkillsToCurriculumArray = (e: number) => {
+    upSkillsToCurriculumArray = (e: Skill) => {
         let currArray = this.state.skillsToCurriculumArray
         let added
-        if (currArray.length === 0) {
+        if (currArray.length <= 1) {
             currArray.push(e)
         } else {
             for (let i = 0; i < currArray.length; i++) {
@@ -55,7 +57,8 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             }
         }
         this.setState({
-            ...this.state
+            ...this.state,
+            upSkillsToCurriculumArray: currArray
         })
     }
 
@@ -77,11 +80,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             submitCurriculum.curriculumId = this.props.curriculaIdNum.length + 1
             submitCurriculum.curriculumName = this.state.newCurriculumName
             submitCurriculum.skills = this.state.skillsToCurriculumArray
-            this.setState({
-                ...this.state,
-            })
             this.props.postSubmitCurriculum(submitCurriculum)
-            //message of successful creation should go here once sql error is handled
         }
     }
 
@@ -123,6 +122,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
     render() {
         return (
+            !this.props.submitSuccess ?
             <>
                 <div>
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.upCurriculumName} />
@@ -137,33 +137,31 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                         </Paper>
                     </Grid>
                 </div>
-                <div>
-                    {this.state.filterSkillsMap[0].skillId === 0 && !this.state.search ?
-                        <div>
-                            {this.props.allSkillsMap.sort(this.compare).map((allSkill: any) => {
-                                return (
-                                    this.state.skillsToCurriculumArray.includes(allSkill.skillId) ?
-                                        <Chip icon={<DoneIcon />} label={allSkill.skillName} className="skillPillCurriculum" key={allSkill.skillId} style={{ backgroundColor: this.state.colors[allSkill.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(allSkill.skillId) }} />
-                                        :
-                                        <Chip label={allSkill.skillName} className="skillPillCurriculum" key={allSkill.skillId} style={{ backgroundColor: this.state.colors[allSkill.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(allSkill.skillId) }} />
-                                )
-                            })}
-                        </div>
-                        :
-                        <div>
-                            {this.state.filterSkillsMap.sort(this.compare).map((filterSkill: any) => {
-                                return (
-                                    this.state.skillsToCurriculumArray.includes(filterSkill.skillId) ?
-                                        <Chip icon={<DoneIcon />} label={filterSkill.skillName} className="skillPillCurriculum" key={filterSkill.skillId} style={{ backgroundColor: this.state.colors[filterSkill.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(filterSkill.skillId) }} />
-                                        :
-                                        <Chip label={filterSkill.skillName} className="skillPillCurriculum" key={filterSkill.skillId} style={{ backgroundColor: this.state.colors[filterSkill.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(filterSkill.skillId) }} />
-                                )
-                            })}
-                        </div>
-                    }
-                </div>
-                <PopupButtonComponent />
-            </>
+
+                {this.state.filterSkillsMap[0].skillId === 0 && !this.state.search ?
+                    <div className="skillPillContainer" >
+                        {this.props.allSkillsMap.sort(this.compare).map((f: any) => {
+                            return (
+                                this.state.skillsToCurriculumArray.includes(f) ?
+                                    <Chip icon={<DoneIcon />} label={f.skillName} className="skillPillCurriculum" key={f.skillId} style={{ backgroundColor: this.state.colors[f.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(f) }} /> :
+                                    <Chip label={f.skillName} className="skillPillCurriculum" key={f.skillId} style={{ backgroundColor: this.state.colors[f.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(f) }} />
+                            )
+                        })}
+                    </div> :
+                    <div className="skillPillContainer" >
+                        {this.state.filterSkillsMap.sort(this.compare).map((e: any) => {
+                            return (
+                                this.state.skillsToCurriculumArray.includes(e) ?
+                                    <Chip icon={<DoneIcon />} label={e.skillName} className="skillPillCurriculum" key={e.skillId} style={{ backgroundColor: this.state.colors[e.category.categoryId] }} onClick={() => { this.upSkillsToCurriculumArray(e) }} /> :
+                                    <Chip label={e.skillName} className="skillPillCurriculum" key={e.skillId} style={{ backgroundColor: this.state.colors[e.category.categoryId], opacity: 0.6 }} onClick={() => { this.upSkillsToCurriculumArray(e) }} />
+                            )
+                        })}
+                    </div>
+                }
+
+                <PopupButtonComponent categories={this.props.allCategories}/>
+            </> :
+            <Redirect to='/search' />
         )
     }
 }
