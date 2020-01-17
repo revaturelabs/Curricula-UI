@@ -62,7 +62,7 @@ export default function PopupButtonComponent(categories: any) {
           <div className={classes.paper} >
             <Container>
 
-              <h1 id="head2" className="negativeMargBot">Add Skill/Category</h1>
+              <h2 id="head2" className="negativeMargBot">Add Skill/Category</h2>
                 <CreateSkillComponent />
                 <CreateCategoryComponent />
 

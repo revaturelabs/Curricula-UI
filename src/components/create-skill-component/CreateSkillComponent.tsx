@@ -91,11 +91,11 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
 
     return (
         <div>
-            <h2>Create New Skill</h2>
-            <h3> Select Your Category :</h3>
-            <FormControl variant="outlined" className={classes.formControl} style = {{marginLeft: -2}}>
-                <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">
-                    Category
+            <h3>Create New Skill </h3>
+            <p> Select Your Category : </p>
+            <FormControl variant="outlined" id="dropdown-category" className={classes.formControl} style = {{marginLeft: -2}}>
+                <InputLabel ref={inputLabel}  >
+                    Category 
                 </InputLabel>
                 <Select
                     labelId="demo-simple-select-outlined-label"
@@ -110,12 +110,15 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
                     {fillDropdown}
                 </Select>
             </FormControl>
-
+            
             <form>
+                <br/>
                 <TextField onChange={updateSkillName} className="negativeMargBot" id="outlined-basic" placeholder = "Type Your Skill Name"/>
                 <p></p>
-                <Button onClick={submitSkill} className="negativeMargBot" variant="contained" color="primary">Submit</Button>
+                <Button onClick={submitSkill} className="negativeMargBot" variant="contained" id="btn1">Submit</Button>
             </form>
+            <hr/>
+            
         </div>
     )
 }

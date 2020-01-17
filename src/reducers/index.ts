@@ -11,8 +11,7 @@ import { visualizationDisplayReducer } from "./visualization-display-reducer";
 
 export interface ISkillState {
     skills: Skill[],
-    newSkill: Skill,
-    message: string
+    newSkill: Skill
 }
 
 export interface IVisualizationState {
