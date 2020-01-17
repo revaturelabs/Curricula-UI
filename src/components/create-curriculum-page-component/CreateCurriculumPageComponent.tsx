@@ -8,6 +8,8 @@ import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
+import colors from '../../colors';
+
 import { Redirect } from 'react-router';
 
 interface ICreateCurriculumPageProps {
@@ -40,7 +42,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             newCurriculumName: '',
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
             search: '',
-            colors: ['white', 'red', 'orangered', 'orange', 'gold', 'yellow', 'yellowgreen', 'green', 'teal', 'blue', 'blueviolet', 'indigo', 'darkviolet', 'violet'],
+            colors: colors,
             shortName: false,
             noSkills: false,
             existsAlready: false,
