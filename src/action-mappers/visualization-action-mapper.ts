@@ -38,7 +38,7 @@ export const postSubmitVisualization = (newVisualization: Visualization) => asyn
             dispatch({
                 type: visualizationTypes.SUBMIT_SUCCESSFUL,
                 payload: {
-                    curriculum: res.body
+                    visualization: res.body
                 }
             })
         } else {

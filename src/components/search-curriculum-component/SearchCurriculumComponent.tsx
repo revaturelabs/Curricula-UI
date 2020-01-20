@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -10,6 +10,7 @@ import { Visualization } from '../../models/visualization';
 import { Curriculum } from '../../models/curriculum';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
+import { Redirect } from 'react-router';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -20,7 +21,7 @@ interface ITestData {
 interface ISearchCurriculumProps {
     postSubmitVisualization: (newVisualization: Visualization) => void
     allCurricula: Curriculum[]
-    //newCurricula: Curriculum[]
+    allVisualizations: Visualization[]
 }
 
 export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
@@ -30,6 +31,17 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
     newCurricula.pop()
     const curriculumList = props.allCurricula.map((e: any) => {
         return { curriculum: e.curriculumName }
+    });
+    const [allVisualizationState] = React.useState(props.allVisualizations);
+    let submitSuccess = useRef(false);
+
+    useEffect(() => {
+        if(allVisualizationState.length < props.allVisualizations.length && !submitSuccess.current) {
+            submitSuccess.current = true
+            setVisualizationName('')
+        }
+        console.log(`Submit = ${submitSuccess.current}`);
+        
     })
 
     const updateCurricula = (name: string, selected: boolean) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,12 +64,12 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             newCurricula.splice(index, 1);
         }
         setNewCurricula(newCurricula)
-        console.log("this is the currname:");
+        // console.log("this is the currname:");
 
-        console.log(currName);
+        // console.log(currName);
 
-        console.log(name);
-        console.log(newCurricula);
+        // console.log(name);
+        // console.log(newCurricula);
     }
 
     const updateVisualization = (e: any) => {
@@ -69,14 +81,15 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
         let tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         tempVisualization.visualizationName = visualizationName
         tempVisualization.curricula = newCurricula
-        console.log(newCurricula);
+        // console.log(newCurricula);
 
-        console.log(tempVisualization);
+        // console.log(tempVisualization);
 
         props.postSubmitVisualization(tempVisualization)
     }
 
     return (
+        !submitSuccess.current ?
         <div>
             <br />
             <TextField onChange={updateVisualization} value={visualizationName} id="VisualizationName" label="Visualization Name" variant="outlined" />
@@ -117,7 +130,8 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             <Button onClick={sumbitVisualization} variant="contained" color="primary">
                 Make
             </Button>
-        </div>
+        </div> :
+        <Redirect to="/" />
     );
 }
 

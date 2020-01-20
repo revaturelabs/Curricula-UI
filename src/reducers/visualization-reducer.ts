@@ -20,8 +20,11 @@ export const visualizationReducer = (state = initialState, action: any) => {
             }
         }
         case visualizationTypes.SUBMIT_SUCCESSFUL: {
+            let vis = [...state.visualizations]
+            vis.push(action.payload.visualization)
             return {
-                ...state
+                ...state,
+                visualizations: vis
             }
         }
         case visualizationTypes.SUBMIT_UNSUCCESSFUL: {

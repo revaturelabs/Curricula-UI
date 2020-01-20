@@ -5,7 +5,8 @@ import { postSubmitVisualization } from "../../action-mappers/visualization-acti
 
 const mapStateToProps = (state: IState) => {
     return {
-        allCurricula: state.allCurricula.curricula
+        allCurricula: state.allCurricula.curricula,
+        allVisualizations: state.allVisualizations.visualizations
     }
 }
 
