@@ -8,7 +8,9 @@ import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
+import colors from '../../colors';
 
+import { Redirect } from 'react-router';
 
 interface ICreateCurriculumPageProps {
     postSubmitCurriculum: (newCurriculum: Curriculum) => void
@@ -20,6 +22,7 @@ interface ICreateCurriculumPageProps {
 
 interface ICreateCurriculumPageState {
     skillsToCurriculumArray: Skill[]
+    allCurriculaState: Curriculum[]
     newCurriculumName: string
     filterSkillsMap: Skill[]
     search: string
@@ -34,15 +37,25 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     constructor(props: any) {
         super(props)
         this.state = {
-            skillsToCurriculumArray: [],
+            skillsToCurriculumArray: [new Skill(0, '', new Category(0, ''))],
+            allCurriculaState: this.props.allCurricula,
             newCurriculumName: '',
-            filterSkillsMap: [],
+            filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
             search: '',
-            colors: ['white', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
+            colors: colors,
             shortName: false,
             noSkills: false,
             existsAlready: false,
-            submitSuccess: false,
+            submitSuccess: false
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.state.allCurriculaState.length < this.props.allCurricula.length && !this.state.submitSuccess) {
+            this.setState({
+                ...this.state,
+                submitSuccess: true
+            })
         }
     }
 
@@ -56,10 +69,10 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     updateSkillsToCurriculumArray = (skill: Skill) => {
         let skillsArray = [...this.state.skillsToCurriculumArray]
 
-        if(!skillsArray.includes(skill)){
+        if (!skillsArray.includes(skill)) {
             skillsArray.push(skill)
         } else {
-            let index = skillsArray.findIndex((skillToCheck: Skill)=>{return skillToCheck === skill})
+            let index = skillsArray.findIndex((skillToCheck: Skill) => { return skillToCheck === skill })
             skillsArray.splice(index, 1)
         }
 
@@ -76,38 +89,35 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 ...this.state,
                 shortName: true,
                 noSkills: false,
-                existsAlready: false,
-                submitSuccess: false,
+                existsAlready: false
             })
         } else if (this.state.skillsToCurriculumArray.length < 1) {
             this.setState({
                 ...this.state,
                 shortName: false,
                 noSkills: true,
-                existsAlready: false,
-                submitSuccess: false,
+                existsAlready: false
             })
         } else {
-            for(let curriculum of this.props.allCurricula){
-                if(curriculum.curriculumName === this.state.newCurriculumName){
+            for (let curriculum of this.props.allCurricula) {
+                if (curriculum.curriculumName === this.state.newCurriculumName) {
                     this.setState({
                         ...this.state,
                         shortName: false,
                         noSkills: false,
-                        existsAlready: true,
-                        submitSuccess: false,
+                        existsAlready: true
                     })
                     return
                 }
             }
+            this.state.skillsToCurriculumArray.shift()
             let newCurriculum = new Curriculum(0, this.state.newCurriculumName, this.state.skillsToCurriculumArray)
             this.props.postSubmitCurriculum(newCurriculum)
             this.setState({
                 ...this.state,
                 shortName: false,
                 noSkills: false,
-                existsAlready: false,
-                submitSuccess: true,
+                existsAlready: false
             })
         }
     }
@@ -133,14 +143,14 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
 
         let allSkills = [...this.props.allSkills]
         allSkills.sort(this.compare)
-        let skillsToDisplay = allSkills.filter((skill:Skill) => {
-            if(skill.skillName.toLowerCase().includes(this.state.search.toLowerCase())){
+        let skillsToDisplay = allSkills.filter((skill: Skill) => {
+            if (skill.skillName.toLowerCase().includes(this.state.search.toLowerCase())) {
                 return true
             } else {
                 return false
             }
-        }).map((skill:Skill) => {
-            if(this.state.skillsToCurriculumArray.includes(skill)){
+        }).map((skill: Skill) => {
+            if (this.state.skillsToCurriculumArray.includes(skill)) {
                 return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             } else {
                 return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.6 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
@@ -148,7 +158,8 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         })
 
         return (
-            <>  
+            !this.state.submitSuccess ?
+            <>
                 <div>
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
                     <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
@@ -173,7 +184,8 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
                 {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
                 {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
                 {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
-            </>
+            </> :
+            <Redirect to='/search' />
         )
     }
 }
