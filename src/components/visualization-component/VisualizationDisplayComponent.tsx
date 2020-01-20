@@ -106,14 +106,14 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
             <Container component="main" maxWidth="xl">
                 <Grid container spacing={1} justify="space-evenly">
 
-                    <Grid item lg={2}>
+                    <Grid item lg={4}>
                         <CurriculaSelectionComponent
                             updateActiveCurriculum={this.updateActiveCurriculum}
                             curricula={this.state.visualization.curricula}
                             activeCurriculum={this.state.activeCurriculum} />
                     </Grid>
 
-                    <Grid item lg={8}>
+                    <Grid item lg={6}>
                         {skillsToDisplay}
                     </Grid>
 
