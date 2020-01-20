@@ -109,7 +109,8 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
                     <Grid item lg={2}>
                         <CurriculaSelectionComponent
                             updateActiveCurriculum={this.updateActiveCurriculum}
-                            curricula={this.state.visualization.curricula} />
+                            curricula={this.state.visualization.curricula}
+                            activeCurriculum={this.state.activeCurriculum} />
                     </Grid>
 
                     <Grid item lg={8}>
