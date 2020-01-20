@@ -72,7 +72,7 @@ export default function NavBarComponent() {
                         <img src={RevatureLogo} alt="logo" className={classes.revatureLogo} />
                     </Link>
                     <Grid container justify="space-evenly">
-                    <Button color="inherit" component={Link} to="/"  >Curricula</Button>
+                    <Button color="inherit" component={Link} to="/"  >Home</Button>
                     <Button
                          ref={anchorRef}
                          aria-controls={open ? 'menu-list-grow' : undefined}
