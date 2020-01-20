@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Container, Chip } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { Visualization } from '../../models/visualization';
 import { Curriculum } from '../../models/curriculum';
@@ -13,14 +13,13 @@ import { Category } from '../../models/category';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-interface ITestData {
+interface ICurriculum {
     curriculum: string;
 }
 
 interface ISearchCurriculumProps {
     postSubmitVisualization: (newVisualization: Visualization) => void
     allCurricula: Curriculum[]
-    //newCurricula: Curriculum[]
 }
 
 export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
@@ -28,11 +27,12 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
     const [visualizationName, setVisualizationName] = React.useState('');
     const [newCurricula, setNewCurricula] = React.useState([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])]);
     newCurricula.pop()
+
     const curriculumList = props.allCurricula.map((e: any) => {
         return { curriculum: e.curriculumName }
     })
 
-    const updateCurricula = (name: string, selected: boolean) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updateCurricula = (name: string, selected: boolean) => {
         let currName: Curriculum = new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])
         for (let i = 0; i < props.allCurricula.length; i++) {
             if (props.allCurricula[i].curriculumName === name) {
@@ -46,18 +46,15 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             }
         }
         if (selected) {
-            newCurricula.push(currName)
+            let test = newCurricula
+            test.push(currName)
+            setNewCurricula(test)
+            console.log(newCurricula);
         } else if (newCurricula.includes(currName)) {
             const index = newCurricula.indexOf(currName)
             newCurricula.splice(index, 1);
         }
-        setNewCurricula(newCurricula)
-        console.log("this is the currname:");
 
-        console.log(currName);
-
-        console.log(name);
-        console.log(newCurricula);
     }
 
     const updateVisualization = (e: any) => {
@@ -69,10 +66,6 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
         let tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         tempVisualization.visualizationName = visualizationName
         tempVisualization.curricula = newCurricula
-        console.log(newCurricula);
-
-        console.log(tempVisualization);
-
         props.postSubmitVisualization(tempVisualization)
     }
 
@@ -89,18 +82,24 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     id="checkboxes-tags-demo"
                     options={curriculumList}
                     disableCloseOnSelect
-                    getOptionLabel={(option: ITestData) => option.curriculum}
-                    renderOption={(option: ITestData, { selected }) => (
-                        <React.Fragment>
+                    getOptionLabel={(option: ICurriculum) => option.curriculum}
+                    renderTags={(value: ICurriculum[]) =>
+                        value.map((option: ICurriculum) => (
+                            <Chip label={option.curriculum} key={option.curriculum} />
+                        ))
+                    }
+                    renderOption={(option: ICurriculum, { selected }) => (
+                        <Container onClick={() => {
+                            updateCurricula(option.curriculum, !selected)
+                        }}>
                             <Checkbox
                                 icon={icon}
                                 checkedIcon={checkedIcon}
                                 style={{ marginRight: 8 }}
                                 checked={selected}
-                                onChange={updateCurricula(option.curriculum, !selected)}
                             />
                             {option.curriculum}
-                        </React.Fragment>
+                        </Container>
                     )}
                     style={{ width: 500 }}
                     renderInput={params => (
@@ -110,6 +109,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                             label="Search Curriculum"
                             placeholder="Curriculum"
                             fullWidth
+                        //onClick={test}
                         />
                     )}
                 />
