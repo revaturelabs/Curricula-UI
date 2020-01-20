@@ -23,8 +23,8 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         super(props)
         this.state = {
 
-            visualization: new Visualization(0,'',[]),
-            activeCurriculum: new Curriculum(0,'',[]),
+            visualization: new Visualization(0, '', []),
+            activeCurriculum: new Curriculum(0, '', []),
             colors: colors
 
         }
@@ -47,11 +47,11 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         }
     }
 
-    compare(a: any, b: any) {
-        if (a.category.categoryId > b.category.categoryId) {
+    compare(skill1: Skill, skill2: Skill) {
+        if (skill1.category.categoryId > skill2.category.categoryId) {
             return 1;
         }
-        if (a.category.categoryId < b.category.categoryId) {
+        if (skill1.category.categoryId < skill2.category.categoryId) {
             return -1;
         }
         return 0;
@@ -93,38 +93,35 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         })
 
         let legend = categoriesInLegend.map((category) => {
-            console.log(this.state.activeCurriculum.skills)
-            let activeSkillsArray = this.state.activeCurriculum.skills
-            for (let i = 0; i < activeSkillsArray.length; i++) {
-                if (activeSkillsArray[i].category.categoryId === category.categoryId) {
-                    return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumShow" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
-                } 
-            }
-            if(activeSkillsArray.length <= 1) {
-                return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumHide" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
-            }
-            return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumHide" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
+
+            // for (let skill of this.state.activeCurriculum.skills) {
+            //     if (skill.category.categoryId === category.categoryId) {
+            //         return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumShow" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
+            //     }
+            // }
+            return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumShow" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
         })
 
         return (
             <Container component="main" maxWidth="xl">
                 <Grid container spacing={1} justify="space-evenly">
 
-                    <Grid item lg={2}> 
-                        <CurriculaSelectionComponent 
-                        updateActiveCurriculum={this.updateActiveCurriculum}
-                        curricula={this.state.visualization.curricula} />
+                    <Grid item lg={4}>
+                        <CurriculaSelectionComponent
+                            updateActiveCurriculum={this.updateActiveCurriculum}
+                            curricula={this.state.visualization.curricula}
+                            activeCurriculum={this.state.activeCurriculum} />
                     </Grid>
 
-                    <Grid item lg={2}>
-                        <Paper elevation={2}>{legend}
-                        </Paper>
-                    </Grid>
-
-                    <Grid item lg={8}>
+                    <Grid item lg={6}>
                         {skillsToDisplay}
                     </Grid>
 
+                    <Grid item lg={2}>
+                        <Paper elevation={2}>
+                            {legend}
+                        </Paper>
+                    </Grid>
                 </Grid>
             </Container>
         )
