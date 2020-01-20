@@ -1,25 +1,24 @@
 import React from 'react'
 import { Curriculum } from '../../../models/curriculum';
-import { Paper, Button } from '@material-ui/core';
+import { Paper, ListItem } from '@material-ui/core';
 import '../Visualization.css'
 
 interface ICurriculaSelectionComponentProps {
     curricula: Curriculum[]
     updateActiveCurriculum: (curriculum: Curriculum) => void
+    activeCurriculum: Curriculum
 }
 
 export class CurriculaSelectionComponent extends React.PureComponent<ICurriculaSelectionComponentProps> {
 
 
     render() {
-        let blankCurriculum = new Curriculum(0, '', [])
         let rows = this.props.curricula.map((curriculum) => {
             return (
                 <div>
-                    <Button className="vizCurriculaSection"
-                        onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}
-                        onMouseLeave={() => { this.props.updateActiveCurriculum(blankCurriculum) }}>
-                        {curriculum.curriculumName}</Button>
+                    <ListItem className="vizCurriculaSection" selected={curriculum === this.props.activeCurriculum} onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}>
+                        {curriculum.curriculumName}
+                    </ListItem>
                 </div>
             )
         })
