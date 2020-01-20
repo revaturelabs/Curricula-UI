@@ -10,6 +10,7 @@ import { Visualization } from '../../models/visualization';
 import { Curriculum } from '../../models/curriculum';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
+import Alert from '@material-ui/lab/Alert';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -20,11 +21,16 @@ interface ICurriculum {
 interface ISearchCurriculumProps {
     postSubmitVisualization: (newVisualization: Visualization) => void
     allCurricula: Curriculum[]
+    allVisualizations: Visualization[]
 }
 
 export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
 
     const [visualizationName, setVisualizationName] = React.useState('');
+    const [shortName, setShortName] = React.useState(false);
+    const [noCurricula, setNoCurricula] = React.useState(false);
+    const [existsAlready, setExistsAlready] = React.useState(false);
+    const [submitSuccess, setSubmitSuccess] = React.useState(false);
     const [newCurricula, setNewCurricula] = React.useState([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])]);
     newCurricula.pop()
 
@@ -40,7 +46,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                 break
             }
             else if (i === props.allCurricula.length - 1) {
-                return console.log('Curriculum don\'t match')
+                return console.log('Curriculum does not match match')
             } else {
                 continue
             }
@@ -49,12 +55,11 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             let test = newCurricula
             test.push(currName)
             setNewCurricula(test)
-            console.log(newCurricula);
         } else if (newCurricula.includes(currName)) {
             const index = newCurricula.indexOf(currName)
             newCurricula.splice(index, 1);
         }
-
+        console.log(newCurricula);
     }
 
     const updateVisualization = (e: any) => {
@@ -63,10 +68,38 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
 
     const sumbitVisualization = (e: any) => {
         e.preventDefault()
-        let tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
-        tempVisualization.visualizationName = visualizationName
-        tempVisualization.curricula = newCurricula
-        props.postSubmitVisualization(tempVisualization)
+        if (visualizationName.length <= 2) {
+            setShortName(true)
+            setNoCurricula(false)
+            setExistsAlready(false)
+            setSubmitSuccess(false)
+        } else if (newCurricula.length < 1) {
+            setShortName(false)
+            setNoCurricula(true)
+            setExistsAlready(false)
+            setSubmitSuccess(false)
+        } else {
+            let noError = true
+            for (let visualization of props.allVisualizations) {
+                if (visualization.visualizationName === visualizationName) {
+                    setShortName(false)
+                    setNoCurricula(false)
+                    setExistsAlready(true)
+                    setSubmitSuccess(false)
+                    noError = false
+                }
+            }
+            if (noError) {
+                let tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
+                tempVisualization.visualizationName = visualizationName
+                tempVisualization.curricula = newCurricula
+                props.postSubmitVisualization(tempVisualization)
+                setShortName(false)
+                setNoCurricula(false)
+                setExistsAlready(false)
+                setSubmitSuccess(true)
+            }
+        }
     }
 
     return (
@@ -109,14 +142,18 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                             label="Search Curriculum"
                             placeholder="Curriculum"
                             fullWidth
-                        //onClick={test}
                         />
                     )}
                 />
             </Grid>
+            <br />
             <Button onClick={sumbitVisualization} variant="contained" color="primary">
                 Make
             </Button>
+            {shortName && (<Alert severity="error">Please include a longer name for your visualization.</Alert>)}
+            {noCurricula && (<Alert severity="error">Please include a curriculum in your visualization.</Alert>)}
+            {existsAlready && (<Alert severity="error">A visualization by this name already exists.</Alert>)}
+            {submitSuccess && (<Alert severity="success">Visualization Created Successfully</Alert>)}
         </div>
     );
 }
