@@ -9,7 +9,6 @@ import ViewAllVisualizationsContainer from './components/view-all-visualizations
 import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
 import { VisualizationComponent } from './components/visualization-component/VisualizationDisplayComponent';
 import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
-import NavBarComponent from './components/navbar-component/NavBarComponent'
 
 
 const App: React.FC = () => {
@@ -17,7 +16,6 @@ const App: React.FC = () => {
     <div className="App">
       <Provider store={store}>
         <Router>
-        <NavBarComponent/>
           <Switch>
             <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
             <Route path='/skill' component={SkillComponent} />

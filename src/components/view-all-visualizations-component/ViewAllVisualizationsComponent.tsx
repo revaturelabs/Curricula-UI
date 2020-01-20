@@ -3,6 +3,7 @@ import { Visualization } from '../../models/visualization';
 import { VisualizationLinkComponent } from './visualization-link-component/VisualizationLinkComponent';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
+import NavBarComponent from '../navbar-component/NavBarComponent'
 
 
 interface IVisualizationsProps {
@@ -72,6 +73,8 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
         return (
             <div>
                     
+                <NavBarComponent/>
+
                 <Paper component="form">
                     <InputBase
                         value={this.state.search}

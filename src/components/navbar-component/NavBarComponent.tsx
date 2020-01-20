@@ -92,8 +92,8 @@ export default function NavBarComponent() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" color="secondary" onKeyDown={handleListKeyDown}>
-                    <MenuItem component={Link} to="/search" onClick={handleClose}>New</MenuItem>
-                    <MenuItem component={Link} to="/createcurriculumpage" onClick={handleClose}>View</MenuItem>
+                    <MenuItem component={Link} to="/search" onClick={handleClose}>New Visualization</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleClose}>View Visualizations</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
