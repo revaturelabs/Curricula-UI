@@ -12,14 +12,12 @@ export class CurriculaSelectionComponent extends React.PureComponent<ICurriculaS
 
 
     render() {
-        let blankCurriculum = new Curriculum(0, '', [])
         let rows = this.props.curricula.map((curriculum) => {
             return (
                 <div>
-                    <Button className="vizCurriculaSection"
-                        onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}
-                        onMouseLeave={() => { this.props.updateActiveCurriculum(blankCurriculum) }}>
-                        {curriculum.curriculumName}</Button>
+                    <Button className="vizCurriculaSection" onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}>
+                        {curriculum.curriculumName}
+                    </Button>
                 </div>
             )
         })
