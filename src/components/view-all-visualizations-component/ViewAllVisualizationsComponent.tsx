@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import NavBarComponent from '../navbar-component/NavBarComponent'
 import { environment } from '../../environment';
+import { Input, TextField, Grid } from '@material-ui/core';
 
 interface IVisualizationsProps {
     getAllVisualizations: () => void
@@ -72,14 +73,26 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
         return (
             <div>
                 <NavBarComponent />
-                <Paper component="form">
-                    <InputBase
-                        value={this.state.search}
-                        onChange={this.updateSearch}
-                        placeholder="Search Visualizations"
-                        inputProps={{ 'aria-label': 'search visualizations' }}
-                    />
-                </Paper>
+                {/* <Paper component="form"> */}
+                <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item>
+                        <TextField
+                            style={{ width: 500 }}
+                            variant="outlined"
+                            value={this.state.search}
+                            onChange={this.updateSearch}
+                            placeholder="Type to filter..."
+                            inputProps={{ 'aria-label': 'search visualizations' }}
+                        />
+                    </Grid >
+                </Grid>
+                {/* </Paper> */}
                 {visualizationsToRender}
             </div>
         )
