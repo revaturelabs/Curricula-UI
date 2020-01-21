@@ -1,6 +1,6 @@
 import { IState } from "../../reducers"
 import { connect } from "react-redux"
-import { submitNewSkill } from "../../action-mappers/skill-pill-action-mapper"
+import { submitNewSkill } from "../../action-mappers/skill-action-mapper"
 import CreateSkillComponent  from "./CreateSkillComponent"
 
 const mapStateToProps = (state : IState) => {

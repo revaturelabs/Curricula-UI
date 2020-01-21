@@ -16,7 +16,6 @@ interface IVisualizationComponentstate {
     colors: string[]
 }
 
-
 export class VisualizationComponent extends React.Component<any, IVisualizationComponentstate>{
 
     constructor(props: any) {
@@ -26,7 +25,6 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
             visualization: new Visualization(0, '', []),
             activeCurriculum: new Curriculum(0, '', []),
             colors: COLORS
-
         }
 
     }
