@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { environment } from '../environment'
 
 export const curriculaClient = axios.create({
-    baseURL: 'http://localhost:1910',
+    baseURL: environment.APIBaseUrl,
     headers: {
         'Content-Type': 'application/json'
     },

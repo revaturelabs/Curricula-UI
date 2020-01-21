@@ -4,14 +4,14 @@ import { VisualizationLinkComponent } from './visualization-link-component/Visua
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import NavBarComponent from '../navbar-component/NavBarComponent'
-
+import { environment } from '../../environment';
 
 interface IVisualizationsProps {
-    allVisualizations: Visualization[]
     getAllVisualizations: () => void
     getAllSkills: () => void
     getAllCurricula: () => void
     getAllCategories: () => void
+    allVisualizations: Visualization[]
 }
 
 interface IVisualizationsState {
@@ -33,6 +33,8 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     }
 
     async componentDidMount() {
+        console.log(process.env.REACT_APP_ENV)
+        console.log(environment.APIBaseUrl)
         this.props.getAllVisualizations()
         this.props.getAllSkills()
         this.props.getAllCurricula()
@@ -54,7 +56,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     }
 
     render() {
-
         let visualizationsToRender = this.props.allVisualizations.filter((visualization) => {
             if (visualization.visualizationName.toLowerCase().includes(this.state.search.toLowerCase())) {
                 return true
@@ -67,14 +68,10 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
             } else {
                 return <VisualizationLinkComponent clipboard={this.state.clipboard} updateClipboardIcon={this.updateClipboardIcon} visualization={visualization} key={visualization.visualizationId} />
             }
-            
         })
-
         return (
             <div>
-                    
-                <NavBarComponent/>
-
+                <NavBarComponent />
                 <Paper component="form">
                     <InputBase
                         value={this.state.search}

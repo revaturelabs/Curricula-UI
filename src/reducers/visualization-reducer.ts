@@ -5,7 +5,6 @@ import { Curriculum } from '../models/curriculum';
 import { Skill } from '../models/skill';
 import { Category } from '../models/category';
 
-
 const initialState: IVisualizationState = {
     visualizations: [new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])]
 }

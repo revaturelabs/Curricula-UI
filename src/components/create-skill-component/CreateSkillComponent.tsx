@@ -7,8 +7,6 @@ import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
 import Alert from '@material-ui/lab/Alert';
 
-
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         formControl: {
@@ -22,9 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ICreateSkillComponentProps {
+    submitNewSkill: (skillToSubmit: Skill) => any,
     categoriesToMap: Category[],
     newSkill: Skill,
-    submitNewSkill: (skillToSubmit: Skill) => any,
     allSkills: Skill[]
 }
 
@@ -50,16 +48,16 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
         setLabelWidth(inputLabel.current!.offsetWidth);
     }, []);
 
-    const updateCategoryName = (e: any) => {
-        setCategoryName(e.target.value)
+    const updateCategoryName = (categoryNameInput: any) => {
+        setCategoryName(categoryNameInput.target.value)
     }
 
-    const updateSkillName = (e: any) => {
-        setSkillName(e.target.value)
+    const updateSkillName = (skillNameInput: any) => {
+        setSkillName(skillNameInput.target.value)
     }
 
-    const submitSkill = async (e: SyntheticEvent) => {
-        e.preventDefault()
+    const submitSkill = async (submitSkillBtn: SyntheticEvent) => {
+        submitSkillBtn.preventDefault()
         if (!categoryName) {
             setCatName(true)
             setNoSkill(false)
@@ -140,7 +138,7 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
                 <FormControl variant="outlined" id="dropdown-category" className={classes.formControl} style={{ marginLeft: -2 }}>
                     <InputLabel ref={inputLabel}  >
                         Category
-                </InputLabel>
+                    </InputLabel>
                     <Select
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
@@ -159,7 +157,7 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
                 <br />
                 <TextField onChange={updateSkillName} className="negativeMargBot" variant="outlined" id="outlined-basic" label="Type Your Skill Name" />
                 <p></p>
-                <Button onClick={submitSkill} className="negativeMargBot" variant="contained" id="btn1">Submit</Button>
+                <Button id="skillNameInput" onClick={submitSkill} className="negativeMargBot" variant="contained">Submit</Button>
             </form>
             <br />
             {catName && (<Alert severity="error">Please select a category</Alert>)}

@@ -10,7 +10,16 @@ interface ICreateCategoryComponentProps {
     allCategories: Category[]
 }
 
-export class CreateCategoryComponent extends React.Component<ICreateCategoryComponentProps, any>{
+interface ICreateCategoryComponentState {
+    categoryName: string,
+    categoryToCreate: Category,
+    catName: boolean,
+    existsAlready: boolean,
+    submitSuccess: boolean,
+    submitFailed: boolean
+}
+
+export class CreateCategoryComponent extends React.Component<ICreateCategoryComponentProps, ICreateCategoryComponentState>{
     constructor(props: any) {
         super(props)
         this.state = {
@@ -23,15 +32,15 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
         }
     }
 
-    updateCategoryName = (e: any) => {
+    updateCategoryName = (categoryNameInput: any) => {
         this.setState({
             ...this.state,
-            categoryName: e.target.value
+            categoryName: categoryNameInput.target.value
         })
     }
 
-    submitPostNewCategory = async (e: SyntheticEvent) => {
-        e.preventDefault()
+    submitPostNewCategory = async (submitCategoryBtn: SyntheticEvent) => {
+        submitCategoryBtn.preventDefault()
         if (!this.state.categoryName) {
             this.setState({
                 ...this.state,
@@ -94,11 +103,11 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
             <div id="createCategory-div">
                 <form id="createCategory" className='createCategory'>
                     <h3 id="category-header"> Create a Category </h3>
-                    <TextField onChange={this.updateCategoryName} label="Type Your Category Name" variant="outlined" />
+                    <TextField id="categoryNameInput" onChange={this.updateCategoryName} label="Type Your Category Name" variant="outlined" />
                     <p></p>
-                    <Button onClick={this.submitPostNewCategory} id="btn2" variant="contained" type='submit'>
+                    <Button id="submitCategoryBtn" onClick={this.submitPostNewCategory} variant="contained" type='submit'>
                         Submit
-                            </Button>
+                    </Button>
                 </form>
                 {this.state.catName && (<Alert severity="error">Please include a longer<br /> name for your category</Alert>)}
                 {this.state.existsAlready && (<Alert severity="error">A category by this name<br /> already exists.</Alert>)}

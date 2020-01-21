@@ -1,8 +1,8 @@
 import { apiGetVisualizationByName } from "../remote/curricula-visualization-display"
 
 export const visualizationNameTypes = {
-    SUCCESSFUL_VISUALIZATION_DISPLAY: 'VISUALIZATION_NAME_SUCCESSFUL',
-    UNSUCCESSFUL_VISUALIZATION_DISPLAY: 'VISUALIZATION_NAME_UNSUCCESSFUL'
+    GET_BY_NAME_SUCCESSFUL: 'GET_VISUALIZATION_BY_NAME_SUCCESSFUL',
+    GET_BY_NAME_UNSUCCESSFUL: 'FAILED_TO_GET_VISUALIZATION_BY_NAME'
 }
 
 export const getVisualizationByName = (name: string) => async (dispatch: any) => {
@@ -10,19 +10,19 @@ export const getVisualizationByName = (name: string) => async (dispatch: any) =>
         let res = await apiGetVisualizationByName(name)
         if (res.status === 200) {
             dispatch({
-                type: visualizationNameTypes.SUCCESSFUL_VISUALIZATION_DISPLAY,
+                type: visualizationNameTypes.GET_BY_NAME_SUCCESSFUL,
                 payload: {
                     allCurricula: res.body
                 }
             })
         } else {
             dispatch({
-                type: visualizationNameTypes.UNSUCCESSFUL_VISUALIZATION_DISPLAY
+                type: visualizationNameTypes.GET_BY_NAME_UNSUCCESSFUL
             })
         }
-    } catch (e) {
+    } catch (error) {
         dispatch({
-            type: visualizationNameTypes.UNSUCCESSFUL_VISUALIZATION_DISPLAY
+            type: visualizationNameTypes.GET_BY_NAME_UNSUCCESSFUL
         })
     }
 }
