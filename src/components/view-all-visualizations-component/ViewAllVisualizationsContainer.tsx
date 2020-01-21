@@ -6,7 +6,6 @@ import { getAllCategories } from "../../action-mappers/category-action-mapper"
 import { connect } from "react-redux"
 import { ViewAllVisualizationsComponent } from "./ViewAllVisualizationsComponent"
 
-
 const mapStateToProps = (state: IState) => {
     return {
         allVisualizations: state.allVisualizations.visualizations,

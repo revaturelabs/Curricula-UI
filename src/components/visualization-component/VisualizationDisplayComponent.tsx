@@ -9,7 +9,6 @@ import { Category } from "../../models/category";
 import COLORS from "../../colors";
 import './Visualization.css'
 
-
 interface IVisualizationComponentstate {
     visualization: Visualization
     activeCurriculum: Curriculum
@@ -17,21 +16,17 @@ interface IVisualizationComponentstate {
 }
 
 export class VisualizationComponent extends React.Component<any, IVisualizationComponentstate>{
-
     constructor(props: any) {
         super(props)
         this.state = {
-
             visualization: new Visualization(0, '', []),
             activeCurriculum: new Curriculum(0, '', []),
             colors: COLORS
         }
-
     }
 
     async componentDidMount() {
         let visualizationName = this.props.match.params.visualization
-
         try {
             let res = await apiGetVisualizationByName(visualizationName)
             if (res.status === 200 && res.body) {
@@ -40,8 +35,8 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
                     visualization: res.body
                 })
             }
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -63,7 +58,6 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
     }
 
     render() {
-
         let allSkills: Skill[] = []
         let categoriesInLegend: Category[] = []
         for (let curriculum of this.state.visualization.curricula) {
@@ -84,19 +78,13 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
                 categoriesInLegend.push(skill.category)
             }
             if (this.state.activeCurriculum.skills.includes(skill)) {
-                return <Chip  label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor] }} />
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor] }} />
             } else {
-                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor],opacity: 0.15 }} />
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor], opacity: 0.15 }} />
             }
         })
 
         let legend = categoriesInLegend.map((category) => {
-
-            // for (let skill of this.state.activeCurriculum.skills) {
-            //     if (skill.category.categoryId === category.categoryId) {
-            //         return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumShow" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
-            //     }
-            // }
             return <div><Chip label={category.categoryName.toUpperCase()} className="categoryLegendCurriculumShow" key={category.categoryId} style={{ backgroundColor: this.state.colors[categoriesInLegend.indexOf(category) + 1] }}></Chip></div>
         })
 
