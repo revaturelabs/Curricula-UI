@@ -10,7 +10,9 @@ import { Visualization } from '../../models/visualization';
 import { Curriculum } from '../../models/curriculum';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
+import NavBarComponent from '../navbar-component/NavBarComponent'
 import Alert from '@material-ui/lab/Alert';
+
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -112,6 +114,8 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
 
     return (
         <div>
+            <NavBarComponent />
+            <br />
             <TextField onChange={updateVisualization} value={visualizationName} id="VisualizationName" label="Visualization Name" variant="outlined" />
             <Grid container justify="center" >
                 <Autocomplete

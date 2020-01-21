@@ -72,7 +72,7 @@ export default function NavBarComponent() {
                         <img src={RevatureLogo} alt="logo" className={classes.revatureLogo} />
                     </Link>
                     <Grid container justify="space-evenly">
-                    <Button color="inherit" component={Link} to="/"  >Curricula</Button>
+                    <Button color="inherit" component={Link} to="/"  >Home</Button>
                     <Button
                          ref={anchorRef}
                          aria-controls={open ? 'menu-list-grow' : undefined}
@@ -92,8 +92,8 @@ export default function NavBarComponent() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" color="secondary" onKeyDown={handleListKeyDown}>
-                    <MenuItem component={Link} to="/search" onClick={handleClose}>New</MenuItem>
-                    <MenuItem component={Link} to="/createcurriculumpage" onClick={handleClose}>View</MenuItem>
+                    <MenuItem component={Link} to="/search" onClick={handleClose}>New Visualization</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleClose}>View Visualizations</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

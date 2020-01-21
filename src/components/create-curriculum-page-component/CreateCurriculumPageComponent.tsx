@@ -9,6 +9,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
 import colors from '../../colors';
+import NavBarComponent from '../navbar-component/NavBarComponent'
 
 import { Redirect } from 'react-router';
 
@@ -160,6 +161,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         return (
             !this.state.submitSuccess ?
             <>
+                <NavBarComponent/>
                 <div>
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
                     <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
