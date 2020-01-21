@@ -32,7 +32,6 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
     const [existsAlready, setExistsAlready] = React.useState(false);
     const [submitSuccess, setSubmitSuccess] = React.useState(false);
     const [newCurricula, setNewCurricula] = React.useState([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])]);
-    newCurricula.pop()
 
     const curriculumList = props.allCurricula.map((e: any) => {
         return { curriculum: e.curriculumName }
@@ -51,13 +50,18 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                 continue
             }
         }
+        if (newCurricula.length > 0) {
+            if (newCurricula[0].curriculumId === 0) {
+                newCurricula.pop()
+            }
+        }
         if (selected) {
-            let test = newCurricula
-            test.push(currName)
-            setNewCurricula(test)
+            newCurricula.push(currName)
+            setNewCurricula(newCurricula)
         } else if (newCurricula.includes(currName)) {
             const index = newCurricula.indexOf(currName)
             newCurricula.splice(index, 1);
+            setNewCurricula(newCurricula)
         }
         console.log(newCurricula);
     }
@@ -68,16 +72,19 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
 
     const sumbitVisualization = (e: any) => {
         e.preventDefault()
+        console.log(newCurricula);
         if (visualizationName.length <= 2) {
             setShortName(true)
             setNoCurricula(false)
             setExistsAlready(false)
             setSubmitSuccess(false)
+            setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else if (newCurricula.length < 1) {
             setShortName(false)
             setNoCurricula(true)
             setExistsAlready(false)
             setSubmitSuccess(false)
+            setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else {
             let noError = true
             for (let visualization of props.allVisualizations) {
@@ -87,6 +94,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     setExistsAlready(true)
                     setSubmitSuccess(false)
                     noError = false
+                    setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
                 }
             }
             if (noError) {
@@ -104,9 +112,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
 
     return (
         <div>
-            <br />
             <TextField onChange={updateVisualization} value={visualizationName} id="VisualizationName" label="Visualization Name" variant="outlined" />
-            <br />
             <Grid container justify="center" >
                 <Autocomplete
                     popupIcon={<SearchIcon />}
