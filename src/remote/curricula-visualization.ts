@@ -2,7 +2,7 @@ import { curriculaClient } from './curricula-client'
 import { Visualization } from '../models/visualization';
 
 export async function apiGetAllVisualizations() {
-    const response = await curriculaClient.get('/visualizations')
+    const response = await curriculaClient.get('/vis/visualizations')
     try {
         if (response.status === 200) {
             return {
@@ -24,7 +24,7 @@ export async function apiGetAllVisualizations() {
 }
 
 export async function apiSubmitVisualization(newVisualization: Visualization) {
-    const response = await curriculaClient.post('/visualizations', newVisualization)
+    const response = await curriculaClient.post('/vis/visualizations', newVisualization)
     try {
         if (response.status === 200) {
             return {

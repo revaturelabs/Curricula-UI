@@ -29,12 +29,12 @@ const App: React.FC = () => {
         <Provider store={store}>
           <Router>
             <Switch>
-              <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
-              <Route path='/skill' component={SkillComponent} />
-              <Route path='/search' component={SearchCurriculumContainer} />
-              <Route path='/visualizations/:visualization' component={VisualizationComponent} />
-              <Route path='/createcategory' component={CreateCategoryComponent} />
-              <Route path='/' component={ViewAllVisualizationsContainer} />
+              <Route path='/vis/createcurriculumpage' component={CreateCurriculumPageComponent} />
+              <Route path='/vis/skill' component={SkillComponent} />
+              <Route path='/vis/search' component={SearchCurriculumContainer} />
+              <Route path='/vis/visualizations/:visualization' component={VisualizationComponent} />
+              <Route path='/vis/createcategory' component={CreateCategoryComponent} />
+              <Route path='/vis/' component={ViewAllVisualizationsContainer} />
             </Switch>
           </Router>
         </Provider>

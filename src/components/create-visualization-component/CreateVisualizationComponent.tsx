@@ -12,6 +12,7 @@ import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
 import NavBarComponent from '../navbar-component/NavBarComponent'
 import Alert from '@material-ui/lab/Alert';
+import { Redirect } from 'react-router';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -21,18 +22,19 @@ interface ICurriculum {
 }
 
 interface ISearchCurriculumProps {
-    postSubmitVisualization: (newVisualization: Visualization) => void
+    postSubmitVisualization: (newVisualization: Visualization) => any
     allCurricula: Curriculum[]
     allVisualizations: Visualization[]
 }
 
 export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
-    
+
     const [visualizationName, setVisualizationName] = React.useState('');
     const [shortName, setShortName] = React.useState(false);
     const [noCurricula, setNoCurricula] = React.useState(false);
     const [existsAlready, setExistsAlready] = React.useState(false);
     const [submitSuccess, setSubmitSuccess] = React.useState(false);
+    const [submitFailed, setSubmitFailed] = React.useState(false);
     const [newCurricula, setNewCurricula] = React.useState([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])]);
 
     const curriculumList = props.allCurricula.map((curricula: Curriculum) => {
@@ -68,19 +70,21 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
         setVisualizationName(visualizationNameInput.target.value)
     }
 
-    const sumbitVisualization = (submitVisualizationBtn: any) => {
+    const sumbitVisualization = async (submitVisualizationBtn: any) => {
         submitVisualizationBtn.preventDefault()
         if (visualizationName.length <= 2) {
             setShortName(true)
             setNoCurricula(false)
             setExistsAlready(false)
             setSubmitSuccess(false)
+            setSubmitFailed(false)
             setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else if (newCurricula.length < 1) {
             setShortName(false)
             setNoCurricula(true)
             setExistsAlready(false)
             setSubmitSuccess(false)
+            setSubmitFailed(false)
             setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else {
             let noError = true
@@ -90,24 +94,37 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     setNoCurricula(false)
                     setExistsAlready(true)
                     setSubmitSuccess(false)
+                    setSubmitFailed(false)
                     noError = false
                     setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
+                    break
                 }
             }
             if (noError) {
                 const tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
                 tempVisualization.visualizationName = visualizationName
                 tempVisualization.curricula = newCurricula
-                props.postSubmitVisualization(tempVisualization)
-                setShortName(false)
-                setNoCurricula(false)
-                setExistsAlready(false)
-                setSubmitSuccess(true)
+                try {
+                    const response = await props.postSubmitVisualization(tempVisualization)
+                    setShortName(false)
+                    setNoCurricula(false)
+                    setExistsAlready(false)
+                    if (response.status === 200) {
+                        setSubmitSuccess(true)
+                    }
+                } catch (error) {
+                    setShortName(false)
+                    setNoCurricula(false)
+                    setExistsAlready(false)
+                    setSubmitSuccess(false)
+                    setSubmitFailed(true)
+                }
             }
         }
     }
 
     return (
+        !submitSuccess ?
         <div>
             <NavBarComponent />
             <Grid
@@ -162,7 +179,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <Button onClick={sumbitVisualization} variant="contained" color="primary">
+                    <Button id="submitVisualizationBtn" onClick={sumbitVisualization} variant="contained" color="primary">
                         Make
                     </Button>
                 </Grid>
@@ -171,9 +188,11 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     {noCurricula && (<Alert severity="error">Please include a curriculum in your visualization.</Alert>)}
                     {existsAlready && (<Alert severity="error">A visualization by this name already exists.</Alert>)}
                     {submitSuccess && (<Alert severity="success">Visualization Created Successfully</Alert>)}
+                    {submitFailed && (<Alert severity="error">An unkown error has occured, please try again later</Alert>)}
                 </Grid>
             </Grid>
-        </div >
+        </div > :
+        <Redirect to="/vis/"/>
     );
 }
 

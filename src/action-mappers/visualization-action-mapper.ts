@@ -41,6 +41,7 @@ export const postSubmitVisualization = (newVisualization: Visualization) => asyn
                     visualization: res.body
                 }
             })
+            return res
         } else {
             dispatch({
                 type: visualizationTypes.SUBMIT_UNSUCCESSFUL

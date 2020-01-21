@@ -199,7 +199,7 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
                     {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
                     {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
                 </> :
-                <Redirect to='/search' />
+                <Redirect to='/vis/search' />
         )
     }
 }
