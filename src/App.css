@@ -54,9 +54,10 @@
   height: '200px';
   overflow: 'scroll';
   margin: 4em;
-
 }
-
+path {
+  color: #fff;
+}
 #btn1, #btn2, #addSkillCatBtn {
   background-color:rgb(242, 105, 37);
   border-radius: 25px;
@@ -83,5 +84,4 @@ hr { display: inline-block;
 
 #category-header{
   margin-top: -5px;
-
 }
