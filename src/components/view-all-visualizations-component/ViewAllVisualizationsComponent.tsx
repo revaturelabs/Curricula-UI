@@ -4,6 +4,7 @@ import { VisualizationLinkComponent } from './visualization-link-component/Visua
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import NavBarComponent from '../navbar-component/NavBarComponent'
+import { environment } from '../../environment';
 
 
 interface IVisualizationsProps {
@@ -33,6 +34,8 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     }
 
     async componentDidMount() {
+        console.log(process.env.REACT_APP_ENV)
+        console.log(environment.APIBaseUrl)
         this.props.getAllVisualizations()
         this.props.getAllSkills()
         this.props.getAllCurricula()
