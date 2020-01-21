@@ -1,3 +1,4 @@
-let colors: string[] = ["white","#2F2FA2", "#F64C72", "#553D67", "#1ED696", "#646464", "#A64AC9", "#F26925"]
+let colors: string[] = ["white","#27539F", "#01D2A2", "#317EE6", "#01DBD5", "#311885", "#A64AC9", "#F26925"]
 
 export default colors
+

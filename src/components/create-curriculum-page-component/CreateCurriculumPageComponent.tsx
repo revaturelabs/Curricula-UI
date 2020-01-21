@@ -9,7 +9,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
 import colors from '../../colors';
-
+import '../create-curriculum-page-component/CreateCurriculumPage.css'
 import { Redirect } from 'react-router';
 
 interface ICreateCurriculumPageProps {
@@ -153,7 +153,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             if (this.state.skillsToCurriculumArray.includes(skill)) {
                 return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             } else {
-                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.6 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.5 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             }
         })
 
