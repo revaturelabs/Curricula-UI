@@ -6,10 +6,9 @@ import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
 import CreateCurriculumPageComponent from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
 import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
-import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
+import SearchCurriculumContainer from './components/create-visualization-component/CreateVisualizationContainer';
 import { VisualizationComponent } from './components/visualization-component/VisualizationDisplayComponent';
 import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
-import NavBarComponent from './components/navbar-component/NavBarComponent'
 
 
 const App: React.FC = () => {
@@ -17,7 +16,6 @@ const App: React.FC = () => {
     <div className="App">
       <Provider store={store}>
         <Router>
-        <NavBarComponent/>
           <Switch>
             <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
             <Route path='/skill' component={SkillComponent} />

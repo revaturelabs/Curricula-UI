@@ -8,7 +8,7 @@ import '../ViewAllVisualizations.css'
 interface IVisualizationLinkComponentProps {
     visualization: Visualization
     updateClipboardIcon: (visualizationId: number) => void
-    clipboard: any
+    clipboard: string
 }
 
 export class VisualizationLinkComponent extends React.PureComponent<IVisualizationLinkComponentProps>{
@@ -16,8 +16,8 @@ export class VisualizationLinkComponent extends React.PureComponent<IVisualizati
     render() {
         return (
             <div className="visualizationsBlockElement">
-                <Button variant="contained" color="primary">
-                    <Link to={`/visualizations/${this.props.visualization.visualizationName}`}>
+                <Button variant="contained" color = "primary">
+                    <Link className = "linkVizAllTextColor" to={`/visualizations/${this.props.visualization.visualizationName}`}>
                         {this.props.visualization.visualizationName}
                     </Link>
                 </Button>

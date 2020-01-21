@@ -84,9 +84,9 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
                 categoriesInLegend.push(skill.category)
             }
             if (this.state.activeCurriculum.skills.includes(skill)) {
-                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor] }} />
+                return <Chip  label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor] }} />
             } else {
-                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor], opacity: 0.6 }} />
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor],opacity: 0.15 }} />
             }
         })
 

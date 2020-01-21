@@ -9,6 +9,8 @@ import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
 import colors from '../../colors';
+import '../create-curriculum-page-component/CreateCurriculumPage.css'
+import NavBarComponent from '../navbar-component/NavBarComponent'
 
 import { Redirect } from 'react-router';
 
@@ -153,13 +155,14 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             if (this.state.skillsToCurriculumArray.includes(skill)) {
                 return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             } else {
-                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.6 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
+                return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.5 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             }
         })
 
         return (
             !this.state.submitSuccess ?
             <>
+                <NavBarComponent/>
                 <div>
                     <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
                     <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
