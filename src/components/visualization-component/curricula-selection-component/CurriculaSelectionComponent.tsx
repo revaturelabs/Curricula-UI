@@ -4,13 +4,12 @@ import { Paper, ListItem } from '@material-ui/core';
 import '../Visualization.css'
 
 interface ICurriculaSelectionComponentProps {
-    curricula: Curriculum[]
     updateActiveCurriculum: (curriculum: Curriculum) => void
+    curricula: Curriculum[]
     activeCurriculum: Curriculum
 }
 
 export class CurriculaSelectionComponent extends React.PureComponent<ICurriculaSelectionComponentProps> {
-
 
     render() {
         let rows = this.props.curricula.map((curriculum) => {
@@ -22,7 +21,6 @@ export class CurriculaSelectionComponent extends React.PureComponent<ICurriculaS
                 </div>
             )
         })
-
         return (
             <div >
                 <Paper elevation={2}>

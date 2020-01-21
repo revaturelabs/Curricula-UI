@@ -5,13 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import NavBarComponent from '../navbar-component/NavBarComponent'
 
-
 interface IVisualizationsProps {
-    allVisualizations: Visualization[]
     getAllVisualizations: () => void
     getAllSkills: () => void
     getAllCurricula: () => void
     getAllCategories: () => void
+    allVisualizations: Visualization[]
 }
 
 interface IVisualizationsState {
@@ -54,7 +53,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     }
 
     render() {
-
         let visualizationsToRender = this.props.allVisualizations.filter((visualization) => {
             if (visualization.visualizationName.toLowerCase().includes(this.state.search.toLowerCase())) {
                 return true
@@ -67,14 +65,10 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
             } else {
                 return <VisualizationLinkComponent clipboard={this.state.clipboard} updateClipboardIcon={this.updateClipboardIcon} visualization={visualization} key={visualization.visualizationId} />
             }
-            
         })
-
         return (
             <div>
-                    
-                <NavBarComponent/>
-
+                <NavBarComponent />
                 <Paper component="form">
                     <InputBase
                         value={this.state.search}

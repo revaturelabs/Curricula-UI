@@ -12,12 +12,14 @@ export async function apiGetAllCategories() {
         } else {
             return {
                 status: response.status,
-                body: undefined
+                body: 'Failed to get all categories'
             }
         }
-    } catch (e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')
+    } catch (error) {
+        return {
+            status: response.status,
+            body: 'Failed to get all categories'
+        }
     }
 }
 
@@ -31,12 +33,14 @@ export async function apiSaveOneCategory(categoryToCreate: Category) {
             }
         } else {
             return {
-                status: response.status
+                status: response.status,
+                body: 'Failed to save new category'
             }
         }
-    } catch(e) {
+    } catch (error) {
         return {
-            status: response.status
+            status: response.status,
+            body: 'Failed to save new category'
         }
     }
 }

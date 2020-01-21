@@ -4,12 +4,11 @@ import { store } from './Store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
-import CreateCurriculumPageComponent from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
+import CreateCurriculumPageComponent from './components/create-curriculum-component/CreateCurriculumContainer';
 import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
 import SearchCurriculumContainer from './components/create-visualization-component/CreateVisualizationContainer';
 import { VisualizationComponent } from './components/visualization-component/VisualizationDisplayComponent';
 import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
-
 
 const App: React.FC = () => {
   return (

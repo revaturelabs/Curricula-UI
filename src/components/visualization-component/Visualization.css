@@ -6,9 +6,11 @@
 
 
 }
+
 .categoryLegendCurriculumHide{
     display: none !important;
 }
+
 .categoryLegendCurriculumShow{
     border-radius: .5em !important;
     width: 100%;
@@ -20,6 +22,7 @@
     color: white !important;
 
 }
+
 .skillPillCurriculum {
     margin: .3em;
     color: white !important;

@@ -16,19 +16,17 @@ export class VisualizationLinkComponent extends React.PureComponent<IVisualizati
     render() {
         return (
             <div className="visualizationsBlockElement">
-                <Button variant="contained" color = "primary">
-                    <Link className = "linkVizAllTextColor" to={`/visualizations/${this.props.visualization.visualizationName}`}>
+                <Button variant="contained" color="primary">
+                    <Link className="linkVizAllTextColor" to={`/visualizations/${this.props.visualization.visualizationName}`}>
                         {this.props.visualization.visualizationName}
                     </Link>
                 </Button>
                 <Button >
                     <CopyToClipboard text={`${process.env.BASE_URL}/visualizations/${this.props.visualization.visualizationName}`}>
-                        <Icon className='clipboard' onClick={()=>{this.props.updateClipboardIcon(this.props.visualization.visualizationId)}}>{this.props.clipboard}</Icon>
+                        <Icon className='clipboard' onClick={() => { this.props.updateClipboardIcon(this.props.visualization.visualizationId) }}>{this.props.clipboard}</Icon>
                     </CopyToClipboard>
                 </Button>
-
             </div>
-
         )
     }
 }

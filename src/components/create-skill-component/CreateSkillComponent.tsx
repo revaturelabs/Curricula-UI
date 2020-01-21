@@ -6,8 +6,6 @@ import Select from '@material-ui/core/Select';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
 
-
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         formControl: {
@@ -21,14 +19,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ICreateSkillComponentProps {
+    submitNewSkill: (skillToSubmit: Skill) => void,
     categoriesToMap: Category[],
     newSkill: Skill,
-    submitNewSkill: (skillToSubmit: Skill) => void,
     allSkills: Skill[]
 }
 
 export default function CreateSkillComponent(props: ICreateSkillComponentProps) {
-
+    
     const fillDropdown = props.categoriesToMap.map((e: any) => {
         return <MenuItem value={e.categoryName} key={"key" + e.categoryId}>{e.categoryName}</MenuItem>
     })
@@ -44,20 +42,20 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
         setLabelWidth(inputLabel.current!.offsetWidth);
     }, []);
 
-    const updateCategoryName = (e: any) => {
-        setCategoryName(e.target.value)
+    const updateCategoryName = (categoryNameInput: any) => {
+        setCategoryName(categoryNameInput.target.value)
     }
 
-    const updateSkillName = (e: any) => {
-        setSkillName(e.target.value)
+    const updateSkillName = (skillNameInput: any) => {
+        setSkillName(skillNameInput.target.value)
     }
 
-    const submitSkill = async (e: SyntheticEvent) => {
-        e.preventDefault()
-        if(!categoryName) {
+    const submitSkill = async (submitSkillBtn: SyntheticEvent) => {
+        submitSkillBtn.preventDefault()
+        if (!categoryName) {
             return alert('Please select a category')
         }
-        if(!skillName) {
+        if (!skillName) {
             return alert('Please enter a skill name')
         }
         for (let i = 0; i < props.allSkills.length; i++) {
@@ -86,16 +84,15 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
             }
         }
         props.submitNewSkill(skillToSubmit)
-        console.log(skillToSubmit)
     }
 
     return (
         <div>
             <h3>Create New Skill </h3>
-            <p> Select Your Category : </p>
-            <FormControl variant="outlined" id="dropdown-category" className={classes.formControl} style = {{marginLeft: -2}}>
+            <p> Select Your Category: </p>
+            <FormControl variant="outlined" id="dropdown-category" className={classes.formControl} style={{ marginLeft: -2 }}>
                 <InputLabel ref={inputLabel}  >
-                    Category 
+                    Category
                 </InputLabel>
                 <Select
                     labelId="demo-simple-select-outlined-label"
@@ -110,15 +107,14 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
                     {fillDropdown}
                 </Select>
             </FormControl>
-            
+
             <form>
-                <br/>
-                <TextField onChange={updateSkillName} className="negativeMargBot" id="outlined-basic" placeholder = "Type Your Skill Name"/>
+                <br />
+                <TextField id="categoryNameInput" onChange={updateSkillName} className="negativeMargBot" placeholder="Type Your Skill Name" />
                 <p></p>
-                <Button onClick={submitSkill} className="negativeMargBot" variant="contained" id="btn1">Submit</Button>
+                <Button id="skillNameInput" onClick={submitSkill} className="negativeMargBot" variant="contained">Submit</Button>
             </form>
-            <hr/>
-            
+            <hr />
         </div>
     )
 }

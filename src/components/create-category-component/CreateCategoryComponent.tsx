@@ -9,7 +9,12 @@ interface ICreateCategoryComponentProps {
     allCategories: Category[]
 }
 
-export class CreateCategoryComponent extends React.Component<ICreateCategoryComponentProps, any>{
+interface ICreateCategoryComponentState {
+    categoryName: string,
+    categoryToCreate: Category
+}
+
+export class CreateCategoryComponent extends React.Component<ICreateCategoryComponentProps, ICreateCategoryComponentState>{
     constructor(props: any) {
         super(props)
         this.state = {
@@ -18,15 +23,15 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
         }
     }
 
-    updateCategoryName = (e: any) => {
+    updateCategoryName = (categoryNameInput: any) => {
         this.setState({
             ...this.state,
-            categoryName: e.target.value
+            categoryName: categoryNameInput.target.value
         })
     }
 
-    submitPostNewCategory = (e: SyntheticEvent) => {
-        e.preventDefault()
+    submitPostNewCategory = (submitCategoryBtn: SyntheticEvent) => {
+        submitCategoryBtn.preventDefault()
         if (!this.state.categoryName) {
             return alert('Please Enter a category name')
         }
@@ -45,11 +50,11 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
             <div id="createCategory-div">
                 <form id="createCategory" className='createCategory'>
                     <h3 id="category-header"> Create a Category </h3>
-                    <TextField onChange={this.updateCategoryName} placeholder="Type Your Category Name"></TextField>
+                    <TextField id="categoryNameInput" onChange={this.updateCategoryName} placeholder="Type Your Category Name"></TextField>
                     <p></p>
-                    <Button onClick={this.submitPostNewCategory} id="btn2" variant="contained" type='submit'>
+                    <Button id="submitCategoryBtn" onClick={this.submitPostNewCategory} variant="contained" type='submit'>
                         Submit
-                            </Button>
+                    </Button>
                 </form>
             </div>
         )

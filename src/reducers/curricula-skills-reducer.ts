@@ -41,4 +41,3 @@ export const skillsReducer = (state = initialState, action: any) => {
             return state
     }
 }
-

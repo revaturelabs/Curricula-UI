@@ -27,7 +27,7 @@ interface ISearchCurriculumProps {
 }
 
 export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
-
+    
     const [visualizationName, setVisualizationName] = React.useState('');
     const [shortName, setShortName] = React.useState(false);
     const [noCurricula, setNoCurricula] = React.useState(false);
@@ -35,8 +35,8 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
     const [submitSuccess, setSubmitSuccess] = React.useState(false);
     const [newCurricula, setNewCurricula] = React.useState([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])]);
 
-    const curriculumList = props.allCurricula.map((e: any) => {
-        return { curriculum: e.curriculumName }
+    const curriculumList = props.allCurricula.map((curricula: Curriculum) => {
+        return { curriculum: curricula.curriculumName }
     })
 
     const updateCurricula = (name: string, selected: boolean) => {
@@ -45,9 +45,6 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             if (props.allCurricula[i].curriculumName === name) {
                 currName = props.allCurricula[i]
                 break
-            }
-            else if (i === props.allCurricula.length - 1) {
-                return console.log('Curriculum does not match match')
             } else {
                 continue
             }
@@ -65,16 +62,14 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             newCurricula.splice(index, 1);
             setNewCurricula(newCurricula)
         }
-        console.log(newCurricula);
     }
 
-    const updateVisualization = (e: any) => {
-        setVisualizationName(e.target.value)
+    const updateVisualizationName = (visualizationNameInput: any) => {
+        setVisualizationName(visualizationNameInput.target.value)
     }
 
-    const sumbitVisualization = (e: any) => {
-        e.preventDefault()
-        console.log(newCurricula);
+    const sumbitVisualization = (submitVisualizationBtn: any) => {
+        submitVisualizationBtn.preventDefault()
         if (visualizationName.length <= 2) {
             setShortName(true)
             setNoCurricula(false)
@@ -89,7 +84,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else {
             let noError = true
-            for (let visualization of props.allVisualizations) {
+            for (const visualization of props.allVisualizations) {
                 if (visualization.visualizationName === visualizationName) {
                     setShortName(false)
                     setNoCurricula(false)
@@ -100,7 +95,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                 }
             }
             if (noError) {
-                let tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
+                const tempVisualization = new Visualization(0, '', [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
                 tempVisualization.visualizationName = visualizationName
                 tempVisualization.curricula = newCurricula
                 props.postSubmitVisualization(tempVisualization)
@@ -123,7 +118,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                 spacing={3}
             >
                 <Grid item>
-                    <TextField onChange={updateVisualization} className="visName" value={visualizationName} style={{ width: 500 }} label="Visualization Name" variant="outlined" />
+                    <TextField id="visualizationNameInput" onChange={updateVisualizationName} className="visName" value={visualizationName} style={{ width: 500 }} label="Visualization Name" variant="outlined" />
                 </Grid>
                 <Grid item>
                     <Grid container justify="center" >

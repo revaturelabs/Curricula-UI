@@ -12,12 +12,14 @@ export async function apiGetAllCurricula() {
         } else {
             return {
                 status: response.status,
-                body: undefined
+                body: 'Failed to get all curricula'
             }
         }
-    } catch (e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')
+    } catch (error) {
+        return {
+            status: response.status,
+            body: 'Failed to get all curricula'
+        }
     }
 }
 
@@ -35,7 +37,7 @@ export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
                 body: 'Failed to create curriculum'
             }
         }
-    } catch (e) {
+    } catch (error) {
         return {
             status: response.status,
             body: 'Failed to create curriculum'
