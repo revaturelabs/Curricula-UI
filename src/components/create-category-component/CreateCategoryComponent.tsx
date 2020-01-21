@@ -109,10 +109,10 @@ export class CreateCategoryComponent extends React.Component<ICreateCategoryComp
                         Submit
                     </Button>
                 </form>
-                {this.state.catName && (<Alert severity="error">Please include a longer<br /> name for your category</Alert>)}
-                {this.state.existsAlready && (<Alert severity="error">A category by this name<br /> already exists.</Alert>)}
+                {this.state.catName && (<Alert severity="error">Please include a longer<br />name for your category</Alert>)}
+                {this.state.existsAlready && (<Alert severity="error">A category by this name<br />already exists.</Alert>)}
                 {this.state.submitSuccess && (<Alert severity="success">Category Created Successfully</Alert>)}
-                {this.state.submitFailed && (<Alert severity="error">Something went wrong try again</Alert>)}
+                {this.state.submitFailed && (<Alert severity="error">An unknown error has occured,<br />please try again later</Alert>)}
             </div>
         )
     }
