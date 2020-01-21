@@ -57,11 +57,9 @@ export default function PopupButtonComponent() {
         <Fade in={open}>
           <div className={classes.paper} >
             <Container>
-
               <h2 id="head2" className="negativeMargBot">Add Skill/Category</h2>
               <CreateSkillComponent />
               <CreateCategoryComponent />
-
             </Container>
           </div>
         </Fade>
