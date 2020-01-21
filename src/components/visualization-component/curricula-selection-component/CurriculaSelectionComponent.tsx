@@ -13,13 +13,26 @@ export class CurriculaSelectionComponent extends React.PureComponent<ICurriculaS
 
     render() {
         let rows = this.props.curricula.map((curriculum) => {
-            return (
-                <div>
-                    <ListItem className="vizCurriculaSection" selected={curriculum === this.props.activeCurriculum} onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}>
-                        {curriculum.curriculumName}
-                    </ListItem>
-                </div>
-            )
+            if (curriculum === this.props.activeCurriculum) {
+                return (
+                    <div>
+                        <Paper elevation={8}>
+                            <ListItem className="vizCurriculaSection" onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}>
+                                {curriculum.curriculumName}
+                            </ListItem>
+                        </Paper>
+                    </div>
+                )
+            } else {
+                return (
+                    <div>
+                        <ListItem className="vizCurriculaSection" onMouseEnter={() => { this.props.updateActiveCurriculum(curriculum) }}>
+                            {curriculum.curriculumName}
+                        </ListItem>
+                    </div>
+                )
+            }
+
         })
         return (
             <div >
