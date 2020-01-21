@@ -10,6 +10,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { Link } from 'react-router-dom';
 import { Button, Grid, MenuItem } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import RevatureLogo from '../navbar-component/RevatureLogo.png'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -22,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             flexGrow: 1,
         },
+        revatureLogo: {
+            maxWidth: 160,
+        }
     }),
 );
 
@@ -62,10 +66,13 @@ export default function NavBarComponent() {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" id = "navbar">
+            <AppBar position="static" id="navbar">
                 <Toolbar>
+                    <Link to="/">
+                        <img src={RevatureLogo} alt="logo" className={classes.revatureLogo} />
+                    </Link>
                     <Grid container justify="space-evenly">
-                    <Button color="inherit" component={Link} to="/"  >Curricula</Button>
+                    <Button color="inherit" component={Link} to="/"  >Home</Button>
                     <Button
                          ref={anchorRef}
                          aria-controls={open ? 'menu-list-grow' : undefined}
@@ -84,35 +91,15 @@ export default function NavBarComponent() {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem component={Link} to="/search" onClick={handleClose}>New</MenuItem>
-                    <MenuItem component={Link} to="/createcurriculumpage" onClick={handleClose}>View</MenuItem>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" color="secondary" onKeyDown={handleListKeyDown}>
+                    <MenuItem component={Link} to="/search" onClick={handleClose}>New Visualization</MenuItem>
+                    <MenuItem component={Link} to="/" onClick={handleClose}>View Visualizations</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
             </Grow>
           )}
         </Popper>
-                    {/* <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-                        {({ TransitionProps, placement }) => (
-                            <Grow
-                                {...TransitionProps}
-                                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                            >
-                                <Paper>
-                                    <ClickAwayListener onClickAway={handleClose}>
-                                        <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                              <NavLink to='/search'>New</NavLink>
-                                              <br/>
-                                              <NavLink to='/createcurriculumpage'>View</NavLink>
-                                              
-                                        </MenuList>
-                                    </ClickAwayListener>
-                                </Paper>
-                            </Grow>
-                        )}
-                    </Popper> */}
-
                     <Button color="inherit" component={Link} to="/createcurriculumpage" >New Curriculum</Button>
                     </Grid>
                 </Toolbar>

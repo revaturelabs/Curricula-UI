@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { Container } from '@material-ui/core';
+import { Container, Button } from '@material-ui/core';
 import CreateCategoryComponent from '../create-category-component/CreateCategoryContainer';
 import CreateSkillComponent from '../create-skill-component/CreateSkillContainer';
 
@@ -42,9 +42,9 @@ export default function PopupButtonComponent(categories: any) {
 
   return (
     <div >
-      <button type="button" className="negativeMargBot" onClick={handleOpen}>
+      <Button type="button" id ="addSkillCatBtn"  variant="contained" className="negativeMargBot" onClick={handleOpen}>
         Add Skill/Category
-      </button>
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -62,7 +62,7 @@ export default function PopupButtonComponent(categories: any) {
           <div className={classes.paper} >
             <Container>
 
-              <h1 id="head2" className="negativeMargBot">Add Skill/Category</h1>
+              <h2 id="head2" className="negativeMargBot">Add Skill/Category</h2>
                 <CreateSkillComponent />
                 <CreateCategoryComponent />
 

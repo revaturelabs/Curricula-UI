@@ -6,28 +6,39 @@ import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
 import CreateCurriculumPageComponent from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
 import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
-import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
+import SearchCurriculumContainer from './components/create-visualization-component/CreateVisualizationContainer';
 import { VisualizationComponent } from './components/visualization-component/VisualizationDisplayComponent';
 import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
-import NavBarComponent from './components/navbar-component/NavBarComponent'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#F26925',
+    },
+    secondary: {
+      main: '#F26925',
+    },
+  },
+});
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Provider store={store}>
-        <Router>
-        <NavBarComponent/>
-          <Switch>
-            <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
-            <Route path='/skill' component={SkillComponent} />
-            <Route path='/search' component={SearchCurriculumContainer} />
-            <Route path='/visualizations/:visualization' component={VisualizationComponent} />
-            <Route path='/createcategory' component={CreateCategoryComponent} />
-            <Route path='/' component={ViewAllVisualizationsContainer} />
-          </Switch>
-        </Router>
-      </Provider>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Router>
+            <Switch>
+              <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
+              <Route path='/skill' component={SkillComponent} />
+              <Route path='/search' component={SearchCurriculumContainer} />
+              <Route path='/visualizations/:visualization' component={VisualizationComponent} />
+              <Route path='/createcategory' component={CreateCategoryComponent} />
+              <Route path='/' component={ViewAllVisualizationsContainer} />
+            </Switch>
+          </Router>
+        </Provider>
+      </MuiThemeProvider>
     </div>
   );
 }

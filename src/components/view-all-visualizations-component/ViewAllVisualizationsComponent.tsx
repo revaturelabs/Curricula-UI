@@ -1,9 +1,10 @@
 import React from 'react'
 import { Visualization } from '../../models/visualization';
-import { Link } from 'react-router-dom';
 import { VisualizationLinkComponent } from './visualization-link-component/VisualizationLinkComponent';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
+import NavBarComponent from '../navbar-component/NavBarComponent'
+
 
 interface IVisualizationsProps {
     allVisualizations: Visualization[]
@@ -15,13 +16,19 @@ interface IVisualizationsProps {
 
 interface IVisualizationsState {
     search: string
+    clipboard: string
+    checkmark: string
+    clipboardIdToChange: number
 }
 
 export class ViewAllVisualizationsComponent extends React.Component<IVisualizationsProps, IVisualizationsState>{
     constructor(props: any) {
         super(props);
         this.state = {
-            search: ''
+            search: '',
+            clipboard: 'assignment',
+            checkmark: 'check',
+            clipboardIdToChange: 0
         }
     }
 
@@ -39,7 +46,15 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
         })
     }
 
+    updateClipboardIcon = (visualizationId: number) => {
+        this.setState({
+            ...this.state,
+            clipboardIdToChange: visualizationId
+        })
+    }
+
     render() {
+
         let visualizationsToRender = this.props.allVisualizations.filter((visualization) => {
             if (visualization.visualizationName.toLowerCase().includes(this.state.search.toLowerCase())) {
                 return true
@@ -47,13 +62,19 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
                 return false
             }
         }).map((visualization) => {
-            return <VisualizationLinkComponent visualization={visualization} key = {visualization.visualizationId}/>
+            if (visualization.visualizationId === this.state.clipboardIdToChange) {
+                return <VisualizationLinkComponent clipboard={this.state.checkmark} updateClipboardIcon={this.updateClipboardIcon} visualization={visualization} key={visualization.visualizationId} />
+            } else {
+                return <VisualizationLinkComponent clipboard={this.state.clipboard} updateClipboardIcon={this.updateClipboardIcon} visualization={visualization} key={visualization.visualizationId} />
+            }
+            
         })
 
         return (
             <div>
-                <Link to="/createcurriculumpage"> <p>Visualization Page :D</p> </Link>
-                <Link to="/search"> <p>Search Curriculum</p> </Link>
+                    
+                <NavBarComponent/>
+
                 <Paper component="form">
                     <InputBase
                         value={this.state.search}
