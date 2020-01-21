@@ -46,6 +46,7 @@ export const postNewCategory = (categoryToCreate: Category) => async (dispatch: 
                 type: categoryTypes.SUBMIT_UNSUCCESSFUL
             })
         }
+        return res
     } catch (error) {
         dispatch({
             type: categoryTypes.SUBMIT_UNSUCCESSFUL
