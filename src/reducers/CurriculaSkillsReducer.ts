@@ -1,5 +1,5 @@
 import { Skill } from '../models/skill'
-import { skillPillTypes } from '../action-mappers/skill-pill-action-mapper'
+import { skillPillTypes } from '../action-mappers/skill-action-mapper'
 import { ISkillState } from './index'
 import { Category } from '../models/category'
 
