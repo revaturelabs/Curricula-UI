@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import SkillComponent from './components/create-skill-component/CreateSkillComponent';
 import CreateCurriculumPageComponent from './components/create-curriculum-page-component/CreateCurriculumPageContainer';
 import ViewAllVisualizationsContainer from './components/view-all-visualizations-component/ViewAllVisualizationsContainer';
-import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
+import SearchCurriculumContainer from './components/create-visualization-component/CreateVisualizationContainer';
 import { VisualizationComponent } from './components/visualization-component/VisualizationDisplayComponent';
 import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
 

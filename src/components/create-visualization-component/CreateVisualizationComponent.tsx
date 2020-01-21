@@ -115,56 +115,70 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
     return (
         <div>
             <NavBarComponent />
-            <br />
-            <TextField onChange={updateVisualization} value={visualizationName} id="VisualizationName" label="Visualization Name" variant="outlined" />
-            <Grid container justify="center" >
-                <Autocomplete
-                    popupIcon={<SearchIcon />}
-                    placeholder="test"
-                    multiple
-                    id="checkboxes-tags-demo"
-                    options={curriculumList}
-                    disableCloseOnSelect
-                    getOptionLabel={(option: ICurriculum) => option.curriculum}
-                    renderTags={(value: ICurriculum[]) =>
-                        value.map((option: ICurriculum) => (
-                            <Chip label={option.curriculum} key={option.curriculum} />
-                        ))
-                    }
-                    renderOption={(option: ICurriculum, { selected }) => (
-                        <Container onClick={() => {
-                            updateCurricula(option.curriculum, !selected)
-                        }}>
-                            <Checkbox
-                                icon={icon}
-                                checkedIcon={checkedIcon}
-                                style={{ marginRight: 8 }}
-                                checked={selected}
-                            />
-                            {option.curriculum}
-                        </Container>
-                    )}
-                    style={{ width: 500 }}
-                    renderInput={params => (
-                        <TextField
-                            {...params}
-                            variant="outlined"
-                            label="Search Curriculum"
-                            placeholder="Curriculum"
-                            fullWidth
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                spacing={3}
+            >
+                <Grid item>
+                    <TextField onChange={updateVisualization} className="visName" value={visualizationName} style={{ width: 500 }} label="Visualization Name" variant="outlined" />
+                </Grid>
+                <Grid item>
+                    <Grid container justify="center" >
+                        <Autocomplete
+                            popupIcon={<SearchIcon />}
+                            placeholder="test"
+                            multiple
+                            id="checkboxes-tags-demo"
+                            options={curriculumList}
+                            disableCloseOnSelect
+                            getOptionLabel={(option: ICurriculum) => option.curriculum}
+                            renderTags={(value: ICurriculum[]) =>
+                                value.map((option: ICurriculum) => (
+                                    <Chip label={option.curriculum} key={option.curriculum} />
+                                ))
+                            }
+                            renderOption={(option: ICurriculum, { selected }) => (
+                                <Container onClick={() => {
+                                    updateCurricula(option.curriculum, !selected)
+                                }}>
+                                    <Checkbox
+                                        icon={icon}
+                                        checkedIcon={checkedIcon}
+                                        style={{ marginRight: 8 }}
+                                        checked={selected}
+                                    />
+                                    {option.curriculum}
+                                </Container>
+                            )}
+                            style={{ width: 500 }}
+                            renderInput={params => (
+                                <TextField
+                                    {...params}
+                                    variant="outlined"
+                                    label="Search Curriculum"
+                                    placeholder="Curriculum"
+                                    fullWidth
+                                />
+                            )}
                         />
-                    )}
-                />
+                    </Grid>
+                </Grid>
+                <Grid item>
+                    <Button onClick={sumbitVisualization} variant="contained" color="primary">
+                        Make
+                    </Button>
+                </Grid>
+                <Grid item>
+                    {shortName && (<Alert severity="error">Please include a longer name for your visualization.</Alert>)}
+                    {noCurricula && (<Alert severity="error">Please include a curriculum in your visualization.</Alert>)}
+                    {existsAlready && (<Alert severity="error">A visualization by this name already exists.</Alert>)}
+                    {submitSuccess && (<Alert severity="success">Visualization Created Successfully</Alert>)}
+                </Grid>
             </Grid>
-            <br />
-            <Button onClick={sumbitVisualization} variant="contained" color="primary">
-                Make
-            </Button>
-            {shortName && (<Alert severity="error">Please include a longer name for your visualization.</Alert>)}
-            {noCurricula && (<Alert severity="error">Please include a curriculum in your visualization.</Alert>)}
-            {existsAlready && (<Alert severity="error">A visualization by this name already exists.</Alert>)}
-            {submitSuccess && (<Alert severity="success">Visualization Created Successfully</Alert>)}
-        </div>
+        </div >
     );
 }
 
