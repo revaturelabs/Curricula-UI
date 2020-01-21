@@ -88,11 +88,6 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
                     newCategoryId = props.categoriesToMap[i].categoryId
                     break
                 }
-                else if (i === props.categoriesToMap.length - 1) {
-                    return console.log('Categories don\'t match')
-                } else {
-                    continue
-                }
             }
             if (noError) {
                 let skillToSubmit: Skill = {
@@ -161,9 +156,10 @@ export default function CreateSkillComponent(props: ICreateSkillComponentProps) 
             </form>
             <br />
             {catName && (<Alert severity="error">Please select a category</Alert>)}
-            {noSkill && (<Alert severity="error">Please include a longer<br /> name for your skill</Alert>)}
-            {existsAlready && (<Alert severity="error">A skill by this name<br /> already exists.</Alert>)}
+            {noSkill && (<Alert severity="error">Please include a longer<br />name for your skill</Alert>)}
+            {existsAlready && (<Alert severity="error">A skill by this name<br />already exists.</Alert>)}
             {submitSuccess && (<Alert severity="success">Skill Created Successfully</Alert>)}
+            {submitFailed && (<Alert severity="error">An unknown error has occured,<br />please try again later</Alert>)}
             <hr />
         </div>
     )
