@@ -9,23 +9,36 @@ import ViewAllVisualizationsContainer from './components/view-all-visualizations
 import SearchCurriculumContainer from './components/search-curriculum-component/SearchCurriculumContainer';
 import { VisualizationComponent } from './components/visualization-component/VisualizationDisplayComponent';
 import CreateCategoryComponent from './components/create-category-component/CreateCategoryContainer'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#F26925',
+    },
+    secondary: {
+      main: '#ffe57f',
+    },
+  },
+});
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Provider store={store}>
-        <Router>
-          <Switch>
-            <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
-            <Route path='/skill' component={SkillComponent} />
-            <Route path='/search' component={SearchCurriculumContainer} />
-            <Route path='/visualizations/:visualization' component={VisualizationComponent} />
-            <Route path='/createcategory' component={CreateCategoryComponent} />
-            <Route path='/' component={ViewAllVisualizationsContainer} />
-          </Switch>
-        </Router>
-      </Provider>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Router>
+            <Switch>
+              <Route path='/createcurriculumpage' component={CreateCurriculumPageComponent} />
+              <Route path='/skill' component={SkillComponent} />
+              <Route path='/search' component={SearchCurriculumContainer} />
+              <Route path='/visualizations/:visualization' component={VisualizationComponent} />
+              <Route path='/createcategory' component={CreateCategoryComponent} />
+              <Route path='/' component={ViewAllVisualizationsContainer} />
+            </Switch>
+          </Router>
+        </Provider>
+      </MuiThemeProvider>
     </div>
   );
 }
