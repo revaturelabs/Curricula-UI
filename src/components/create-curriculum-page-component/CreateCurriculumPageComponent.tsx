@@ -8,7 +8,7 @@ import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
-import colors from '../../colors';
+import COLORS from '../../colors';
 import '../create-curriculum-page-component/CreateCurriculumPage.css'
 import NavBarComponent from '../navbar-component/NavBarComponent'
 
@@ -44,7 +44,7 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             newCurriculumName: '',
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
             search: '',
-            colors: colors,
+            colors: COLORS,
             shortName: false,
             noSkills: false,
             existsAlready: false,

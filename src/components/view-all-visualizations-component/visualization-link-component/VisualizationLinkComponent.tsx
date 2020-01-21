@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Button, Icon } from '@material-ui/core';
 import '../ViewAllVisualizations.css'
+import { environment } from '../../../environment';
 
 interface IVisualizationLinkComponentProps {
     visualization: Visualization
@@ -22,7 +23,7 @@ export class VisualizationLinkComponent extends React.PureComponent<IVisualizati
                     </Link>
                 </Button>
                 <Button >
-                    <CopyToClipboard text={`${process.env.BASE_URL}/visualizations/${this.props.visualization.visualizationName}`}>
+                    <CopyToClipboard text={`${environment.UIBaseUrl}/visualizations/${this.props.visualization.visualizationName}`}>
                         <Icon className='clipboard' onClick={()=>{this.props.updateClipboardIcon(this.props.visualization.visualizationId)}}>{this.props.clipboard}</Icon>
                     </CopyToClipboard>
                 </Button>
