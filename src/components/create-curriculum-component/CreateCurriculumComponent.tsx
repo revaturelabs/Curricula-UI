@@ -3,7 +3,7 @@ import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, Input, Grid, Paper } from '@material-ui/core';
+import { Button, Input, Grid, Paper, TextField } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
@@ -159,17 +159,32 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
             !this.state.submitSuccess ?
                 <>
                     <NavBarComponent />
-                    <div>
-                        <Input id="curriculumNameInput" className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
-                        <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
-                    </div>
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        <Grid item>
+                            <TextField
+                                style={{ width: 500 }}
+                                variant="outlined" id="curriculumNameInput" className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
+                        </Grid>
+                    </Grid>
+                    <Button id="createCurriculumButton" variant="contained" color="primary" className="newCurriculumForm" style={{marginTop: '1em', marginBottom: '1em'}} onClick={this.submitCurriculum}>Create Curriculum</Button>
+
 
                     <div>
                         <br />
                         <Grid container justify="center">
-                            <Paper component="form" >
-                                <Input placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch}></Input>
-                            </Paper>
+                            {/* <Paper component="form" > */}
+                            <Grid item>
+                            <TextField
+                                style={{ width: 500 }}
+                                variant="outlined" placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch} />
+                            {/* </Paper> */}
+                            </Grid>
                         </Grid>
                     </div>
 

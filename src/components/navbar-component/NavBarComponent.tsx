@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuList from '@material-ui/core/MenuList';
 import { Link } from 'react-router-dom';
-import { Button, Grid, MenuItem } from '@material-ui/core';
+import { Button, Grid, MenuItem, Icon } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import RevatureLogo from '../navbar-component/RevatureLogo.png'
 
@@ -70,7 +70,7 @@ export default function NavBarComponent() {
                         <img src={RevatureLogo} alt="logo" className={classes.revatureLogo} />
                     </Link>
                     <Grid container justify="space-evenly">
-                        <Button color="inherit" component={Link} to="/vis/"  >Home</Button>
+                        <Button color="inherit" component={Link} to="/vis/"  ><Icon>home</Icon>Home</Button>
                         <Button
                             ref={anchorRef}
                             aria-controls={open ? 'menu-list-grow' : undefined}
