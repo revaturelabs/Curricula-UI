@@ -1,11 +1,9 @@
 import React from 'react'
 import { Visualization } from '../../models/visualization';
 import { VisualizationLinkComponent } from './visualization-link-component/VisualizationLinkComponent';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
 import NavBarComponent from '../navbar-component/NavBarComponent'
 import { environment } from '../../environment';
-import { Input, TextField, Grid } from '@material-ui/core';
+import { TextField, Grid } from '@material-ui/core';
 
 interface IVisualizationsProps {
     getAllVisualizations: () => void
