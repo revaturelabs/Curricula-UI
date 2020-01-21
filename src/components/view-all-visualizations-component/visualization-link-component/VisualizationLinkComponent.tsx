@@ -8,7 +8,7 @@ import '../ViewAllVisualizations.css'
 interface IVisualizationLinkComponentProps {
     visualization: Visualization
     updateClipboardIcon: (visualizationId: number) => void
-    clipboard: any
+    clipboard: string
 }
 
 export class VisualizationLinkComponent extends React.PureComponent<IVisualizationLinkComponentProps>{
