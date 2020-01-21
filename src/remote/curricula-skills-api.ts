@@ -3,7 +3,7 @@ import { Skill } from '../models/skill'
 import { Curriculum } from '../models/curriculum'
 
 export async function apiGetAllSkills() {
-    const response = await curriculaClient.get('/skills')
+    const response = await curriculaClient.get('/vis/skills')
     try {
         if (response.status === 200) {
             return {
@@ -25,7 +25,7 @@ export async function apiGetAllSkills() {
 }
 
 export async function apiSubmitSkill(skillToSubmit: Skill) {
-    const response = await curriculaClient.post('/skills', skillToSubmit)
+    const response = await curriculaClient.post('/vis/skills', skillToSubmit)
     try {
         if (response.status === 200) {
             return {
@@ -47,7 +47,7 @@ export async function apiSubmitSkill(skillToSubmit: Skill) {
 }
 
 export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
-    const response = await curriculaClient.post('/curricula', newCurriculum)
+    const response = await curriculaClient.post('/vis/curricula', newCurriculum)
     try {
         if (response.status === 200) {
             return {

@@ -1,7 +1,7 @@
 import { curriculaClient } from "./curricula-client";
 
 export async function apiGetVisualizationByName(visualizationName: string) {
-    const response = await curriculaClient.get('/visualizations/' + visualizationName)
+    const response = await curriculaClient.get('/vis/visualizations/' + visualizationName)
 
     try {
         if (response.status === 200) {
