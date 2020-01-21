@@ -3,4 +3,11 @@
 .visualizationsBlockElement {
     margin-top: 1em; 
     margin-bottom: 1em;
+
 }
+
+
+.linkVizAllTextColor {
+    color: white !important;
+    
+ }
