@@ -46,6 +46,7 @@ export const postSubmitCurriculum = (newCurriculum: Curriculum) => async (dispat
                 type: curriculumTypes.SUBMIT_UNSUCCESSFUL
             })
         }
+        return res
     } catch (error) {
         dispatch({
             type: curriculumTypes.SUBMIT_UNSUCCESSFUL

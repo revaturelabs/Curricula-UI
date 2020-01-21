@@ -79,7 +79,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             setSubmitSuccess(false)
             setSubmitFailed(false)
             setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
-        } else if (newCurricula.length < 1) {
+        } else if (newCurricula[0].curriculumId === 0) {
             setShortName(false)
             setNoCurricula(true)
             setExistsAlready(false)
