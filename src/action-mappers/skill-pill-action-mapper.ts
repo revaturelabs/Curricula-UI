@@ -45,6 +45,7 @@ export const submitNewSkill = (skillToSubmit: Skill) => async (dispatch: any) =>
                 type: skillPillTypes.POST_NEW_SKILL_FAIL
             })
         }
+        return res
     } catch (e) {
         dispatch({
             type: skillPillTypes.POST_NEW_SKILL_FAIL

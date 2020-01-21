@@ -42,7 +42,7 @@ export default function PopupButtonComponent(categories: any) {
 
   return (
     <div >
-      <Button type="button" id ="addSkillCatBtn"  variant="contained" className="negativeMargBot" onClick={handleOpen}>
+      <Button type="button" id="addSkillCatBtn" variant="contained" className="negativeMargBot" onClick={handleOpen}>
         Add Skill/Category
       </Button>
       <Modal
@@ -63,9 +63,8 @@ export default function PopupButtonComponent(categories: any) {
             <Container>
 
               <h2 id="head2" className="negativeMargBot">Add Skill/Category</h2>
-                <CreateSkillComponent />
-                <CreateCategoryComponent />
-
+              <CreateSkillComponent />
+              <CreateCategoryComponent />
             </Container>
           </div>
         </Fade>

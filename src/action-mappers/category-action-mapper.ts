@@ -33,7 +33,7 @@ export const getAllCategories = () => async (dispatch: any) => {
 
 export const postNewCategory = (categoryToCreate: Category) => async (dispatch: any) => {
     try {
-        let res = await apiSaveOneCategory(categoryToCreate) 
+        let res = await apiSaveOneCategory(categoryToCreate)
         if (res.status === 200) {
             dispatch({
                 type: categoryTypes.SUCCESSFUL_POST_NEW_CATEGORY,
@@ -46,7 +46,8 @@ export const postNewCategory = (categoryToCreate: Category) => async (dispatch: 
                 type: categoryTypes.UNSUCCESSFUL_POST_NEW_CATEGORY
             })
         }
-    } catch(e) {
+        return res
+    } catch (e) {
         dispatch({
             type: categoryTypes.UNSUCCESSFUL_POST_NEW_CATEGORY
         })
