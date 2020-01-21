@@ -27,7 +27,7 @@ interface ISearchCurriculumProps {
 }
 
 export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
-    
+
     const [visualizationName, setVisualizationName] = React.useState('');
     const [shortName, setShortName] = React.useState(false);
     const [noCurricula, setNoCurricula] = React.useState(false);
@@ -162,7 +162,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <Button onClick={sumbitVisualization} variant="contained" color="primary">
+                    <Button id="submitVisualizationBtn" onClick={sumbitVisualization} variant="contained" color="primary">
                         Make
                     </Button>
                 </Grid>
