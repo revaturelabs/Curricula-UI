@@ -23,7 +23,7 @@ export const skillsReducer = (state = initialState, action: any) => {
                 message: 'Failed to retrieve skills'
             }
         }
-        case skillPillTypes.POST_NEW_SKILL_SUCCESS: {
+        case skillPillTypes.SUBMIT_SUCCESSFUL: {
             let skills = [...state.skills]
             skills.push(action.payload.skill)
             return {
@@ -32,7 +32,7 @@ export const skillsReducer = (state = initialState, action: any) => {
                 newSkill: action.payload.skill
             }
         }
-        case skillPillTypes.POST_NEW_SKILL_FAIL: {
+        case skillPillTypes.SUBMIT_UNSUCCESSFUL: {
             return {
                 ...state,
             }

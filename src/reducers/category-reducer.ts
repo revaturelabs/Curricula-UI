@@ -17,12 +17,12 @@ export const categoryReducer = (state = initialState, action: any) => {
                 categories: action.payload.allCategories
             }
         }
-        case categoryTypes.UNSUCCESSFUL_POST_NEW_CATEGORY: {
+        case categoryTypes.SUBMIT_UNSUCCESSFUL: {
             return {
                 ...state,
             }
         }
-        case categoryTypes.SUCCESSFUL_POST_NEW_CATEGORY: {
+        case categoryTypes.SUBMIT_SUCCESSFUL: {
             let categories = [...state.categories]
             categories.push(action.payload.category)
             return {
