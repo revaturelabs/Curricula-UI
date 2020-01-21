@@ -1,9 +1,9 @@
 import { IState } from "../../reducers"
 import { connect } from "react-redux"
-import { submitNewSkill } from "../../action-mappers/skill-pill-action-mapper"
-import CreateSkillComponent  from "./CreateSkillComponent"
+import { submitNewSkill } from "../../action-mappers/skill-action-mapper"
+import CreateSkillComponent from "./CreateSkillComponent"
 
-const mapStateToProps = (state : IState) => {
+const mapStateToProps = (state: IState) => {
     return {
         categoriesToMap: state.allCategories.categories,
         newSkill: state.allSkills.newSkill,

@@ -1,24 +1,18 @@
 .vizCurriculaSection{
-    margin: .1em;
-    padding: 10px !important;    
-    box-shadow: 10px !important;
-    box-sizing: .5em !important;
-
-
+    margin: 1em;
+    padding: 1em !important;
 }
 .categoryLegendCurriculumHide{
     display: none !important;
 }
 .categoryLegendCurriculumShow{
     border-radius: .5em !important;
-    width: 100%;
+    width: 90%;
     font-weight: bolder;
-    text-shadow: white;
     margin: 0.5em;
     padding-top: 0.8em;
     display: flexbox !important;
     color: white !important;
-
 }
 .skillPillCurriculum {
     margin: .3em;
