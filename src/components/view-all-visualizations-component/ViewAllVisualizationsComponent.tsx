@@ -71,7 +71,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
         return (
             <div>
                 <NavBarComponent />
-                {/* <Paper component="form"> */}
                 <Grid
                     container
                     direction="column"
@@ -91,7 +90,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
                         />
                     </Grid >
                 </Grid>
-                {/* </Paper> */}
                 {visualizationsToRender}
             </div>
         )

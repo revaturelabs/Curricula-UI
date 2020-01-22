@@ -183,19 +183,17 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
                         <Grid item>
                             <TextField
                                 style={{ width: 500 }}
-                                variant="outlined" id="curriculumNameInput" className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
+                                variant="outlined" id="curriculumNameInput" className="newCurriculumForm" label="Curriculum Name" onChange={this.updateCurriculumName} />
                         </Grid>
                     </Grid>
 
                     <div>
                         <br />
                         <Grid container justify="center">
-                            {/* <Paper component="form" > */}
                             <Grid item>
                                 <TextField
                                     style={{ width: 500 }}
-                                    variant="outlined" placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch} />
-                                {/* </Paper> */}
+                                    variant="outlined" label="Search Skills" placeholder="Skill" value={this.state.search} onChange={this.updateSearch} />
                             </Grid>
                         </Grid>
                     </div>
