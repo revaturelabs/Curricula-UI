@@ -2,7 +2,6 @@ import React from 'react'
 import { Visualization } from '../../models/visualization';
 import { VisualizationLinkComponent } from './visualization-link-component/VisualizationLinkComponent';
 import NavBarComponent from '../navbar-component/NavBarComponent'
-import { environment } from '../../environment';
 import { TextField, Grid } from '@material-ui/core';
 
 interface IVisualizationsProps {
@@ -32,8 +31,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     }
 
     async componentDidMount() {
-        console.log(process.env.REACT_APP_ENV)
-        console.log(environment.APIBaseUrl)
         this.props.getAllVisualizations()
         this.props.getAllSkills()
         this.props.getAllCurricula()

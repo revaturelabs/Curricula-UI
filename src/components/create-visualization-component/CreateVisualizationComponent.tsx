@@ -180,7 +180,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                 </Grid>
                 <Grid item>
                     <Button id="submitVisualizationBtn" onClick={sumbitVisualization} variant="contained" color="primary">
-                        Make
+                        Create
                     </Button>
                 </Grid>
                 <Grid item>
