@@ -1,10 +1,8 @@
 import React from 'react'
 import { Visualization } from '../../models/visualization';
 import { VisualizationLinkComponent } from './visualization-link-component/VisualizationLinkComponent';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
 import NavBarComponent from '../navbar-component/NavBarComponent'
-import { environment } from '../../environment';
+import { TextField, Grid } from '@material-ui/core';
 
 interface IVisualizationsProps {
     getAllVisualizations: () => void
@@ -33,8 +31,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     }
 
     async componentDidMount() {
-        console.log(process.env.REACT_APP_ENV)
-        console.log(environment.APIBaseUrl)
         this.props.getAllVisualizations()
         this.props.getAllSkills()
         this.props.getAllCurricula()
@@ -72,14 +68,25 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
         return (
             <div>
                 <NavBarComponent />
-                <Paper component="form">
-                    <InputBase
-                        value={this.state.search}
-                        onChange={this.updateSearch}
-                        placeholder="Search Visualizations"
-                        inputProps={{ 'aria-label': 'search visualizations' }}
-                    />
-                </Paper>
+                <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item>
+                        <TextField
+                            style={{ width: 500 }}
+                            variant="outlined"
+                            value={this.state.search}
+                            onChange={this.updateSearch}
+                            placeholder="Visualization"
+                            label="Search Visualizations"
+                            inputProps={{ 'aria-label': 'search visualizations' }}
+                        />
+                    </Grid >
+                </Grid>
                 {visualizationsToRender}
             </div>
         )

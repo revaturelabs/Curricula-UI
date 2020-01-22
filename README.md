@@ -1,4 +1,4 @@
-# Curricula Service
+# Curricula UI
 
 ![revature-logo](../assets/revature-logo-600x219.png "Logo")
 
@@ -14,20 +14,27 @@ Curricula is a project designed for business level users to be able to quickly v
 
 ```bash
 ├── src
+│   ├── _tests_
+│   ├── action-mappers
+│   ├── assets
 │   ├── components
 │   │   ├── create-category-component
 │   │   ├── create-curriculum-page-component
 │   │   ├── create-skill-component
+│   │   ├── create-visualization-component
 │   │   ├── navbar-component
 │   │   ├── popup-component
-│   │   ├── search-curriculum-component
 │   │   ├── view-all-visualizations-component
+|   │   │   └── visualization-link-component
 │   │   ├── visualization-component
+|   │   │   └── curricula-selection-component
 │   ├── models
 │   ├── reducers
 │   ├── remote
 │   ├── App.css
 │   ├── App.test.tsx
+│   ├── App.tsx
+│   ├── colors.ts
 │   ├── index.css
 │   ├── index.tsx
 │   ├── logo.svg
@@ -40,7 +47,7 @@ Curricula is a project designed for business level users to be able to quickly v
 │   ├── index.html
 │   ├── logo.png
 │   ├── manifest.json
-│   ├── robots.txt
+│   └── robots.txt
 ├── .gitignore
 ├── package.json
 ├── README.md

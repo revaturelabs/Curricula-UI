@@ -19,13 +19,13 @@ export class VisualizationLinkComponent extends React.PureComponent<IVisualizati
             <div className="visualizationsBlockElement">
                 <Grid container justify="center">
                     <Grid item>
-                        <Button id="visualizationLinkBtn" color="primary" component={Link} to={`/visualizations/${this.props.visualization.visualizationName}`} variant="contained">
+                        <Button id="visualizationLinkBtn" color="primary" component={Link} to={`/vis/visualizations/${this.props.visualization.visualizationName}`} variant="contained">
                             {this.props.visualization.visualizationName}
                         </Button>
                     </Grid>
                     <Grid item>
                         <Button>
-                            <CopyToClipboard text={`${environment.UIBaseUrl}/visualizations/${this.props.visualization.visualizationName}`}>
+                            <CopyToClipboard text={`${environment.UIBaseUrl}/vis/visualizations/${this.props.visualization.visualizationName}`}>
                                 <Icon className='clipboard' onClick={() => { this.props.updateClipboardIcon(this.props.visualization.visualizationId) }}>{this.props.clipboard}</Icon>
                             </CopyToClipboard>
                         </Button>
