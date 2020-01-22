@@ -183,19 +183,17 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
                         <Grid item>
                             <TextField
                                 style={{ width: 500 }}
-                                variant="outlined" id="curriculumNameInput" className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
+                                variant="outlined" id="curriculumNameInput" className="newCurriculumForm" label="Curriculum Name" onChange={this.updateCurriculumName} />
                         </Grid>
                     </Grid>
 
                     <div>
                         <br />
                         <Grid container justify="center">
-                            {/* <Paper component="form" > */}
                             <Grid item>
                                 <TextField
                                     style={{ width: 500 }}
-                                    variant="outlined" placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch} />
-                                {/* </Paper> */}
+                                    variant="outlined" label="Search Skills" placeholder="Skill" value={this.state.search} onChange={this.updateSearch} />
                             </Grid>
                         </Grid>
                     </div>
@@ -205,14 +203,21 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
                     </div>
 
                     <Button id="createCurriculumButton" variant="contained" color="primary" className="newCurriculumForm" style={{ marginTop: '1em', marginBottom: '1em' }} onClick={this.submitCurriculum}>Create Curriculum</Button>
-
                     <PopupButtonComponent />
-
-                    {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
-                    {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
-                    {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
-                    {this.state.submitFailed && (<Alert severity="error">An unkown error has occured, try again later</Alert>)}
-                    {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
+                    <br />
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
+                        {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
+                        {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
+                        {this.state.submitFailed && (<Alert severity="error">An unkown error has occured, try again later</Alert>)}
+                        {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
+                    </Grid>
                 </> :
                 <Redirect to='/vis/search' />
         )

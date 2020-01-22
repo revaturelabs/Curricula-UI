@@ -71,7 +71,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
         return (
             <div>
                 <NavBarComponent />
-                {/* <Paper component="form"> */}
                 <Grid
                     container
                     direction="column"
@@ -85,12 +84,12 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
                             variant="outlined"
                             value={this.state.search}
                             onChange={this.updateSearch}
-                            placeholder="Type to filter..."
+                            placeholder="Visualization"
+                            label="Search Visualizations"
                             inputProps={{ 'aria-label': 'search visualizations' }}
                         />
                     </Grid >
                 </Grid>
-                {/* </Paper> */}
                 {visualizationsToRender}
             </div>
         )
