@@ -85,7 +85,8 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
                             variant="outlined"
                             value={this.state.search}
                             onChange={this.updateSearch}
-                            placeholder="Type to filter..."
+                            placeholder="Visualization"
+                            label="Search Visualizations"
                             inputProps={{ 'aria-label': 'search visualizations' }}
                         />
                     </Grid >
