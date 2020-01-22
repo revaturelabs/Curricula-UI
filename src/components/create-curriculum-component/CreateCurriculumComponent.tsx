@@ -164,7 +164,7 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
             }
         }).map((skill: Skill) => {
             if (this.state.skillsToCurriculumArray.includes(skill)) {
-                return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
+                return <Chip icon={<DoneIcon style={{ color: "white" }} />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             } else {
                 return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.5 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             }
