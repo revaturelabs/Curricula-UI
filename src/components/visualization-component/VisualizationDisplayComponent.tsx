@@ -89,7 +89,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
         })
 
         return (
-            <Container component="main" maxWidth="xl">
+            <Container className="visualuzationContainer" component="main" maxWidth="xl">
                 <Grid container spacing={1} justify="space-evenly">
 
                     <Grid item lg={4}>
