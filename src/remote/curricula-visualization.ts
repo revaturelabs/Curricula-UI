@@ -2,7 +2,7 @@ import { curriculaClient } from './curricula-client'
 import { Visualization } from '../models/visualization';
 
 export async function apiGetAllVisualizations() {
-    const response = await curriculaClient.get('/visualizations')
+    const response = await curriculaClient.get('/vis/visualizations')
     try {
         if (response.status === 200) {
             return {
@@ -12,17 +12,19 @@ export async function apiGetAllVisualizations() {
         } else {
             return {
                 status: response.status,
-                body: undefined
+                body: 'Failed to get all visualizations'
             }
         }
-    } catch (e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')
+    } catch (error) {
+        return {
+            status: response.status,
+            body: 'Failed to get all visualizations'
+        }
     }
 }
 
 export async function apiSubmitVisualization(newVisualization: Visualization) {
-    const response = await curriculaClient.post('/visualizations', newVisualization)
+    const response = await curriculaClient.post('/vis/visualizations', newVisualization)
     try {
         if (response.status === 200) {
             return {
@@ -35,8 +37,10 @@ export async function apiSubmitVisualization(newVisualization: Visualization) {
                 body: 'Failed to create curriculum'
             }
         }
-    } catch (e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')
+    } catch (error) {
+        return {
+            status: response.status,
+            body: 'Failed to create curriculum'
+        }
     }
 }

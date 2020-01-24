@@ -1,8 +1,7 @@
 import { curriculaClient } from "./curricula-client";
 
-
-export async function apiGetVisualizationByName(visualizationName: string){
-    const response = await curriculaClient.get('/visualizations/'+visualizationName)
+export async function apiGetVisualizationByName(visualizationName: string) {
+    const response = await curriculaClient.get('/vis/visualizations/' + visualizationName)
 
     try {
         if (response.status === 200) {
@@ -13,13 +12,13 @@ export async function apiGetVisualizationByName(visualizationName: string){
         } else {
             return {
                 status: response.status,
-                body: undefined
+                body: 'Failed to get visualization by name'
             }
         }
-    } catch (e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')
+    } catch (error) {
+        return {
+            status: response.status,
+            body: 'Failed to get visualization by name'
+        }
     }
-
-
 }

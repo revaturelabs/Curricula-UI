@@ -2,7 +2,7 @@ import { curriculaClient } from './curricula-client'
 import { Curriculum } from '../models/curriculum';
 
 export async function apiGetAllCurricula() {
-    const response = await curriculaClient.get('/curricula')
+    const response = await curriculaClient.get('/vis/curricula')
     try {
         if (response.status === 200) {
             return {
@@ -12,17 +12,19 @@ export async function apiGetAllCurricula() {
         } else {
             return {
                 status: response.status,
-                body: undefined
+                body: 'Failed to get all curricula'
             }
         }
-    } catch (e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')
+    } catch (error) {
+        return {
+            status: response.status,
+            body: 'Failed to get all curricula'
+        }
     }
 }
 
 export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
-    const response = await curriculaClient.post('/curricula', newCurriculum)
+    const response = await curriculaClient.post('/vis/curricula', newCurriculum)
     try {
         if (response.status === 200) {
             return {
@@ -35,7 +37,7 @@ export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
                 body: 'Failed to create curriculum'
             }
         }
-    } catch (e) {
+    } catch (error) {
         return {
             status: response.status,
             body: 'Failed to create curriculum'

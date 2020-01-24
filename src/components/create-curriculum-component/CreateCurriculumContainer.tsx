@@ -1,8 +1,8 @@
 import { IState } from "../../reducers"
 import { connect } from "react-redux"
-import { getAllSkills } from '../../action-mappers/skill-pill-action-mapper'
+import { getAllSkills } from '../../action-mappers/skill-action-mapper'
 import { postSubmitCurriculum } from '../../action-mappers/curriculum-action-mapper'
-import { CreateCurriculumPageComponent } from './CreateCurriculumPageComponent'
+import { CreateCurriculumComponent } from './CreateCurriculumComponent'
 
 const mapStateToProps = (state: IState) => {
     return {
@@ -17,4 +17,4 @@ const mapDispatchToProps = {
     getAllSkills
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateCurriculumPageComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateCurriculumComponent)
