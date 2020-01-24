@@ -65,7 +65,6 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             newCurricula.splice(index, 1);
             setNewCurricula(newCurricula)
         }
-        console.log(newCurricula);
     }
 
     const updateVisualization = (e: any) => {
@@ -80,13 +79,11 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             setNoCurricula(false)
             setExistsAlready(false)
             setSubmitSuccess(false)
-            setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else if (newCurricula.length < 1) {
             setShortName(false)
             setNoCurricula(true)
             setExistsAlready(false)
             setSubmitSuccess(false)
-            setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else {
             let noError = true
             for (let visualization of props.allVisualizations) {
@@ -96,7 +93,6 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     setExistsAlready(true)
                     setSubmitSuccess(false)
                     noError = false
-                    setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
                 }
             }
             if (noError) {
