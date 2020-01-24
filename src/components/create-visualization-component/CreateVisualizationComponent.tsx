@@ -78,14 +78,12 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
             setExistsAlready(false)
             setSubmitSuccess(false)
             setSubmitFailed(false)
-            setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else if (newCurricula[0].curriculumId === 0) {
             setShortName(false)
             setNoCurricula(true)
             setExistsAlready(false)
             setSubmitSuccess(false)
             setSubmitFailed(false)
-            setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
         } else {
             let noError = true
             for (const visualization of props.allVisualizations) {
@@ -96,7 +94,6 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                     setSubmitSuccess(false)
                     setSubmitFailed(false)
                     noError = false
-                    setNewCurricula([new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])])
                     break
                 }
             }
@@ -152,7 +149,13 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                                     <Chip label={option.curriculum} key={option.curriculum} />
                                 ))
                             }
-                            renderOption={(option: ICurriculum, { selected }) => (
+                            renderOption={(option: ICurriculum, { selected }) => {
+                                for(let curricula of newCurricula){
+                                    if(curricula.curriculumName === option.curriculum){
+                                        selected = true
+                                    }
+                                }
+                                return(
                                 <Container onClick={() => {
                                     updateCurricula(option.curriculum, !selected)
                                 }}>
@@ -164,7 +167,7 @@ export function SearchCurriculumComponent(props: ISearchCurriculumProps) {
                                     />
                                     {option.curriculum}
                                 </Container>
-                            )}
+                            )}}
                             style={{ width: 500 }}
                             renderInput={params => (
                                 <TextField
