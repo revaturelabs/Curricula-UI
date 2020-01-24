@@ -3,26 +3,25 @@ import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, Input, Grid, Paper } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
 import '../../App.css'
-import colors from '../../colors';
-import '../create-curriculum-page-component/CreateCurriculumPage.css'
+import COLORS from '../../colors';
+import '../create-curriculum-component/CreateCurriculum.css'
 import NavBarComponent from '../navbar-component/NavBarComponent'
-
 import { Redirect } from 'react-router';
 
-interface ICreateCurriculumPageProps {
-    postSubmitCurriculum: (newCurriculum: Curriculum) => void
+interface ICreateCurriculumProps {
+    postSubmitCurriculum: (newCurriculum: Curriculum) => any
     getAllSkills: () => void
     allSkills: Skill[]
     allCurricula: Curriculum[]
     allCategories: Category[]
 }
 
-interface ICreateCurriculumPageState {
+interface ICreateCurriculumState {
     skillsToCurriculumArray: Skill[]
     allCurriculaState: Curriculum[]
     newCurriculumName: string
@@ -33,9 +32,10 @@ interface ICreateCurriculumPageState {
     noSkills: boolean
     existsAlready: boolean
     submitSuccess: boolean
+    submitFailed: boolean
 }
 
-export class CreateCurriculumPageComponent extends React.Component<ICreateCurriculumPageProps, ICreateCurriculumPageState>{
+export class CreateCurriculumComponent extends React.Component<ICreateCurriculumProps, ICreateCurriculumState>{
     constructor(props: any) {
         super(props)
         this.state = {
@@ -44,11 +44,12 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             newCurriculumName: '',
             filterSkillsMap: [new Skill(0, '', new Category(0, ''))],
             search: '',
-            colors: colors,
+            colors: COLORS,
             shortName: false,
             noSkills: false,
             existsAlready: false,
-            submitSuccess: false
+            submitSuccess: false,
+            submitFailed: false
         }
     }
 
@@ -61,10 +62,10 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
         }
     }
 
-    updateCurriculumName = (e: any) => {
+    updateCurriculumName = (curriculumNameInput: any) => {
         this.setState({
             ...this.state,
-            newCurriculumName: e.target.value
+            newCurriculumName: curriculumNameInput.target.value
         })
     }
 
@@ -77,15 +78,14 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             let index = skillsArray.findIndex((skillToCheck: Skill) => { return skillToCheck === skill })
             skillsArray.splice(index, 1)
         }
-
         this.setState({
             ...this.state,
             skillsToCurriculumArray: skillsArray
         })
     }
 
-    submitCurriculum = (e: SyntheticEvent) => {
-        e.preventDefault()
+    submitCurriculum = async (submitCurriculumBtn: SyntheticEvent) => {
+        submitCurriculumBtn.preventDefault()
         if (this.state.newCurriculumName.length <= 2) {
             this.setState({
                 ...this.state,
@@ -114,20 +114,32 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             }
             this.state.skillsToCurriculumArray.shift()
             let newCurriculum = new Curriculum(0, this.state.newCurriculumName, this.state.skillsToCurriculumArray)
-            this.props.postSubmitCurriculum(newCurriculum)
-            this.setState({
-                ...this.state,
-                shortName: false,
-                noSkills: false,
-                existsAlready: false
-            })
+            try {
+                const response = await this.props.postSubmitCurriculum(newCurriculum)
+                if (response.status === 200) {
+                    this.setState({
+                        ...this.state,
+                        shortName: false,
+                        noSkills: false,
+                        existsAlready: false
+                    })
+                }
+            } catch (error) {
+                this.setState({
+                    ...this.state,
+                    shortName: false,
+                    noSkills: false,
+                    existsAlready: false,
+                    submitFailed: true
+                })
+            }
         }
     }
 
-    updateSearch = (e: any) => {
+    updateSearch = (searchCurriculum: any) => {
         this.setState({
             ...this.state,
-            search: e.target.value
+            search: searchCurriculum.target.value
         })
     }
 
@@ -142,7 +154,6 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
     }
 
     render() {
-
         let allSkills = [...this.props.allSkills]
         allSkills.sort(this.compare)
         let skillsToDisplay = allSkills.filter((skill: Skill) => {
@@ -153,42 +164,62 @@ export class CreateCurriculumPageComponent extends React.Component<ICreateCurric
             }
         }).map((skill: Skill) => {
             if (this.state.skillsToCurriculumArray.includes(skill)) {
-                return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
+                return <Chip icon={<DoneIcon style={{ color: "white" }} />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             } else {
                 return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.5 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             }
         })
-
         return (
             !this.state.submitSuccess ?
-            <>
-                <NavBarComponent/>
-                <div>
-                    <Input className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
-                    <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
-                </div>
-
-                <div>
-                    <br />
-                    <Grid container justify="center">
-                        <Paper component="form" >
-                            <Input placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch}></Input>
-                        </Paper>
+                <>
+                    <NavBarComponent />
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        <Grid item>
+                            <TextField
+                                style={{ width: 500 }}
+                                variant="outlined" id="curriculumNameInput" className="newCurriculumForm" label="Curriculum Name" onChange={this.updateCurriculumName} />
+                        </Grid>
                     </Grid>
-                </div>
 
-                <div className="skillPillContainer">
-                    {skillsToDisplay}
-                </div>
+                    <div>
+                        <br />
+                        <Grid container justify="center">
+                            <Grid item>
+                                <TextField
+                                    style={{ width: 500 }}
+                                    variant="outlined" label="Search Skills" placeholder="Skill" value={this.state.search} onChange={this.updateSearch} />
+                            </Grid>
+                        </Grid>
+                    </div>
 
-                <PopupButtonComponent categories={this.props.allCategories} />
+                    <div className="skillPillContainer">
+                        {skillsToDisplay}
+                    </div>
 
-                {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
-                {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
-                {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
-                {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
-            </> :
-            <Redirect to='/search' />
+                    <Button id="createCurriculumButton" variant="contained" color="primary" className="newCurriculumForm" style={{ marginTop: '1em', marginBottom: '1em' }} onClick={this.submitCurriculum}>Create Curriculum</Button>
+                    <PopupButtonComponent />
+                    <br />
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
+                        {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
+                        {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
+                        {this.state.submitFailed && (<Alert severity="error">An unkown error has occured, try again later</Alert>)}
+                        {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
+                    </Grid>
+                </> :
+                <Redirect to='/vis/search' />
         )
     }
 }

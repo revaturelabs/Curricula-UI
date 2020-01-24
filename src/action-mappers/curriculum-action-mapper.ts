@@ -3,10 +3,10 @@ import { Curriculum } from "../models/curriculum"
 
 
 export const curriculumTypes = {
-    SUCCESSFUL_GET_ALL: 'CURRICULA_SUCCESSFUL_GET_ALL',
-    UNSUCCESSFUL_GET_ALL: 'CURRICULA_UNSUCCESSFUL_GET_ALL',
-    SUBMIT_SUCCESSFUL: 'SUBMIT_CURRICULUM_SUCCESSFUL',
-    SUBMIT_UNSUCCESSFUL: 'SUBMIT_CURRICULUM_UNSUCCESSFUL'
+    SUCCESSFUL_GET_ALL: 'GET_ALL_CURRICULA_SUCCESSFUL',
+    UNSUCCESSFUL_GET_ALL: 'GET_ALL_CURRICULA_UNSUCCESSFUL',
+    SUBMIT_SUCCESSFUL: 'SUCCESSFULLY_CREATED_CURRICULUM',
+    SUBMIT_UNSUCCESSFUL: 'FAILED_TO_CREATE_CURRICULUM'
 }
 
 export const getAllCurricula = () => async (dispatch: any) => {
@@ -24,7 +24,7 @@ export const getAllCurricula = () => async (dispatch: any) => {
                 type: curriculumTypes.UNSUCCESSFUL_GET_ALL
             })
         }
-    } catch (e) {
+    } catch (error) {
         dispatch({
             type: curriculumTypes.UNSUCCESSFUL_GET_ALL
         })
@@ -46,7 +46,8 @@ export const postSubmitCurriculum = (newCurriculum: Curriculum) => async (dispat
                 type: curriculumTypes.SUBMIT_UNSUCCESSFUL
             })
         }
-    } catch (e) {
+        return res
+    } catch (error) {
         dispatch({
             type: curriculumTypes.SUBMIT_UNSUCCESSFUL
         })

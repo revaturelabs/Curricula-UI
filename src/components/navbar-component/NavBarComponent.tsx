@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuList from '@material-ui/core/MenuList';
 import { Link } from 'react-router-dom';
-import { Button, Grid, MenuItem } from '@material-ui/core';
+import { Button, Grid, MenuItem, Icon } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import RevatureLogo from '../navbar-component/RevatureLogo.png'
 
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function NavBarComponent() {
+    
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -42,7 +43,6 @@ export default function NavBarComponent() {
         if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
             return;
         }
-
         setOpen(false);
     };
 
@@ -53,13 +53,11 @@ export default function NavBarComponent() {
         }
     }
 
-    // return focus to the button when we transitioned from !open -> open
     const prevOpen = React.useRef(open);
     React.useEffect(() => {
         if (prevOpen.current === true && open === false) {
             anchorRef.current!.focus();
         }
-
         prevOpen.current = open;
     }, [open]);
 
@@ -68,39 +66,39 @@ export default function NavBarComponent() {
         <div className={classes.root}>
             <AppBar position="static" id="navbar">
                 <Toolbar>
-                    <Link to="/">
+                    <Link to="/vis/">
                         <img src={RevatureLogo} alt="logo" className={classes.revatureLogo} />
                     </Link>
                     <Grid container justify="space-evenly">
-                    <Button color="inherit" component={Link} to="/"  >Home</Button>
-                    <Button
-                         ref={anchorRef}
-                         aria-controls={open ? 'menu-list-grow' : undefined}
-                         aria-haspopup="true"
-                         color="inherit"
-                         onClick={handleToggle}
-                    >
-                        Visualization
+                        <Button color="inherit" component={Link} to="/vis/"  ><Icon>home</Icon>Home</Button>
+                        <Button
+                            ref={anchorRef}
+                            aria-controls={open ? 'menu-list-grow' : undefined}
+                            aria-haspopup="true"
+                            color="inherit"
+                            onClick={handleToggle}
+                        >
+                            Visualization
                         <ArrowDropDownIcon />
-                    </Button>
-                    <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" color="secondary" onKeyDown={handleListKeyDown}>
-                    <MenuItem component={Link} to="/search" onClick={handleClose}>New Visualization</MenuItem>
-                    <MenuItem component={Link} to="/" onClick={handleClose}>View Visualizations</MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-                    <Button color="inherit" component={Link} to="/createcurriculumpage" >New Curriculum</Button>
+                        </Button>
+                        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                            {({ TransitionProps, placement }) => (
+                                <Grow
+                                    {...TransitionProps}
+                                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                >
+                                    <Paper>
+                                        <ClickAwayListener onClickAway={handleClose}>
+                                            <MenuList autoFocusItem={open} id="menu-list-grow" color="secondary" onKeyDown={handleListKeyDown}>
+                                                <MenuItem component={Link} to="/vis/search" onClick={handleClose}>New Visualization</MenuItem>
+                                                <MenuItem component={Link} to="/vis/" onClick={handleClose}>View Visualizations</MenuItem>
+                                            </MenuList>
+                                        </ClickAwayListener>
+                                    </Paper>
+                                </Grow>
+                            )}
+                        </Popper>
+                        <Button color="inherit" component={Link} to="/vis/createcurriculumpage" >New Curriculum</Button>
                     </Grid>
                 </Toolbar>
             </AppBar>

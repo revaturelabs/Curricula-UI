@@ -2,7 +2,7 @@ import { curriculaClient } from './curricula-client'
 import { Category } from '../models/category';
 
 export async function apiGetAllCategories() {
-    const response = await curriculaClient.get('/categories')
+    const response = await curriculaClient.get('/vis/categories')
     try {
         if (response.status === 200) {
             return {
@@ -12,17 +12,19 @@ export async function apiGetAllCategories() {
         } else {
             return {
                 status: response.status,
-                body: undefined
+                body: 'Failed to get all categories'
             }
         }
-    } catch (e) {
-        console.log(e);
-        throw new Error('Something Went Wrong')
+    } catch (error) {
+        return {
+            status: response.status,
+            body: 'Failed to get all categories'
+        }
     }
 }
 
 export async function apiSaveOneCategory(categoryToCreate: Category) {
-    const response = await curriculaClient.post('/categories', categoryToCreate)
+    const response = await curriculaClient.post('/vis/categories', categoryToCreate)
     try {
         if (response.status === 200) {
             return {
@@ -31,12 +33,14 @@ export async function apiSaveOneCategory(categoryToCreate: Category) {
             }
         } else {
             return {
-                status: response.status
+                status: response.status,
+                body: 'Failed to save new category'
             }
         }
-    } catch(e) {
+    } catch (error) {
         return {
-            status: response.status
+            status: response.status,
+            body: 'Failed to save new category'
         }
     }
 }

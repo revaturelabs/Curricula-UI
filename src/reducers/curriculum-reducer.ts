@@ -4,7 +4,6 @@ import { Skill } from '../models/skill';
 import { Category } from '../models/category';
 import { curriculumTypes } from '../action-mappers/curriculum-action-mapper';
 
-
 const initialState: ICurriculumState = {
     curricula: [new Curriculum(0, '', [new Skill(0, '', new Category(0, ''))])],
 }

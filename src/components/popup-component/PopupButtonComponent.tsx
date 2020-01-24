@@ -7,7 +7,6 @@ import { Container, Button } from '@material-ui/core';
 import CreateCategoryComponent from '../create-category-component/CreateCategoryContainer';
 import CreateSkillComponent from '../create-skill-component/CreateSkillContainer';
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function PopupButtonComponent(categories: any) {
+export default function PopupButtonComponent() {
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -33,16 +32,13 @@ export default function PopupButtonComponent(categories: any) {
     setOpen(true);
   };
 
-
-
-
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <div >
-      <Button type="button" id ="addSkillCatBtn"  variant="contained" className="negativeMargBot" onClick={handleOpen}>
+      <Button type="button" id="addSkillCatBtn" variant="contained" className="negativeMargBot" onClick={handleOpen}>
         Add Skill/Category
       </Button>
       <Modal
@@ -61,11 +57,9 @@ export default function PopupButtonComponent(categories: any) {
         <Fade in={open}>
           <div className={classes.paper} >
             <Container>
-
               <h2 id="head2" className="negativeMargBot">Add Skill/Category</h2>
-                <CreateSkillComponent />
-                <CreateCategoryComponent />
-
+              <CreateSkillComponent />
+              <CreateCategoryComponent />
             </Container>
           </div>
         </Fade>

@@ -4,8 +4,8 @@ import { Skill } from '../models/skill'
 export const skillPillTypes = {
     SUCCESSFUL_GET_ALL: 'GET_ALL_SKILLS_SUCCESSFUL',
     UNSUCCESSFUL_GET_ALL: 'GET_ALL_SKILLS_UNSUCCESSFUL',
-    POST_NEW_SKILL_SUCCESS: 'SUCESSFULLY_POSTED_NEW_SKILL',
-    POST_NEW_SKILL_FAIL: 'FAILURE_TO_POST_NEW_SKILL'
+    SUBMIT_SUCCESSFUL: 'SUCESSFULLY_CREATED_SKILL',
+    SUBMIT_UNSUCCESSFUL: 'FAILED_TO_CREATE_SKILL'
 }
 
 export const getAllSkills = () => async (dispatch: any) => {
@@ -23,7 +23,7 @@ export const getAllSkills = () => async (dispatch: any) => {
                 type: skillPillTypes.UNSUCCESSFUL_GET_ALL
             })
         }
-    } catch (e) {
+    } catch (error) {
         dispatch({
             type: skillPillTypes.UNSUCCESSFUL_GET_ALL
         })
@@ -35,19 +35,20 @@ export const submitNewSkill = (skillToSubmit: Skill) => async (dispatch: any) =>
         let res = await apiSubmitSkill(skillToSubmit)
         if (res.status === 200) {
             dispatch({
-                type: skillPillTypes.POST_NEW_SKILL_SUCCESS,
+                type: skillPillTypes.SUBMIT_SUCCESSFUL,
                 payload: {
                     skill: res.body
                 }
             })
         } else {
             dispatch({
-                type: skillPillTypes.POST_NEW_SKILL_FAIL
+                type: skillPillTypes.SUBMIT_UNSUCCESSFUL
             })
         }
-    } catch (e) {
+        return res
+    } catch (error) {
         dispatch({
-            type: skillPillTypes.POST_NEW_SKILL_FAIL
+            type: skillPillTypes.SUBMIT_UNSUCCESSFUL
         })
     }
 }

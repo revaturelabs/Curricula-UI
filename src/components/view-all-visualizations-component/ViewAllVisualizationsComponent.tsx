@@ -1,17 +1,15 @@
 import React from 'react'
 import { Visualization } from '../../models/visualization';
 import { VisualizationLinkComponent } from './visualization-link-component/VisualizationLinkComponent';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
 import NavBarComponent from '../navbar-component/NavBarComponent'
-
+import { TextField, Grid } from '@material-ui/core';
 
 interface IVisualizationsProps {
-    allVisualizations: Visualization[]
     getAllVisualizations: () => void
     getAllSkills: () => void
     getAllCurricula: () => void
     getAllCategories: () => void
+    allVisualizations: Visualization[]
 }
 
 interface IVisualizationsState {
@@ -54,7 +52,6 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
     }
 
     render() {
-
         let visualizationsToRender = this.props.allVisualizations.filter((visualization) => {
             if (visualization.visualizationName.toLowerCase().includes(this.state.search.toLowerCase())) {
                 return true
@@ -67,22 +64,29 @@ export class ViewAllVisualizationsComponent extends React.Component<IVisualizati
             } else {
                 return <VisualizationLinkComponent clipboard={this.state.clipboard} updateClipboardIcon={this.updateClipboardIcon} visualization={visualization} key={visualization.visualizationId} />
             }
-            
         })
-
         return (
             <div>
-                    
-                <NavBarComponent/>
-
-                <Paper component="form">
-                    <InputBase
-                        value={this.state.search}
-                        onChange={this.updateSearch}
-                        placeholder="Search Visualizations"
-                        inputProps={{ 'aria-label': 'search visualizations' }}
-                    />
-                </Paper>
+                <NavBarComponent />
+                <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item>
+                        <TextField
+                            style={{ width: 500 }}
+                            variant="outlined"
+                            value={this.state.search}
+                            onChange={this.updateSearch}
+                            placeholder="Visualization"
+                            label="Search Visualizations"
+                            inputProps={{ 'aria-label': 'search visualizations' }}
+                        />
+                    </Grid >
+                </Grid>
                 {visualizationsToRender}
             </div>
         )
