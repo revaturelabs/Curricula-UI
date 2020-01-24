@@ -59,14 +59,20 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
 
     render() {
         let allSkills: Skill[] = []
+        let allSkillIds: number[] = []
         let categoriesInLegend: Category[] = []
         for (let curriculum of this.state.visualization.curricula) {
             for (let skill of curriculum.skills) {
-                if (!allSkills.includes(skill)) {
+                if (!allSkillIds.includes(skill.skillId)) {
                     allSkills.push(skill)
+                    allSkillIds.push(skill.skillId)
                 }
             }
         }
+
+        let activeCurriculumSkillIds = this.state.activeCurriculum.skills.map((skill) => {
+            return skill.skillId
+        })
 
         allSkills.sort(this.compare)
         let categoryId = 0
@@ -77,7 +83,7 @@ export class VisualizationComponent extends React.Component<any, IVisualizationC
                 colorIncrementor++
                 categoriesInLegend.push(skill.category)
             }
-            if (this.state.activeCurriculum.skills.includes(skill)) {
+            if (activeCurriculumSkillIds.includes(skill.skillId)) {
                 return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor] }} />
             } else {
                 return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[colorIncrementor], opacity: 0.30 }} />
