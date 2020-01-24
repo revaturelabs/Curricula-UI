@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuList from '@material-ui/core/MenuList';
 import { Link } from 'react-router-dom';
-import { Button, Grid, MenuItem } from '@material-ui/core';
+import { Button, Grid, MenuItem, Icon } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import RevatureLogo from '../navbar-component/RevatureLogo.png'
 
@@ -66,11 +66,11 @@ export default function NavBarComponent() {
         <div className={classes.root}>
             <AppBar position="static" id="navbar">
                 <Toolbar>
-                    <Link to="/">
+                    <Link to="/vis/">
                         <img src={RevatureLogo} alt="logo" className={classes.revatureLogo} />
                     </Link>
                     <Grid container justify="space-evenly">
-                        <Button color="inherit" component={Link} to="/"  >Home</Button>
+                        <Button color="inherit" component={Link} to="/vis/"  ><Icon>home</Icon>Home</Button>
                         <Button
                             ref={anchorRef}
                             aria-controls={open ? 'menu-list-grow' : undefined}
@@ -90,15 +90,15 @@ export default function NavBarComponent() {
                                     <Paper>
                                         <ClickAwayListener onClickAway={handleClose}>
                                             <MenuList autoFocusItem={open} id="menu-list-grow" color="secondary" onKeyDown={handleListKeyDown}>
-                                                <MenuItem component={Link} to="/search" onClick={handleClose}>New Visualization</MenuItem>
-                                                <MenuItem component={Link} to="/" onClick={handleClose}>View Visualizations</MenuItem>
+                                                <MenuItem component={Link} to="/vis/search" onClick={handleClose}>New Visualization</MenuItem>
+                                                <MenuItem component={Link} to="/vis/" onClick={handleClose}>View Visualizations</MenuItem>
                                             </MenuList>
                                         </ClickAwayListener>
                                     </Paper>
                                 </Grow>
                             )}
                         </Popper>
-                        <Button color="inherit" component={Link} to="/createcurriculumpage" >New Curriculum</Button>
+                        <Button color="inherit" component={Link} to="/vis/createcurriculumpage" >New Curriculum</Button>
                     </Grid>
                 </Toolbar>
             </AppBar>

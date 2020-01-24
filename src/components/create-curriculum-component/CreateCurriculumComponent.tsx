@@ -3,7 +3,7 @@ import { Curriculum } from '../../models/curriculum';
 import PopupButtonComponent from '../popup-component/PopupButtonComponent';
 import { Skill } from '../../models/skill';
 import { Category } from '../../models/category';
-import { Button, Input, Grid, Paper } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import Alert from '@material-ui/lab/Alert';
@@ -14,7 +14,7 @@ import NavBarComponent from '../navbar-component/NavBarComponent'
 import { Redirect } from 'react-router';
 
 interface ICreateCurriculumProps {
-    postSubmitCurriculum: (newCurriculum: Curriculum) => void
+    postSubmitCurriculum: (newCurriculum: Curriculum) => any
     getAllSkills: () => void
     allSkills: Skill[]
     allCurricula: Curriculum[]
@@ -32,6 +32,7 @@ interface ICreateCurriculumState {
     noSkills: boolean
     existsAlready: boolean
     submitSuccess: boolean
+    submitFailed: boolean
 }
 
 export class CreateCurriculumComponent extends React.Component<ICreateCurriculumProps, ICreateCurriculumState>{
@@ -47,7 +48,8 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
             shortName: false,
             noSkills: false,
             existsAlready: false,
-            submitSuccess: false
+            submitSuccess: false,
+            submitFailed: false
         }
     }
 
@@ -82,7 +84,7 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
         })
     }
 
-    submitCurriculum = (submitCurriculumBtn: SyntheticEvent) => {
+    submitCurriculum = async (submitCurriculumBtn: SyntheticEvent) => {
         submitCurriculumBtn.preventDefault()
         if (this.state.newCurriculumName.length <= 2) {
             this.setState({
@@ -112,13 +114,25 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
             }
             this.state.skillsToCurriculumArray.shift()
             let newCurriculum = new Curriculum(0, this.state.newCurriculumName, this.state.skillsToCurriculumArray)
-            this.props.postSubmitCurriculum(newCurriculum)
-            this.setState({
-                ...this.state,
-                shortName: false,
-                noSkills: false,
-                existsAlready: false
-            })
+            try {
+                const response = await this.props.postSubmitCurriculum(newCurriculum)
+                if (response.status === 200) {
+                    this.setState({
+                        ...this.state,
+                        shortName: false,
+                        noSkills: false,
+                        existsAlready: false
+                    })
+                }
+            } catch (error) {
+                this.setState({
+                    ...this.state,
+                    shortName: false,
+                    noSkills: false,
+                    existsAlready: false,
+                    submitFailed: true
+                })
+            }
         }
     }
 
@@ -150,7 +164,7 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
             }
         }).map((skill: Skill) => {
             if (this.state.skillsToCurriculumArray.includes(skill)) {
-                return <Chip icon={<DoneIcon />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
+                return <Chip icon={<DoneIcon style={{ color: "white" }} />} label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId] }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             } else {
                 return <Chip label={skill.skillName} className="skillPillCurriculum" key={skill.skillId} style={{ backgroundColor: this.state.colors[skill.category.categoryId], opacity: 0.5 }} onClick={() => { this.updateSkillsToCurriculumArray(skill) }} />
             }
@@ -159,17 +173,28 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
             !this.state.submitSuccess ?
                 <>
                     <NavBarComponent />
-                    <div>
-                        <Input id="curriculumNameInput" className="newCurriculumForm" placeholder="New Curriculum Name" onChange={this.updateCurriculumName} />
-                        <Button className="newCurriculumForm" onClick={this.submitCurriculum}>Create Curriculum {this.state.newCurriculumName}</Button>
-                    </div>
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        <Grid item>
+                            <TextField
+                                style={{ width: 500 }}
+                                variant="outlined" id="curriculumNameInput" className="newCurriculumForm" label="Curriculum Name" onChange={this.updateCurriculumName} />
+                        </Grid>
+                    </Grid>
 
                     <div>
                         <br />
                         <Grid container justify="center">
-                            <Paper component="form" >
-                                <Input placeholder="Type to filter..." value={this.state.search} onChange={this.updateSearch}></Input>
-                            </Paper>
+                            <Grid item>
+                                <TextField
+                                    style={{ width: 500 }}
+                                    variant="outlined" label="Search Skills" placeholder="Skill" value={this.state.search} onChange={this.updateSearch} />
+                            </Grid>
                         </Grid>
                     </div>
 
@@ -177,14 +202,24 @@ export class CreateCurriculumComponent extends React.Component<ICreateCurriculum
                         {skillsToDisplay}
                     </div>
 
+                    <Button id="createCurriculumButton" variant="contained" color="primary" className="newCurriculumForm" style={{ marginTop: '1em', marginBottom: '1em' }} onClick={this.submitCurriculum}>Create Curriculum</Button>
                     <PopupButtonComponent />
-
-                    {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
-                    {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
-                    {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
-                    {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
+                    <br />
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        {this.state.shortName && (<Alert severity="error">Please include a longer name for your curriculum.</Alert>)}
+                        {this.state.noSkills && (<Alert severity="error">Please include skills in your curriculum.</Alert>)}
+                        {this.state.existsAlready && (<Alert severity="error">A curriculum by this name already exists.</Alert>)}
+                        {this.state.submitFailed && (<Alert severity="error">An unkown error has occured, try again later</Alert>)}
+                        {this.state.submitSuccess && (<Alert severity="success">Curriculum Created Successfully</Alert>)}
+                    </Grid>
                 </> :
-                <Redirect to='/search' />
+                <Redirect to='/vis/search' />
         )
     }
 }

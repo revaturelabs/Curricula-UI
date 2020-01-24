@@ -2,7 +2,7 @@ import { curriculaClient } from './curricula-client'
 import { Curriculum } from '../models/curriculum';
 
 export async function apiGetAllCurricula() {
-    const response = await curriculaClient.get('/curricula')
+    const response = await curriculaClient.get('/vis/curricula')
     try {
         if (response.status === 200) {
             return {
@@ -24,7 +24,7 @@ export async function apiGetAllCurricula() {
 }
 
 export async function apiSubmitCurriculum(newCurriculum: Curriculum) {
-    const response = await curriculaClient.post('/curricula', newCurriculum)
+    const response = await curriculaClient.post('/vis/curricula', newCurriculum)
     try {
         if (response.status === 200) {
             return {

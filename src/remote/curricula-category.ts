@@ -2,7 +2,7 @@ import { curriculaClient } from './curricula-client'
 import { Category } from '../models/category';
 
 export async function apiGetAllCategories() {
-    const response = await curriculaClient.get('/categories')
+    const response = await curriculaClient.get('/vis/categories')
     try {
         if (response.status === 200) {
             return {
@@ -24,7 +24,7 @@ export async function apiGetAllCategories() {
 }
 
 export async function apiSaveOneCategory(categoryToCreate: Category) {
-    const response = await curriculaClient.post('/categories', categoryToCreate)
+    const response = await curriculaClient.post('/vis/categories', categoryToCreate)
     try {
         if (response.status === 200) {
             return {
