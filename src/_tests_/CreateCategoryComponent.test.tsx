@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {cleanup} from '@testing-library/react';
 import { shallow } from 'enzyme';
 import App from '../App';
-import CreateCategoryComponent from '../components/create-category-component/CreateCategoryComponent';
+import CreateCategoryComponent from '../components/create-category-component/CreateCategoryContainer';
 
 // automatically unmount and cleanup DOM after the test is finished.
 afterEach(cleanup);
